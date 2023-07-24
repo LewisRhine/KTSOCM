@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import supabaseClient, { DataSlate } from "../superbaseClient";
-import "./Dashboard.css"
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const [dataslates, setDataslates] = useState<DataSlate[] | null>(null);
@@ -26,7 +26,10 @@ const Dashboard = () => {
       {dataslates?.map((dataslate, index) => {
         return (
           <div>
-            <h1 className="box" key={index}> Team Name: {dataslate.team_name}</h1>
+            <h1 className="box" key={index}>
+              {" "}
+              Team Name: {dataslate.team_name}
+            </h1>
             <p key={index}>Created at: {dataslate.created_at}</p>
             <p key={index}>Faction: {dataslate.faction}</p>
             <p key={index}>History: {dataslate.history}</p>
