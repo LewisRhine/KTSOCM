@@ -1,60 +1,72 @@
-import { useEffect, useState } from "react";
-import supabaseClient, { DataSlate } from "../superbaseClient";
-import { Session } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
+//KNEEL BEFORE
+import { ZodType, z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Session } from "@supabase/supabase-js";
+import supabaseClient, { Faction } from "../superbaseClient";
+import { useEffect, useState } from "react";
+
+type FormData = {
+  killTeamName: string;
+  faction: string;
+};
 
 interface NewDataslateProps {
   session: Session | null;
 }
 
-let { data: factions, error } = await supabaseClient
-  .from("factions")
-  .select("*");
+const NewDataslate = (props: NewDataslateProps) => {
+  const [factions, setFactions] = useState<Faction[] | null>(null);
 
-const Form = () => {
-  const { register, handleSubmit } = useForm();
+  useEffect(() => {
+    const fetchFactions = async () => {
+      try {
+        const { data: factions, error } = await supabaseClient
+          .from("factions")
+          .select("*");
+        if (error) throw error;
+        setFactions(factions);
+      } catch (e: any) {
+        console.log(e.Message);
+      }
+    };
 
-  const onSubmit = (data: any) => {
+    fetchFactions();
+  }, []);
+
+  const schema: ZodType<FormData> = z.object({
+    killTeamName: z.string().min(2).max(50),
+    faction: z.string(),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = (data: FormData) => {
     console.log(data);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        placeholder="Enter Kill Team Name..."
-        {...register("team_name")}
-      />
-      <input
-        type="text"
-        placeholder="faction drop down"
-        {...register("faction")}
-      />
+      <label> Enter Kill Team Name... </label>
+      <input type="text" {...register("killTeamName")} />
+      {errors.killTeamName && (
+        <span style={{ color: "red" }}>{errors.killTeamName.message}</span>
+      )}
+      <label> Chose Faction </label>
+      <select {...register("faction")}>
+        {factions?.map((faction) => {
+          return <option value={faction.id.toString()}>{faction.name}</option>;
+        })}
+        {/* <option value={"a"}>a</option> */}
+      </select>
+      <button type="submit">Submit</button>
     </form>
   );
-};
-
-const NewDataslate = (props: NewDataslateProps) => {
-  const Form = () => {
-    const { register, handleSubmit } = useForm();
-
-    const onSubmit = (data: any) => {
-      console.log(data);
-    };
-    return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          placeholder="Enter Kill Team Name..."
-          {...register("team_name")}
-        />
-        <input
-          type="text"
-          placeholder="faction drop down"
-          {...register("faction")}
-        />
-      </form>
-    );
-  };
 };
 
 export default NewDataslate;
