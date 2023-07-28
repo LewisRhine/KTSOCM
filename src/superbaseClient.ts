@@ -9,20 +9,7 @@ interface Database {
   public: {
     Tables: {
       dataslate: {
-        Row: {
-          base: number | null;
-          created_at: string | null;
-          faction: number;
-          history: string | null;
-          id: number;
-          notes: string | null;
-          quirks: string | null;
-          req_points: number;
-          selectable_keyword: string | null;
-          spec_ops_log: number[] | null;
-          team_name: string;
-          user_id: string;
-        };
+        Row: DataSlate;
         Insert: {
           base?: number | null;
           created_at?: string | null;
@@ -54,11 +41,7 @@ interface Database {
         Relationships: [];
       };
       factions: {
-        Row: {
-          id: number;
-          keyword: string;
-          name: string;
-        };
+        Row: Faction;
         Insert: {
           id?: number;
           keyword: string;
@@ -100,6 +83,12 @@ export interface DataSlate {
   spec_ops_log: number[] | null;
   team_name: string;
   user_id: string;
+}
+
+export interface Faction {
+  id: number;
+  keyword: string;
+  name: string;
 }
 
 export default supabaseClient;
