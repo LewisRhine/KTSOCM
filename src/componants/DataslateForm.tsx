@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 type FormData = {
   killTeamName: string;
-  faction: number;
+  faction: string;
 };
 
 interface NewDataslateProps {
@@ -34,10 +34,9 @@ const DataslateForm = (props: NewDataslateProps) => {
     fetchFactions();
   }, []);
 
-
   const schema: ZodType<FormData> = z.object({
     killTeamName: z.string().min(2).max(50),
-    faction: z.number(),
+    faction: z.string(),
   });
   const {
     register,
@@ -61,8 +60,9 @@ const DataslateForm = (props: NewDataslateProps) => {
       <label> Chose Faction </label>
       <select {...register("faction")}>
         {factions?.map((faction) => {
-          return <option value={faction.id}>{faction.name}</option>
+          return <option value={faction.id.toString()}>{faction.name}</option>;
         })}
+        {/* <option value={"a"}>a</option> */}
       </select>
       <button type="submit">Submit</button>
     </form>
