@@ -46,8 +46,20 @@ const NewDataslate = (props: NewDataslateProps) => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    console.log("click");
+    try {
+      const { error } = await supabaseClient.from("factions").insert({
+        team_name: data?.killTeamName,
+        faction: data.faction,
+        user_id: props.session?.user,
+      });
+      console.log(data);
+
+      if (error) throw error;
+    } catch (e: any) {
+      console.log(e.Message);
+    }
   };
 
   return (
