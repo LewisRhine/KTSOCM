@@ -36,7 +36,7 @@ const NewDataslate = (props: NewDataslateProps) => {
 
   const schema: ZodType<FormData> = z.object({
     killTeamName: z.string().min(2).max(50),
-    faction: z.string(),
+    faction: z.string().
   });
   const {
     register,
@@ -47,18 +47,20 @@ const NewDataslate = (props: NewDataslateProps) => {
   });
 
   const onSubmit = async (data: FormData) => {
+    const factionConverter = Number(data.faction);
+    console.log(factionConverter);
+
     console.log("click");
     try {
-      const { error } = await supabaseClient.from("factions").insert({
+      const { error } = await supabaseClient.from("dataslate").insert({
         team_name: data?.killTeamName,
-        faction: data.faction,
-        user_id: props.session?.user,
+        faction: factionConverter,
+        user_id: props.session?.user.id,
       });
-      console.log(data);
 
       if (error) throw error;
     } catch (e: any) {
-      console.log(e.Message);
+      console.log("error: " + e.Message);
     }
   };
 
