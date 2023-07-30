@@ -29,6 +29,14 @@ const NewDataslate = (props: NewDataslateProps) => {
       } catch (e: any) {
         console.log(e.Message);
       }
+
+      try {
+        const { factionNameData, factionNameError } = await supabaseClient.from('factions').select(
+          id, 
+          team_name, 
+          users ( id, name )
+        )
+      }
     };
 
     fetchFactions();
