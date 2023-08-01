@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import supabaseClient, { DataSlate } from "../superbaseClient";
+import supabaseClient, { DataSlate, Faction } from "../superbaseClient";
 import "./Dashboard.css";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [dataslates, setDataslates] = useState<DataSlate[] | null>(null);
+  const [factions, setFactions] = useState<Faction[] | null>(null);
 
   useEffect(() => {
     const fetchDataslates = async () => {
@@ -18,12 +20,28 @@ const Dashboard = () => {
       }
     };
 
+    const fetchFactions = async () => {
+      try {
+        const { data: factions, error } = await supabaseClient
+          .from("factions")
+          .select("*");
+        if (error) throw error;
+        setFactions(factions);
+      } catch (e: any) {
+        console.log(e.Message);
+      }
+    };
+
+    fetchFactions();
     fetchDataslates();
   }, []);
   return (
     <>
       {" "}
       {dataslates?.map((dataslate, index) => {
+        const factionName = (factions: Faction) => {
+          return factions.id === dataslate.faction;
+        };
         return (
           <div>
             <h1 className="box" key={index}>
@@ -31,7 +49,7 @@ const Dashboard = () => {
               Team Name: {dataslate.team_name}
             </h1>
             <p key={index}>Created at: {dataslate.created_at}</p>
-            <p key={index}>Faction: {dataslate.faction}</p>
+            <p key={index}>Faction: {factions?.find(factionName)?.name}</p>
             <p key={index}>History: {dataslate.history}</p>
             <p key={index}>Notes: {dataslate.notes}</p>
             <p key={index}>Quirks: {dataslate.quirks}</p>
@@ -43,6 +61,9 @@ const Dashboard = () => {
           </div>
         );
       })}{" "}
+      <Link to="/new-dataslate">
+              <button>Create New Dataslate</button>
+            </Link>
     </>
   );
 };
