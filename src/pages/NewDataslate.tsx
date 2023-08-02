@@ -36,7 +36,7 @@ const NewDataslate = (props: NewDataslateProps) => {
 
   const schema: ZodType<FormData> = z.object({
     killTeamName: z.string().min(2).max(50),
-    faction: z.string(),
+    faction: z.string().nonempty("Must select a Faction!!!"),
   });
   const {
     register,
@@ -74,14 +74,17 @@ const NewDataslate = (props: NewDataslateProps) => {
         <span style={{ color: "red" }}>{errors.killTeamName.message}</span>
       )}
       <label> Chose Faction </label>
-      <select
-        {...register("faction")}
-        defaultValue={factions?.[1].id.toString()}
-      >
+      <select {...register("faction")} defaultValue="">
+        <option value=""> Select From Dropdown </option>
         {factions?.map((faction) => {
-          return <option value={faction.id.toString()}>{faction.name}</option>;
+          return (
+            <>
+              <option value={faction.id.toString()}>{faction.name}</option>
+            </>
+          );
         })}
       </select>
+      <span style={{ color: "red" }}>{errors.faction?.message}</span>
       <button type="submit">Submit</button>
     </form>
   );
