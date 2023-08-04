@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Authentication from "./pages/Authentication";
@@ -29,16 +28,47 @@ function App() {
     return <Authentication session={session} />;
   } else {
     return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/auth" element={<Authentication session={session} />} />
-          <Route
-            path="/new-dataslate"
-            element={<NewDataslate session={session} />}
-          />
-        </Routes>
-      </BrowserRouter>
+      <>
+        <nav className="navbar is-dark">
+          <a className="navbar-burger" data-target="navbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+
+          <div id="navbarMenu" className="navbar-menu">
+            <div className="navbar-start">
+              <a className="navbar-item" href={"/"}>
+                Dashboard
+              </a>
+            </div>
+
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <button
+                  className="button"
+                  onClick={() => supabaseClient.auth.signOut()}
+                >
+                  Log out
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route
+              path="/auth"
+              element={<Authentication session={session} />}
+            />
+            <Route
+              path="/new-dataslate"
+              element={<NewDataslate session={session} />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </>
     );
   }
 }

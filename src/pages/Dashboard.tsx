@@ -43,27 +43,22 @@ const Dashboard = () => {
           return factions.id === dataslate.faction;
         };
         return (
-          <div>
-            <h1 className="box" key={index}>
-              {" "}
-              Team Name: {dataslate.team_name}
-            </h1>
-            <p key={index}>Created at: {dataslate.created_at}</p>
-            <p key={index}>Faction: {factions?.find(factionName)?.name}</p>
-            <p key={index}>History: {dataslate.history}</p>
-            <p key={index}>Notes: {dataslate.notes}</p>
-            <p key={index}>Quirks: {dataslate.quirks}</p>
-            <p key={index}>Reqired Points: {dataslate.req_points}</p>
-            <p key={index}>
-              Selectable Keyword: {dataslate.selectable_keyword}
-            </p>
+          <div key={index}>
+            <h1> Team Name: {dataslate.team_name}</h1>
+            <p>Created at: {dataslate.created_at}</p>
+            <p>Faction: {factions?.find(factionName)?.name}</p>
+            <p>History: {dataslate.history}</p>
+            <p>Notes: {dataslate.notes}</p>
+            <p>Quirks: {dataslate.quirks}</p>
+            <p>Reqired Points: {dataslate.req_points}</p>
+            <p>Selectable Keyword: {dataslate.selectable_keyword}</p>
             <p key={index}>Special Ops Log: {dataslate.spec_ops_log}</p>
           </div>
         );
       })}{" "}
       <Link to="/new-dataslate">
-              <button>Create New Dataslate</button>
-            </Link>
+        <button>Create New Dataslate</button>
+      </Link>
     </>
   );
 };
