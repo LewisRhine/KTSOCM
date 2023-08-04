@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import supabaseClient, { DataSlate, Faction } from "../superbaseClient";
-import "./Dashboard.css";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -43,16 +42,21 @@ const Dashboard = () => {
           return factions.id === dataslate.faction;
         };
         return (
-          <div key={index}>
-            <h1> Team Name: {dataslate.team_name}</h1>
-            <p>Created at: {dataslate.created_at}</p>
-            <p>Faction: {factions?.find(factionName)?.name}</p>
-            <p>History: {dataslate.history}</p>
-            <p>Notes: {dataslate.notes}</p>
-            <p>Quirks: {dataslate.quirks}</p>
-            <p>Reqired Points: {dataslate.req_points}</p>
-            <p>Selectable Keyword: {dataslate.selectable_keyword}</p>
-            <p key={index}>Special Ops Log: {dataslate.spec_ops_log}</p>
+          <div key={index} className="card">
+            <div className="card-header-title is centered">
+              {" "}
+              Team Name: {dataslate.team_name}
+            </div>
+            <div className="has-background-grey-lighter">
+              <p>Created at: {dataslate.created_at}</p>
+              <p>Faction: {factions?.find(factionName)?.name}</p>
+              <p> History: {dataslate.history}</p>
+              <p> Notes: {dataslate.notes}</p>
+              <p> Quirks: {dataslate.quirks}</p>
+              <p>Reqired Points: {dataslate.req_points}</p>
+              <p>Selectable Keyword: {dataslate.selectable_keyword}</p>
+              <p>Special Ops Log: {dataslate.spec_ops_log}</p>
+            </div>
           </div>
         );
       })}{" "}
