@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import supabaseClient, { DataSlate, Faction } from "../superbaseClient";
+import { getDataslates, Dataslates } from "../superbaseClient";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
-  const [dataslates, setDataslates] = useState<DataSlate[] | null>(null);
-  const [factions, setFactions] = useState<Faction[] | null>(null);
+  const [dataslates, setDataslates] = useState<Dataslates | null>(null);
 
   useEffect(() => {
     const fetchDataslates = async () => {
       try {
-        const { data: dataslates, error } = await supabaseClient
-          .from("dataslate")
-          .select("*");
+        const { data: dataslates, error } = await getDataslates();
         if (error) throw error;
         setDataslates(dataslates);
       } catch (e: any) {
@@ -19,28 +16,12 @@ const Dashboard = () => {
       }
     };
 
-    const fetchFactions = async () => {
-      try {
-        const { data: factions, error } = await supabaseClient
-          .from("factions")
-          .select("*");
-        if (error) throw error;
-        setFactions(factions);
-      } catch (e: any) {
-        console.log(e.Message);
-      }
-    };
-
-    fetchFactions();
     fetchDataslates();
   }, []);
   return (
     <>
       {" "}
       {dataslates?.map((dataslate, index) => {
-        const factionName = (factions: Faction) => {
-          return factions.id === dataslate.faction;
-        };
         return (
           <div key={index} className="card">
             <div className="card-header-title is centered">
@@ -49,7 +30,7 @@ const Dashboard = () => {
             </div>
             <div className="has-background-grey-lighter">
               <p>Created at: {dataslate.created_at}</p>
-              <p>Faction: {factions?.find(factionName)?.name}</p>
+              <p>Faction: {dataslate.faction?.name}</p>
               <p> History: {dataslate.history}</p>
               <p> Notes: {dataslate.notes}</p>
               <p> Quirks: {dataslate.quirks}</p>
