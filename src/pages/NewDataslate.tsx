@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Session } from "@supabase/supabase-js";
-import supabaseClient, { Faction } from "../superbaseClient";
+import { Factions, getFactions, postDataslate } from "../superbaseClient";
 import { useEffect, useState } from "react";
 
 type FormData = {
@@ -12,18 +12,16 @@ type FormData = {
 };
 
 interface NewDataslateProps {
-  session: Session | null;
+  session: Session;
 }
 
 const NewDataslate = (props: NewDataslateProps) => {
-  const [factions, setFactions] = useState<Faction[] | null>(null);
+  const [factions, setFactions] = useState<Factions | null>(null);
 
   useEffect(() => {
     const fetchFactions = async () => {
       try {
-        const { data: factions, error } = await supabaseClient
-          .from("factions")
-          .select("*");
+        const { data: factions, error } = await getFactions();
         if (error) throw error;
         setFactions(factions);
       } catch (e: any) {
@@ -52,11 +50,10 @@ const NewDataslate = (props: NewDataslateProps) => {
     alert("Success!");
     window.location.href = "/";
 
-    console.log("click");
     try {
-      const { error } = await supabaseClient.from("dataslate").insert({
+      const { error } = await postDataslate({
         team_name: data?.killTeamName,
-        faction: factionConverter,
+        faction_id: factionConverter,
         user_id: props.session?.user.id,
       });
 
