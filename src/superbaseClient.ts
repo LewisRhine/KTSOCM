@@ -5,15 +5,93 @@ const supabaseClient = createClient<Database>(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhrZ3ZwbWppbnBkbmpkemtjbmNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODkxOTIwNDYsImV4cCI6MjAwNDc2ODA0Nn0.6A3nJNGM6zUn0Aoys8kiyJOCQxk0sfrpKRwaY7AQKVc"
 );
 
-interface Database {
+export async function getDataslates() {
+  return supabaseClient.from("dataslate").select("*, faction (*)");
+}
+
+export type DataslatesResponse = Awaited<ReturnType<typeof getDataslates>>;
+export type Dataslates = DataslatesResponse["data"];
+
+type PostDataslate = Database["public"]["Tables"]["dataslate"]["Insert"];
+export async function postDataslate(newDataslate: PostDataslate) {
+  return supabaseClient.from("dataslate").insert(newDataslate);
+}
+
+export async function getFactions() {
+  return supabaseClient.from("faction").select("*");
+}
+
+export type FactionResponse = Awaited<ReturnType<typeof getFactions>>;
+export type Factions = FactionResponse["data"];
+
+export interface Database {
   public: {
     Tables: {
+      base_of_operations: {
+        Row: {
+          asset_capacity: number;
+          dataslate_id: number;
+          description: string | null;
+          id: number;
+          name: string;
+          stash: number[] | null;
+          strategic_assets: number[] | null;
+          user_id: string;
+        };
+        Insert: {
+          asset_capacity?: number;
+          dataslate_id: number;
+          description?: string | null;
+          id?: number;
+          name: string;
+          stash?: number[] | null;
+          strategic_assets?: number[] | null;
+          user_id: string;
+        };
+        Update: {
+          asset_capacity?: number;
+          dataslate_id?: number;
+          description?: string | null;
+          id?: number;
+          name?: string;
+          stash?: number[] | null;
+          strategic_assets?: number[] | null;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "base_of_operations_dataslate_id_fkey";
+            columns: ["dataslate_id"];
+            referencedRelation: "dataslate";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "base_of_operations_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       dataslate: {
-        Row: DataSlate;
+        Row: {
+          base: number | null;
+          created_at: string | null;
+          faction_id: number;
+          history: string | null;
+          id: number;
+          notes: string | null;
+          quirks: string | null;
+          req_points: number;
+          selectable_keyword: string | null;
+          spec_ops_log: number[] | null;
+          team_name: string;
+          user_id: string;
+        };
         Insert: {
           base?: number | null;
           created_at?: string | null;
-          faction: number;
+          faction_id: number;
           history?: string | null;
           id?: number;
           notes?: string | null;
@@ -27,7 +105,7 @@ interface Database {
         Update: {
           base?: number | null;
           created_at?: string | null;
-          faction?: number;
+          faction_id?: number;
           history?: string | null;
           id?: number;
           notes?: string | null;
@@ -38,19 +116,42 @@ interface Database {
           team_name?: string;
           user_id?: string;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "dataslate_faction_id_fkey";
+            columns: ["faction_id"];
+            referencedRelation: "faction";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "dataslate_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
       };
-      factions: {
-        Row: Faction;
+      faction: {
+        Row: {
+          history_table: string[] | null;
+          id: number;
+          keyword: string;
+          name: string;
+          quirk_table: string[] | null;
+        };
         Insert: {
+          history_table?: string[] | null;
           id?: number;
           keyword: string;
           name: string;
+          quirk_table?: string[] | null;
         };
         Update: {
+          history_table?: string[] | null;
           id?: number;
           keyword?: string;
           name?: string;
+          quirk_table?: string[] | null;
         };
         Relationships: [];
       };
@@ -68,27 +169,6 @@ interface Database {
       [_ in never]: never;
     };
   };
-}
-
-export interface DataSlate {
-  base: number | null;
-  created_at: string | null;
-  faction: number;
-  history: string | null;
-  id: number;
-  notes: string | null;
-  quirks: string | null;
-  req_points: number;
-  selectable_keyword: string | null;
-  spec_ops_log: number[] | null;
-  team_name: string;
-  user_id: string;
-}
-
-export interface Faction {
-  id: number;
-  keyword: string;
-  name: string;
 }
 
 export default supabaseClient;
