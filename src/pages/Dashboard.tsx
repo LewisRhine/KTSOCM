@@ -20,12 +20,10 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-      {" "}
       {dataslates?.map((dataslate, index) => {
         return (
           <div key={index} className="card">
             <div className="card-header-title is centered">
-              {" "}
               Team Name: {dataslate.team_name}
             </div>
             <div className="has-background-grey-lighter">
@@ -40,7 +38,7 @@ const Dashboard = () => {
             </div>
           </div>
         );
-      })}{" "}
+      })}
       <Link to="/new-dataslate">
         <button>Create New Dataslate</button>
       </Link>
