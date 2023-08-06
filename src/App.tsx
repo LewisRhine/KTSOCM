@@ -5,6 +5,7 @@ import Authentication from "./pages/Authentication";
 import { Session } from "@supabase/supabase-js";
 import supabaseClient from "./superbaseClient";
 import NewDataslate from "./pages/NewDataslate";
+import Dataslate from "./pages/Dataslate";
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -65,6 +66,10 @@ function App() {
             <Route
               path="/new-dataslate"
               element={<NewDataslate session={session} />}
+            />
+            <Route
+              path="/dataslate/:dataslateId"
+              element={<Dataslate/>}
             />
           </Routes>
         </BrowserRouter>

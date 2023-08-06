@@ -12,11 +12,21 @@ export async function getDataslates() {
 export type DataslatesResponse = Awaited<ReturnType<typeof getDataslates>>;
 export type Dataslates = DataslatesResponse["data"];
 
+export async function getDataslate(id: number) {
+  return supabaseClient
+    .from("dataslate")
+    .select("*, faction (*)")
+    .eq("id", id)
+    .single();
+}
+
+export type DataslateResponse = Awaited<ReturnType<typeof getDataslate>>;
+export type Dataslate = DataslateResponse["data"];
+
 type PostDataslate = Database["public"]["Tables"]["dataslate"]["Insert"];
 export async function postDataslate(newDataslate: PostDataslate) {
   return supabaseClient.from("dataslate").insert(newDataslate);
 }
-
 export async function getFactions() {
   return supabaseClient.from("faction").select("*");
 }
