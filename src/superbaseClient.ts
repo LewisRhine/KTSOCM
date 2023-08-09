@@ -27,6 +27,11 @@ type PostDataslate = Database["public"]["Tables"]["dataslate"]["Insert"];
 export async function postDataslate(newDataslate: PostDataslate) {
   return supabaseClient.from("dataslate").insert(newDataslate);
 }
+type UpdateDataslate = Database["public"]["Tables"]["dataslate"]["Update"];
+export async function updateDataslate(Dataslate: UpdateDataslate) {
+  return supabaseClient.from("dataslate").update(Dataslate);
+}
+
 export async function getFactions() {
   return supabaseClient.from("faction").select("*");
 }
