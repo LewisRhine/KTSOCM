@@ -62,8 +62,6 @@ const EditDataslate = (props: NewDataslateProps) => {
     try {
       const { error } = await updateDataslate({
         history: data?.history,
-        faction_id: factionConverter,
-        user_id: props.session?.user.id,
       });
 
       if (error) throw error;
@@ -78,18 +76,15 @@ const EditDataslate = (props: NewDataslateProps) => {
         Team Name: {dataslate.team_name}
       </div>
       <div className="has-background-grey-lighter">
+        <p>Created at: {dataslate.created_at}</p>
         <p>Faction: {dataslate.faction?.name}</p>
+        <p> History: {dataslate.history}</p>
+        <p> Notes: {dataslate.notes}</p>
+        <p> Quirks: {dataslate.quirks}</p>
+        <p>Reqired Points: {dataslate.req_points}</p>
+        <p>Selectable Keyword: {dataslate.selectable_keyword}</p>
+        <p>Special Ops Log: {dataslate.spec_ops_log}</p>
       </div>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label> Enter Team History... </label>
-        <input type="text" {...register("history")} />
-        {errors.history && (
-          <span style={{ color: "red" }}>{errors.history.message}</span>
-        )}
-        <span style={{ color: "red" }}>{errors.faction?.message}</span>
-        <button type="submit">Submit</button>
-      </form>
     </>
   );
 };
