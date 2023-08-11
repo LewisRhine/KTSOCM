@@ -6,7 +6,6 @@ import { Session } from "@supabase/supabase-js";
 import supabaseClient from "./superbaseClient";
 import NewDataslate from "./pages/NewDataslate";
 import Dataslate from "./pages/Dataslate";
-import EditDataslate from "./componants/EditDataslate";
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -70,7 +69,7 @@ function App() {
             />
             <Route
               path="/dataslate/:dataslateId"
-              element={<EditDataslate session={session} />}
+              element={<Dataslate session={session} />}
             />
           </Routes>
         </BrowserRouter>

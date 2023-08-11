@@ -1,11 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDataslate, Dataslate } from "../superbaseClient";
+import EditDataslate from "../componants/EditDataslate";
+import { Session } from "@supabase/supabase-js";
 
-const Dataslate = () => {
+interface DataslateProps {
+  session: Session;
+}
+
+
+const Dataslate = (props: DataslateProps) => {
   const { dataslateId } = useParams();
   const [dataslate, setDataslate] = useState<Dataslate | null>(null);
   const [error, setError] = useState(false);
+  const [isEditMode, setisEditMode] = useState(false)
   console.log(dataslateId);
   console.log(dataslate);
 
@@ -26,20 +34,33 @@ const Dataslate = () => {
   }, []);
   if (error) return <h1> There was an error loading Dataslate! </h1>;
   if (!dataslate) return <h1> Loading </h1>;
+  if (isEditMode) return <EditDataslate session={props.session} dataslate={dataslate} onUpdated={() => setisEditMode(false)} />;
+
   return (
     <>
-      <div className="card-header-title is centered">
-        Team Name: {dataslate.team_name}
+      <div className="navbar-end">
+        <div className="navbar-item">
+          <button
+            className="button"
+            onClick={() => setisEditMode(true)}
+          >
+            Edit
+          </button>
+        </div>
       </div>
-      <div className="has-background-grey-lighter">
-        <p>Created at: {dataslate.created_at}</p>
-        <p>Faction: {dataslate.faction?.name}</p>
-        <p> History: {dataslate.history}</p>
-        <p> Notes: {dataslate.notes}</p>
-        <p> Quirks: {dataslate.quirks}</p>
-        <p>Reqired Points: {dataslate.req_points}</p>
-        <p>Selectable Keyword: {dataslate.selectable_keyword}</p>
-        <p>Special Ops Log: {dataslate.spec_ops_log}</p>
+      <div className="container">
+        <section className="section">
+          {dataslate.team_name}
+        </section>
+        <section className="section">
+          <p>Faction: {dataslate.faction?.name}</p>
+          {dataslate.history && (<p>History: {dataslate.history}</p>)}
+          <p>Notes: {dataslate.notes}</p>
+          <p>Quirks: {dataslate.quirks}</p>
+          <p>Reqired Points: {dataslate.req_points}</p>
+          <p>Selectable Keyword: {dataslate.selectable_keyword}</p>
+          <p>Special Ops Log: {dataslate.spec_ops_log}</p>
+        </section>
       </div>
     </>
   );

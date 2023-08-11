@@ -13,45 +13,27 @@ type FormData = {
 
 interface NewDataslateProps {
   session: Session;
+  dataslate: NonNullable<Dataslate>
+  onUpdated(): void
 }
 
 const EditDataslate = (props: NewDataslateProps) => {
-  const { dataslateId } = useParams();
-  const [dataslate, setDataslate] = useState<Dataslate | null>(null);
-  const [error, setError] = useState(false);
-  console.log(dataslateId);
-  console.log(dataslate);
+  const { dataslate } = props
+  const [teamName, setTeamName] = useState(dataslate.team_name)
+  const [history, setHistory] = useState(dataslate.history ?? '')
 
-  useEffect(() => {
-    if (!dataslateId) return;
-    const fetchDataslate = async () => {
-      try {
-        const { data: dataslate, error } = await getDataslate(+dataslateId);
-        if (error) throw error;
-        setDataslate(dataslate);
-        setError(false);
-      } catch (e: any) {
-        setError(true);
-      }
-    };
 
-    fetchDataslate();
-  }, []);
-
-  if (error) return <h1> There was an error loading Dataslate! </h1>;
-  if (!dataslate) return <h1> Loading </h1>;
-
-  const schema: ZodType<FormData> = z.object({
-    history: z.string().min(10).max(150),
-    faction: z.string().nonempty("Must select a Faction!!!"),
-  });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
+  // const schema: ZodType<FormData> = z.object({
+  //   history: z.string().min(10).max(150),
+  //   faction: z.string().nonempty("Must select a Faction!!!"),
+  // });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm<FormData>({
+  //   resolver: zodResolver(schema),
+  // });
 
   const onSubmit = async (data: FormData) => {
     const factionConverter = Number(data.faction);
@@ -70,20 +52,53 @@ const EditDataslate = (props: NewDataslateProps) => {
     }
   };
 
+  const genarateHisotry = (): string => {
+    const rollResult = Math.floor(Math.random() * 6);
+    return dataslate.faction?.history_table?.[rollResult] ?? ''
+  }
+
   return (
     <>
-      <div className="card-header-title is centered">
-        Team Name: {dataslate.team_name}
+      <div className="navbar-end">
+        <div className="navbar-item">
+          <button
+            className="button"
+            onClick={() => props.onUpdated()}
+          >
+            Save
+          </button>
+        </div>
       </div>
-      <div className="has-background-grey-lighter">
-        <p>Created at: {dataslate.created_at}</p>
-        <p>Faction: {dataslate.faction?.name}</p>
-        <p> History: {dataslate.history}</p>
-        <p> Notes: {dataslate.notes}</p>
-        <p> Quirks: {dataslate.quirks}</p>
-        <p>Reqired Points: {dataslate.req_points}</p>
-        <p>Selectable Keyword: {dataslate.selectable_keyword}</p>
-        <p>Special Ops Log: {dataslate.spec_ops_log}</p>
+      <div className="container">
+        <form>
+          <div className="field">
+            <label className="label">Team Name</label>
+            <div className="control">
+              <input className="input"
+                type="text"
+                value={teamName}
+                onChange={(event) => setTeamName(event.target.value)} />
+            </div>
+          </div>
+
+          <div className="field is-group">
+            <label className="label">History</label>
+            <div className="control">
+              <textarea className="textarea" value={history}
+                onChange={(event) => setHistory(event.target.value)} />
+            </div>
+            {dataslate.faction?.history_table && (
+              <div className="control">
+                <button className="button is-primary" onClick={() => setHistory(genarateHisotry()) }>
+                  Genarate
+                </button>
+              </div>
+            )}
+          </div>
+
+
+
+        </form>
       </div>
     </>
   );

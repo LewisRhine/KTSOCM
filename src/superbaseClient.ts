@@ -28,8 +28,8 @@ export async function postDataslate(newDataslate: PostDataslate) {
   return supabaseClient.from("dataslate").insert(newDataslate);
 }
 type UpdateDataslate = Database["public"]["Tables"]["dataslate"]["Update"];
-export async function updateDataslate(Dataslate: UpdateDataslate) {
-  return supabaseClient.from("dataslate").update(Dataslate);
+export async function updateDataslate(dataslate: UpdateDataslate) {
+  return supabaseClient.from("dataslate").update(dataslate).eq("id", dataslate.id);
 }
 
 export async function getFactions() {
@@ -67,7 +67,7 @@ export interface Database {
           asset_capacity?: number;
           dataslate_id?: number;
           description?: string | null;
-          id?: number;
+          id: number;
           name?: string;
           stash?: number[] | null;
           strategic_assets?: number[] | null;
