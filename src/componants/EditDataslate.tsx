@@ -13,15 +13,14 @@ type FormData = {
 
 interface NewDataslateProps {
   session: Session;
-  dataslate: NonNullable<Dataslate>
-  onUpdated(): void
+  dataslate: NonNullable<Dataslate>;
+  onUpdated(): void;
 }
 
 const EditDataslate = (props: NewDataslateProps) => {
-  const { dataslate } = props
-  const [teamName, setTeamName] = useState(dataslate.team_name)
-  const [history, setHistory] = useState(dataslate.history ?? '')
-
+  const { dataslate } = props;
+  const [teamName, setTeamName] = useState(dataslate.team_name);
+  const [history, setHistory] = useState(dataslate.history ?? "");
 
   // const schema: ZodType<FormData> = z.object({
   //   history: z.string().min(10).max(150),
@@ -54,17 +53,14 @@ const EditDataslate = (props: NewDataslateProps) => {
 
   const genarateHisotry = (): string => {
     const rollResult = Math.floor(Math.random() * 6);
-    return dataslate.faction?.history_table?.[rollResult] ?? ''
-  }
+    return dataslate.faction?.history_table?.[rollResult] ?? "";
+  };
 
   return (
     <>
       <div className="navbar-end">
         <div className="navbar-item">
-          <button
-            className="button"
-            onClick={() => props.onUpdated()}
-          >
+          <button className="button" onClick={() => props.onUpdated()}>
             Save
           </button>
         </div>
@@ -74,30 +70,35 @@ const EditDataslate = (props: NewDataslateProps) => {
           <div className="field">
             <label className="label">Team Name</label>
             <div className="control">
-              <input className="input"
+              <input
+                className="input"
                 type="text"
                 value={teamName}
-                onChange={(event) => setTeamName(event.target.value)} />
+                onChange={(event) => setTeamName(event.target.value)}
+              />
             </div>
           </div>
 
           <div className="field is-group">
             <label className="label">History</label>
             <div className="control">
-              <textarea className="textarea" value={history}
-                onChange={(event) => setHistory(event.target.value)} />
+              <textarea
+                className="textarea"
+                value={history}
+                onChange={(event) => setHistory(event.target.value)}
+              />
             </div>
             {dataslate.faction?.history_table && (
               <div className="control">
-                <button className="button is-primary" onClick={() => setHistory(genarateHisotry()) }>
+                <div
+                  className="button is-primary"
+                  onClick={() => setHistory(genarateHisotry())}
+                >
                   Genarate
-                </button>
+                </div>
               </div>
             )}
           </div>
-
-
-
         </form>
       </div>
     </>
