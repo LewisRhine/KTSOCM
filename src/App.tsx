@@ -69,7 +69,7 @@ function App() {
             />
             <Route
               path="/dataslate/:dataslateId"
-              element={<Dataslate/>}
+              element={<Dataslate session={session} />}
             />
           </Routes>
         </BrowserRouter>

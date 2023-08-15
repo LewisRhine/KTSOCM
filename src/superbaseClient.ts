@@ -27,6 +27,14 @@ type PostDataslate = Database["public"]["Tables"]["dataslate"]["Insert"];
 export async function postDataslate(newDataslate: PostDataslate) {
   return supabaseClient.from("dataslate").insert(newDataslate);
 }
+type UpdateDataslate = Database["public"]["Tables"]["dataslate"]["Update"];
+export async function updateDataslate(dataslate: UpdateDataslate) {
+  return supabaseClient
+    .from("dataslate")
+    .update(dataslate)
+    .eq("id", dataslate.id);
+}
+
 export async function getFactions() {
   return supabaseClient.from("faction").select("*");
 }
@@ -62,7 +70,7 @@ export interface Database {
           asset_capacity?: number;
           dataslate_id?: number;
           description?: string | null;
-          id?: number;
+          id: number;
           name?: string;
           stash?: number[] | null;
           strategic_assets?: number[] | null;
@@ -117,7 +125,7 @@ export interface Database {
           created_at?: string | null;
           faction_id?: number;
           history?: string | null;
-          id?: number;
+          id: number;
           notes?: string | null;
           quirks?: string | null;
           req_points?: number;
