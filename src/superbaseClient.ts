@@ -29,7 +29,10 @@ export async function postDataslate(newDataslate: PostDataslate) {
 }
 type UpdateDataslate = Database["public"]["Tables"]["dataslate"]["Update"];
 export async function updateDataslate(dataslate: UpdateDataslate) {
-  return supabaseClient.from("dataslate").update(dataslate).eq("id", dataslate.id);
+  return supabaseClient
+    .from("dataslate")
+    .update(dataslate)
+    .eq("id", dataslate.id);
 }
 
 export async function getFactions() {
@@ -122,7 +125,7 @@ export interface Database {
           created_at?: string | null;
           faction_id?: number;
           history?: string | null;
-          id?: number;
+          id: number;
           notes?: string | null;
           quirks?: string | null;
           req_points?: number;

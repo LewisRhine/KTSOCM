@@ -22,32 +22,38 @@ const EditDataslate = (props: NewDataslateProps) => {
   const [teamName, setTeamName] = useState(dataslate.team_name);
   const [history, setHistory] = useState(dataslate.history ?? "");
 
-  // const schema: ZodType<FormData> = z.object({
-  //   history: z.string().min(10).max(150),
-  //   faction: z.string().nonempty("Must select a Faction!!!"),
-  // });
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm<FormData>({
-  //   resolver: zodResolver(schema),
-  // });
+  const schema: ZodType<FormData> = z.object({
+    history: z.string().min(10).max(150),
+    faction: z.string().nonempty("Must select a Faction!!!"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
 
-  const onSubmit = async (data: FormData) => {
-    const factionConverter = Number(data.faction);
-    console.log(factionConverter);
-    alert("Success!");
-    window.location.href = "/";
-
+  const onSubmit = async () => {
     try {
       const { error } = await updateDataslate({
-        history: data?.history,
+        id: dataslate.id,
+        history: history,
       });
 
       if (error) throw error;
+      props.onUpdated();
+      window.location.reload();
     } catch (e: any) {
       console.log("error: " + e.Message);
+    }
+  };
+
+  const updateHistory = () => {
+    if (history !== dataslate.history) {
+      onSubmit();
+    } else {
+      props.onUpdated();
     }
   };
 
@@ -60,13 +66,13 @@ const EditDataslate = (props: NewDataslateProps) => {
     <>
       <div className="navbar-end">
         <div className="navbar-item">
-          <button className="button" onClick={() => props.onUpdated()}>
+          <button className="button" onClick={updateHistory}>
             Save
           </button>
         </div>
       </div>
       <div className="container">
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="field">
             <label className="label">Team Name</label>
             <div className="control">
