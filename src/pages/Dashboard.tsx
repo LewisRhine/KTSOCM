@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDataslates, Dataslates } from "../superbaseClient";
 import { Link } from "react-router-dom";
+import DataslateCard from "../componants/DataslateCard";
 
 const Dashboard = () => {
   const [dataslates, setDataslates] = useState<Dataslates | null>(null);
@@ -20,28 +21,26 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-      {dataslates?.map((dataslate, index) => {
-        return (
-          <div key={index} className="card">
-            <div className="card-header-title is centered">
-              Team Name: {dataslate.team_name}
-            </div>
-            <div className="has-background-grey-lighter">
-              <p>Created at: {dataslate.created_at}</p>
-              <p>Faction: {dataslate.faction?.name}</p>
-              <p> History: {dataslate.history}</p>
-              <p> Notes: {dataslate.notes}</p>
-              <p> Quirks: {dataslate.quirks}</p>
-              <p>Reqired Points: {dataslate.req_points}</p>
-              <p>Selectable Keyword: {dataslate.selectable_keyword}</p>
-              <p>Special Ops Log: {dataslate.spec_ops_log}</p>
-            </div>
+      <div className="navbar-end">
+        <div className="navbar-item">
+          <Link to="/new-dataslate" className="button">
+            Create New Dataslate
+          </Link>
+        </div>
+      </div>
+      <div className="container">
+        <section className="section">
+          <div className="columns">
+            {dataslates?.map((dataslate, index) => {
+              return (
+                <div key={index} className="columns">
+                  <DataslateCard dataslate={dataslate} />
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
-      <Link to="/new-dataslate">
-        <button>Create New Dataslate</button>
-      </Link>
+        </section>
+      </div>
     </>
   );
 };
