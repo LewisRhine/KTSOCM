@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getDataslate, Dataslate, updateDataslate } from "../superbaseClient";
+// import { useParams } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Dataslate, updateDataslate } from "../superbaseClient";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Session } from "@supabase/supabase-js";
+// import { Session } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
+import { SessionContext } from "../context/sessionContext";
 
 type FormData = {
   history: string;
@@ -12,7 +13,7 @@ type FormData = {
 };
 
 interface NewDataslateProps {
-  session: Session;
+  // session: Session;
   dataslate: NonNullable<Dataslate>;
   onUpdated(): void;
 }
@@ -21,6 +22,7 @@ const EditDataslate = (props: NewDataslateProps) => {
   const { dataslate } = props;
   const [teamName, setTeamName] = useState(dataslate.team_name);
   const [history, setHistory] = useState(dataslate.history ?? "");
+  const session = useContext(SessionContext)
 
   const schema: ZodType<FormData> = z.object({
     history: z.string().min(10).max(150),

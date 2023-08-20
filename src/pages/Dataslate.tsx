@@ -1,19 +1,22 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getDataslate, Dataslate } from "../superbaseClient";
 import EditDataslate from "../componants/EditDataslate";
-import { Session } from "@supabase/supabase-js";
+// import { Session } from "@supabase/supabase-js";
+import { SessionContext } from "../context/sessionContext";
 
-interface DataslateProps {
-  session: Session;
-}
+// interface DataslateProps {
+//   session: Session;
+// }
 
 
-const Dataslate = (props: DataslateProps) => {
+const Dataslate = (/*props: DataslateProps*/) => {
+  const session = useContext(SessionContext)
   const { dataslateId } = useParams();
   const [dataslate, setDataslate] = useState<Dataslate | null>(null);
   const [error, setError] = useState(false);
   const [isEditMode, setisEditMode] = useState(false)
+
   console.log(dataslateId);
   console.log(dataslate);
 
@@ -34,7 +37,7 @@ const Dataslate = (props: DataslateProps) => {
   }, []);
   if (error) return <h1> There was an error loading Dataslate! </h1>;
   if (!dataslate) return <h1> Loading </h1>;
-  if (isEditMode) return <EditDataslate session={props.session} dataslate={dataslate} onUpdated={() => setisEditMode(false)} />;
+  if (isEditMode) return <EditDataslate dataslate={dataslate} onUpdated={() => setisEditMode(false)} />;
 
   return (
     <>

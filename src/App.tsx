@@ -66,11 +66,11 @@ function App() {
             />
             <Route
               path="/new-dataslate"
-              element={<NewDataslate session={session} />}
+              element={<NewDataslate /*session={session}*/ />}
             />
             <Route
               path="/dataslate/:dataslateId"
-              element={<Dataslate session={session} />}
+              element={<Dataslate /*session={session}*/ />}
             />
           </Routes>
         </BrowserRouter>
