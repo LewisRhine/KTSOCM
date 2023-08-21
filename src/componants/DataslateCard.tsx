@@ -2,17 +2,16 @@ import { Dataslate } from "../superbaseClient";
 
 interface DataslateCardProps {
   dataslate: NonNullable<Dataslate>;
-  // onUpdated(): void;
 }
 
 const DataslateCard = (props: DataslateCardProps) => {
   return (
-    <a href={`http://127.0.0.1:5173/dataslate/${props.dataslate.id}`}>
+    <a href={`/dataslate/${props.dataslate.id}`}>
       <div className="card">
         <div className="card-image">
           <figure className="image is-4by3">
             <img
-              src={props.dataslate.faction?.faction_cover_image ?? ""}
+              src={props.dataslate.faction?.cover_image ?? ""}
               alt="Placeholder image"
             />
           </figure>

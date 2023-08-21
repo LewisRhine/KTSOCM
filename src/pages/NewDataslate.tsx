@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 // import { Session } from "@supabase/supabase-js";
 import { Factions, getFactions, postDataslate } from "../superbaseClient";
 import { useContext, useEffect, useState } from "react";
-import { SessionContext } from "../context/sessionContext";
+import { sessionContext } from "../context/sessionContext";
 
 type FormData = {
   killTeamName: string;
@@ -18,7 +18,7 @@ type FormData = {
 
 const NewDataslate = (/*props: NewDataslateProps*/) => {
   const [factions, setFactions] = useState<Factions | null>(null);
-  const session = useContext(SessionContext);
+  const session = useContext(sessionContext);
 
   useEffect(() => {
     const fetchFactions = async () => {

@@ -156,7 +156,7 @@ export interface Database {
           keyword: string;
           name: string;
           quirk_table: string[] | null;
-          faction_cover_image: string | null;
+          cover_image: string | null;
         };
         Insert: {
           history_table?: string[] | null;
@@ -164,7 +164,7 @@ export interface Database {
           keyword: string;
           name: string;
           quirk_table?: string[] | null;
-          faction_cover_image: string | null;
+          cover_image: string | null;
         };
         Update: {
           history_table?: string[] | null;
@@ -172,7 +172,7 @@ export interface Database {
           keyword?: string;
           name?: string;
           quirk_table?: string[] | null;
-          faction_cover_image: string | null;
+          cover_image: string | null;
         };
         Relationships: [];
       };

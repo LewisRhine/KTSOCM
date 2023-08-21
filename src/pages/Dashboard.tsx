@@ -30,10 +30,10 @@ const Dashboard = () => {
       </div>
       <div className="container">
         <section className="section">
-          <div className="columns">
+          <div className="column">
             {dataslates?.map((dataslate, index) => {
               return (
-                <div key={index} className="columns">
+                <div key={index} className="column">
                   <DataslateCard dataslate={dataslate} />
                 </div>
               );
