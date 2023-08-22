@@ -30,7 +30,7 @@ const Dashboard = () => {
       </div>
       <div className="container">
         <section className="section">
-          <div className="column">
+          <div className="columns">
             {dataslates?.map((dataslate, index) => {
               return (
                 <div key={index} className="column">

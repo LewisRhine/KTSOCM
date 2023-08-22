@@ -16,11 +16,11 @@ const DataslateCard = (props: DataslateCardProps) => {
             />
           </figure>
         </div>
-        <div className="media-content">
+        <div className="card-content">
           <p className="title is-4">{props.dataslate.team_name}</p>
           <p className="subtitle is-6">{props.dataslate.faction?.name}</p>
         </div>
-        <div className="content">Current Spec Ops: None</div>
+        <div className="card-content">Current Spec Ops: None</div>
       </div>
     </a>
   );
