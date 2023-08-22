@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Auth } from "@supabase/auth-ui-react";
-import { Session,  } from "@supabase/supabase-js";
+import { Session } from "@supabase/supabase-js";
 import supabaseClient from "../superbaseClient";
 
 interface AuthenticationProps {

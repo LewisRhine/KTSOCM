@@ -2,21 +2,23 @@ import { useForm } from "react-hook-form";
 //KNEEL BEFORE
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Session } from "@supabase/supabase-js";
+// import { Session } from "@supabase/supabase-js";
 import { Factions, getFactions, postDataslate } from "../superbaseClient";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { sessionContext } from "../context/sessionContext";
 
 type FormData = {
   killTeamName: string;
   faction: string;
 };
 
-interface NewDataslateProps {
-  session: Session;
-}
+// interface NewDataslateProps {
+//   session: Session;
+// }
 
-const NewDataslate = (props: NewDataslateProps) => {
+const NewDataslate = (/*props: NewDataslateProps*/) => {
   const [factions, setFactions] = useState<Factions | null>(null);
+  const session = useContext(sessionContext);
 
   useEffect(() => {
     const fetchFactions = async () => {
@@ -30,6 +32,7 @@ const NewDataslate = (props: NewDataslateProps) => {
     };
 
     fetchFactions();
+    console.log("contex userID: " + session?.user.id);
   }, []);
 
   const schema: ZodType<FormData> = z.object({
@@ -54,7 +57,8 @@ const NewDataslate = (props: NewDataslateProps) => {
       const { error } = await postDataslate({
         team_name: data?.killTeamName,
         faction_id: factionConverter,
-        user_id: props.session?.user.id,
+        // user_id: props.session?.user.id,
+        user_id: session?.user.id ?? "",
       });
 
       if (error) throw error;

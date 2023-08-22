@@ -6,6 +6,7 @@ import { Session } from "@supabase/supabase-js";
 import supabaseClient from "./superbaseClient";
 import NewDataslate from "./pages/NewDataslate";
 import Dataslate from "./pages/Dataslate";
+import { sessionContext } from "./context/sessionContext";
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -29,7 +30,7 @@ function App() {
     return <Authentication session={session} />;
   } else {
     return (
-      <>
+      <sessionContext.Provider value={session}>
         <nav className="navbar is-dark">
           <a className="navbar-burger" data-target="navbarMenu">
             <span aria-hidden="true"></span>
@@ -63,17 +64,11 @@ function App() {
               path="/auth"
               element={<Authentication session={session} />}
             />
-            <Route
-              path="/new-dataslate"
-              element={<NewDataslate session={session} />}
-            />
-            <Route
-              path="/dataslate/:dataslateId"
-              element={<Dataslate session={session} />}
-            />
+            <Route path="/new-dataslate" element={<NewDataslate />} />
+            <Route path="/dataslate/:dataslateId" element={<Dataslate />} />
           </Routes>
         </BrowserRouter>
-      </>
+      </sessionContext.Provider>
     );
   }
 }
