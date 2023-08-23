@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 // import { Session } from "@supabase/supabase-js";
-import { Factions, getFactions, postDataslate } from "../superbaseClient";
 import { useContext, useEffect, useState } from "react";
 import { sessionContext } from "../context/sessionContext";
+import { factions } from "../data/faction.ts";
+import { postDataslate } from "../data/dataslate.ts";
 
 type FormData = {
   killTeamName: string;
@@ -17,23 +18,7 @@ type FormData = {
 // }
 
 const NewDataslate = (/*props: NewDataslateProps*/) => {
-  const [factions, setFactions] = useState<Factions | null>(null);
   const session = useContext(sessionContext);
-
-  useEffect(() => {
-    const fetchFactions = async () => {
-      try {
-        const { data: factions, error } = await getFactions();
-        if (error) throw error;
-        setFactions(factions);
-      } catch (e: any) {
-        console.log(e.Message);
-      }
-    };
-
-    fetchFactions();
-    console.log("contex userID: " + session?.user.id);
-  }, []);
 
   const schema: ZodType<FormData> = z.object({
     killTeamName: z.string().min(2).max(50),
@@ -49,22 +34,22 @@ const NewDataslate = (/*props: NewDataslateProps*/) => {
 
   const onSubmit = async (data: FormData) => {
     const factionConverter = Number(data.faction);
-    console.log(factionConverter);
-    alert("Success!");
-    window.location.href = "/";
+    // alert("Success!");
+    // window.location.href = "/";
 
-    try {
-      const { error } = await postDataslate({
-        team_name: data?.killTeamName,
-        faction_id: factionConverter,
-        // user_id: props.session?.user.id,
-        user_id: session?.user.id ?? "",
-      });
+    const faction = factions.find((faction) => faction.id === factionConverter);
 
-      if (error) throw error;
-    } catch (e: any) {
-      console.log("error: " + e.Message);
+    if (!faction) {
+      console.log("Opprs error");
+      return;
     }
+
+    await postDataslate(
+      session?.user.id ?? "",
+      data?.killTeamName,
+      faction,
+      "",
+    );
   };
 
   return (
@@ -76,7 +61,7 @@ const NewDataslate = (/*props: NewDataslateProps*/) => {
       )}
       <label> Chose Faction </label>
       <select {...register("faction")} defaultValue="">
-        <option value=""> Select From Dropdown </option>
+        <option value=""> Select From Dropdown</option>
         {factions?.map((faction) => {
           return (
             <>

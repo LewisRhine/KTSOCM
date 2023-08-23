@@ -1,7 +1,7 @@
-import { Dataslate } from "../superbaseClient";
+import { Dataslate } from "../data/dataslate.ts";
 
 interface DataslateCardProps {
-  dataslate: NonNullable<Dataslate>;
+  dataslate: Dataslate;
 }
 
 const DataslateCard = (props: DataslateCardProps) => {
@@ -11,14 +11,14 @@ const DataslateCard = (props: DataslateCardProps) => {
         <div className="card-image">
           <figure className="image is-4by3">
             <img
-              src={props.dataslate.faction?.cover_image ?? ""}
+              src={props.dataslate.faction.coverImage ?? ""}
               alt="Placeholder image"
             />
           </figure>
         </div>
         <div className="card-content">
-          <p className="title is-4">{props.dataslate.team_name}</p>
-          <p className="subtitle is-6">{props.dataslate.faction?.name}</p>
+          <p className="title is-4">{props.dataslate.teamName}</p>
+          <p className="subtitle is-6">{props.dataslate.faction.name}</p>
         </div>
         <div className="card-content">Current Spec Ops: None</div>
       </div>
