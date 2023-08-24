@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
-import { getDataslates, Dataslates } from "../superbaseClient";
 import { Link } from "react-router-dom";
 import DataslateCard from "../componants/DataslateCard";
+import { Dataslate } from "../data/dataslate.ts";
+import { getDataslates } from "../data/dataslate.ts";
 
 const Dashboard = () => {
-  const [dataslates, setDataslates] = useState<Dataslates | null>(null);
+  const [dataslates, setDataslates] = useState<Dataslate[] | null>(null);
 
   useEffect(() => {
     const fetchDataslates = async () => {
-      try {
-        const { data: dataslates, error } = await getDataslates();
-        if (error) throw error;
-        setDataslates(dataslates);
-      } catch (e: any) {
-        console.log(e.Message);
-      }
+      const {data} = await getDataslates();
+
+      if (!data) return;
+
+      setDataslates(data);
     };
 
     fetchDataslates();
   }, []);
+
   return (
     <>
       <div className="navbar-end">

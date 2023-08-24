@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Dataslate, updateDataslate } from "../superbaseClient";
+import { Dataslate, updateDataslate } from "../data/dataslate.ts";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -11,15 +11,16 @@ type FormData = {
 };
 
 interface NewDataslateProps {
-  dataslate: NonNullable<Dataslate>;
+  dataslate: Dataslate;
+
   onUpdated(): void;
 }
 
 const EditDataslate = (props: NewDataslateProps) => {
   const { dataslate } = props;
-  const [teamName, setTeamName] = useState(dataslate.team_name);
+  const [teamName, setTeamName] = useState(dataslate.teamName);
   const [history, setHistory] = useState(dataslate.history ?? "");
-  const session = useContext(sessionContext)
+  const session = useContext(sessionContext);
 
   const schema: ZodType<FormData> = z.object({
     history: z.string().min(10).max(150),
@@ -34,18 +35,15 @@ const EditDataslate = (props: NewDataslateProps) => {
   });
 
   const onSubmit = async () => {
-    try {
-      const { error } = await updateDataslate({
-        id: dataslate.id,
-        history: history,
-      });
+    const { error } = await updateDataslate({
+      ...dataslate,
+      history,
+    });
 
-      if (error) throw error;
-      props.onUpdated();
-      window.location.reload();
-    } catch (e: any) {
-      console.log("error: " + e.Message);
-    }
+    if (error) console.log(error);
+
+    props.onUpdated();
+    window.location.reload();
   };
 
   const updateHistory = () => {
@@ -58,7 +56,7 @@ const EditDataslate = (props: NewDataslateProps) => {
 
   const genarateHisotry = (): string => {
     const rollResult = Math.floor(Math.random() * 6);
-    return dataslate.faction?.history_table?.[rollResult] ?? "";
+    return dataslate.faction?.historyTable?.[rollResult] ?? "";
   };
 
   return (
@@ -93,7 +91,7 @@ const EditDataslate = (props: NewDataslateProps) => {
                 onChange={(event) => setHistory(event.target.value)}
               />
             </div>
-            {dataslate.faction?.history_table && (
+            {dataslate.faction?.historyTable && (
               <div className="control">
                 <div
                   className="button is-primary"

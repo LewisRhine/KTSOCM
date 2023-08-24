@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { getDataslate, Dataslate } from "../superbaseClient";
+import { getDataslate, Dataslate } from "../data/dataslate.ts";
 import EditDataslate from "../componants/EditDataslate";
 import { sessionContext } from "../context/sessionContext";
 
@@ -13,19 +13,22 @@ const Dataslate = () => {
 
   useEffect(() => {
     if (!dataslateId) return;
+
     const fetchDataslate = async () => {
-      try {
-        const { data: dataslate, error } = await getDataslate(+dataslateId);
-        if (error) throw error;
-        setDataslate(dataslate);
-        setError(false);
-      } catch (e: any) {
+      const { data, error } = await getDataslate(dataslateId);
+
+      if (error) {
         setError(true);
+        return;
       }
+
+      if (data) setDataslate(data);
+      setError(false);
     };
 
     fetchDataslate();
-  }, []);
+  }, [dataslateId]);
+
   if (error) return <h1> There was an error loading Dataslate! </h1>;
   if (!dataslate) return <h1> Loading </h1>;
   if (isEditMode)
@@ -46,15 +49,15 @@ const Dataslate = () => {
         </div>
       </div>
       <div className="container">
-        <section className="section">{dataslate.team_name}</section>
+        <section className="section">{dataslate.teamName}</section>
         <section className="section">
-          <p>Faction: {dataslate.faction?.name}</p>
+          <p>Faction: {dataslate.faction.name}</p>
           {dataslate.history && <p>History: {dataslate.history}</p>}
           <p>Notes: {dataslate.notes}</p>
           <p>Quirks: {dataslate.quirks}</p>
-          <p>Reqired Points: {dataslate.req_points}</p>
-          <p>Selectable Keyword: {dataslate.selectable_keyword}</p>
-          <p>Special Ops Log: {dataslate.spec_ops_log}</p>
+          <p>Reqired Points: {dataslate.reqPoints}</p>
+          <p>Selectable Keyword: {dataslate.selectableKeyword}</p>
+          <p>Special Ops Log: {dataslate.specOpsLog}</p>
         </section>
       </div>
     </>
