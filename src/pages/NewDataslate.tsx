@@ -35,7 +35,6 @@ const NewDataslate = (/*props: NewDataslateProps*/) => {
   const onSubmit = async (data: FormData) => {
     const factionConverter = Number(data.faction);
     // alert("Success!");
-    // window.location.href = "/";
 
     const faction = factions.find((faction) => faction.id === factionConverter);
 
@@ -48,30 +47,51 @@ const NewDataslate = (/*props: NewDataslateProps*/) => {
       session?.user.id ?? "",
       data?.killTeamName,
       faction,
-      "",
+      ""
     );
+    window.location.href = "/";
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label> Enter Kill Team Name... </label>
-      <input type="text" {...register("killTeamName")} />
+      <div className="field">
+        <label className="lable"> Enter Kill Team Name... </label>
+        <div className="control">
+          <input
+            className="input is-small"
+            type="text"
+            {...register("killTeamName")}
+          />
+        </div>
+      </div>
       {errors.killTeamName && (
         <span style={{ color: "red" }}>{errors.killTeamName.message}</span>
       )}
-      <label> Chose Faction </label>
-      <select {...register("faction")} defaultValue="">
-        <option value=""> Select From Dropdown</option>
-        {factions?.map((faction) => {
-          return (
-            <>
-              <option value={faction.id.toString()}>{faction.name}</option>
-            </>
-          );
-        })}
-      </select>
-      <span style={{ color: "red" }}>{errors.faction?.message}</span>
-      <button type="submit">Submit</button>
+      <div className="field">
+        <label className="lable"> Chose Faction </label>
+        <div className="control">
+          <div className="select">
+            <select {...register("faction")} defaultValue="">
+              <option value=""> Select From Dropdown</option>
+              {factions?.map((faction) => {
+                return (
+                  <>
+                    <option value={faction.id.toString()}>
+                      {faction.name}
+                    </option>
+                  </>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <span style={{ color: "red" }}>{errors.faction?.message}</span>
+      </div>
+      <p className="control">
+        <button className="button is-success" type="submit">
+          Submit
+        </button>
+      </p>
     </form>
   );
 };
