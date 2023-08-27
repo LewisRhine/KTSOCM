@@ -13,11 +13,11 @@ type FormData = {
   faction: string;
 };
 
-// interface NewDataslateProps {
-//   session: Session;
-// }
+interface NewDataslateProps {
+  cancelShowModal: () => void;
+}
 
-const NewDataslate = (/*props: NewDataslateProps*/) => {
+const NewDataslate = (props: NewDataslateProps) => {
   const session = useContext(sessionContext);
 
   const schema: ZodType<FormData> = z.object({
@@ -34,7 +34,6 @@ const NewDataslate = (/*props: NewDataslateProps*/) => {
 
   const onSubmit = async (data: FormData) => {
     const factionConverter = Number(data.faction);
-    // alert("Success!");
 
     const faction = factions.find((faction) => faction.id === factionConverter);
 
@@ -75,7 +74,7 @@ const NewDataslate = (/*props: NewDataslateProps*/) => {
                 )}
                 <div className="field">
                   <label className="lable"> Chose Faction </label>
-                  <div className="control"/>
+                  <div className="control" />
                   <div className="select">
                     <select {...register("faction")} defaultValue="">
                       <option value=""> Select From Dropdown</option>
@@ -98,6 +97,9 @@ const NewDataslate = (/*props: NewDataslateProps*/) => {
               <footer className="modal-card-foot">
                 <button className="button is-success" type="submit">
                   Submit
+                </button>
+                <button className="button" onClick={props.cancelShowModal}>
+                  Cancel
                 </button>
               </footer>
             </div>

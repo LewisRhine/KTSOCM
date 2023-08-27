@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import DataslateCard from "../componants/DataslateCard";
 import { Dataslate } from "../data/dataslate.ts";
 import { getDataslates } from "../data/dataslate.ts";
@@ -9,8 +8,12 @@ const Dashboard = () => {
   const [dataslates, setDataslates] = useState<Dataslate[] | null>(null);
   const [showNewDataslateModal, setshowNewDataslateModal] = useState(false);
 
-  const openModal = () => {
+  const showModal = () => {
     setshowNewDataslateModal(true);
+  };
+
+  const cancelShowModal = () => {
+    setshowNewDataslateModal(false);
   };
 
   useEffect(() => {
@@ -27,10 +30,12 @@ const Dashboard = () => {
 
   return (
     <>
-      {showNewDataslateModal && <NewDataslate />}
+      {showNewDataslateModal && (
+        <NewDataslate cancelShowModal={cancelShowModal} />
+      )}
       <div className="navbar-end">
         <div className="navbar-item">
-          <button className="button" onClick={openModal}>
+          <button className="button" onClick={showModal}>
             Create New Dataslate
           </button>
         </div>
