@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 //KNEEL BEFORE
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { Session } from "@supabase/supabase-js";
 import { useContext, useEffect, useState } from "react";
 import { sessionContext } from "../context/sessionContext";
 import { factions } from "../data/faction.ts";
