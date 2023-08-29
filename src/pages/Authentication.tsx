@@ -1,15 +1,38 @@
-import { useCallback, useEffect, useState } from "react";
 import { Auth } from "@supabase/auth-ui-react";
-import { Session } from "@supabase/supabase-js";
 import supabaseClient from "../superbaseClient";
 
-interface AuthenticationProps {
-  session: Session | null;
-}
-
-const Authentication = (props: AuthenticationProps) => {
-  // return <div>auth</div>;
-  return <Auth supabaseClient={supabaseClient} />;
+const Authentication = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "flex-end",
+      }}
+    >
+      <Auth
+        supabaseClient={supabaseClient}
+        appearance={{
+          style: {
+            container: { width: "340px" },
+            anchor: { display: "flex", justifyContent: "center" },
+            label: { paddingTop: "20px" },
+            button: { marginTop: "20px", marginBottom: "20px" },
+          },
+          extend: false,
+          className: {
+            container: "container",
+            divider: "divider",
+            input: "input",
+            label: "label",
+            message: 'help is-danger',
+            button: "button",
+          },
+        }}
+        providers={["discord"]}
+      />
+    </div>
+  );
 };
 
 export default Authentication;
