@@ -27,7 +27,7 @@ function App() {
 
   console.log("Session: " + session);
   if (!session) {
-    return <Authentication session={session} />;
+    return <Authentication />;
   } else {
     return (
       <sessionContext.Provider value={session}>
@@ -60,10 +60,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route
-              path="/auth"
-              element={<Authentication session={session} />}
-            />
+            <Route path="/auth" element={<Authentication />} />
             <Route path="/new-dataslate" element={<NewDataslate />} />
             <Route path="/dataslate/:dataslateId" element={<Dataslate />} />
           </Routes>
