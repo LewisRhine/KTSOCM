@@ -42,10 +42,10 @@ const Dashboard = () => {
       </div>
       <div className="container">
         <section className="section">
-          <div className="columns">
+          <div className="columns is-multiline">
             {dataslates?.map((dataslate, index) => {
               return (
-                <div key={index} className="column">
+                <div key={index} className="column is-one-quarter">
                   <DataslateCard dataslate={dataslate} />
                 </div>
               );
