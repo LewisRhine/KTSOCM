@@ -7,6 +7,7 @@ import supabaseClient from "./superbaseClient";
 import NewDataslate from "./pages/NewDataslate";
 import Dataslate from "./pages/Dataslate";
 import { sessionContext } from "./context/sessionContext";
+import TeamBackground from "./component/TeamBackground";
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -63,6 +64,10 @@ function App() {
             <Route path="/auth" element={<Authentication />} />
             <Route path="/new-dataslate" element={<NewDataslate />} />
             <Route path="/dataslate/:dataslateId" element={<Dataslate />} />
+            <Route
+              path="/dataslate/:dataslateId/teambackground"
+              element={<TeamBackground />}
+            />
           </Routes>
         </BrowserRouter>
       </sessionContext.Provider>
