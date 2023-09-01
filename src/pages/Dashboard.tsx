@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import DataslateCard from "../componants/DataslateCard";
+import DataslateCard from "../component/DataslateCard.tsx";
 import { Dataslate } from "../data/dataslate.ts";
 import { getDataslates } from "../data/dataslate.ts";
-import NewDataslate from "../componants/NewDataslate.tsx";
+import NewDataslate from "../component/NewDataslate.tsx";
 
 const Dashboard = () => {
   const [dataslates, setDataslates] = useState<Dataslate[] | null>(null);

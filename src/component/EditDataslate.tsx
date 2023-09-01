@@ -3,7 +3,7 @@ import { Dataslate, updateDataslate } from "../data/dataslate.ts";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { sessionContext } from "../context/sessionContext";
+import { sessionContext } from "../context/sessionContext.ts";
 
 type FormData = {
   history: string;

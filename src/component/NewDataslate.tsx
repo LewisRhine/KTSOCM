@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useEffect, useState } from "react";
-import { sessionContext } from "../context/sessionContext";
+import { sessionContext } from "../context/sessionContext.ts";
 import { factions } from "../data/faction.ts";
 import { postDataslate } from "../data/dataslate.ts";
 
