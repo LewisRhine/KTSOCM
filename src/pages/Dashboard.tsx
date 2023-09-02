@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import DataslateCard from '../componants/DataslateCard'
-import { Dataslate } from '../data/dataslate.ts'
-import { getDataslates } from '../data/dataslate.ts'
 import NewDataslate from '../componants/NewDataslate.tsx'
+import useDataslateStore from '../stores/dataslateStore.ts'
 
 const Dashboard = () => {
-  const [dataslates, setDataslates] = useState<Dataslate[] | null>(null)
   const [showNewDataslateModal, setshowNewDataslateModal] = useState(false)
+
+  const dataslates = useDataslateStore((state) => state.dataslates)
+  const gatDataslates = useDataslateStore((state) => state.getDataslates)
 
   const showModal = () => {
     setshowNewDataslateModal(true)
@@ -17,15 +18,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    const fetchDataslates = async () => {
-      const { data } = await getDataslates()
-
-      if (!data) return
-
-      setDataslates(data)
-    }
-
-    fetchDataslates()
+    gatDataslates()
   }, [])
 
   return (
