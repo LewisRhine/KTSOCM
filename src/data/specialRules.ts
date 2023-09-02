@@ -1,4 +1,4 @@
 export interface SpecialRules {
-  name: string;
-  rule: string;
+  name: string
+  rule: string
 }

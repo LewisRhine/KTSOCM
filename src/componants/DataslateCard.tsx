@@ -1,7 +1,7 @@
-import { Dataslate } from "../data/dataslate.ts";
+import { Dataslate } from '../data/dataslate.ts'
 
 interface DataslateCardProps {
-  dataslate: Dataslate;
+  dataslate: Dataslate
 }
 
 const DataslateCard = (props: DataslateCardProps) => {
@@ -11,7 +11,7 @@ const DataslateCard = (props: DataslateCardProps) => {
         <div className="card-image">
           <figure className="image is-4by3">
             <img
-              src={props.dataslate.faction.coverImage ?? ""}
+              src={props.dataslate.faction.coverImage ?? ''}
               alt="Placeholder image"
             />
           </figure>
@@ -23,7 +23,7 @@ const DataslateCard = (props: DataslateCardProps) => {
         <div className="card-content">Current Spec Ops: None</div>
       </div>
     </a>
-  );
-};
+  )
+}
 
-export default DataslateCard;
+export default DataslateCard

@@ -1,63 +1,63 @@
-import { useContext, useState } from "react";
-import { Dataslate, updateDataslate } from "../data/dataslate.ts";
-import { ZodType, z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { sessionContext } from "../context/sessionContext";
+import { useContext, useState } from 'react'
+import { Dataslate, updateDataslate } from '../data/dataslate.ts'
+import { ZodType, z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { sessionContext } from '../context/sessionContext'
 
 type FormData = {
-  history: string;
-  faction: string;
-};
+  history: string
+  faction: string
+}
 
 interface NewDataslateProps {
-  dataslate: Dataslate;
+  dataslate: Dataslate
 
-  onUpdated(): void;
+  onUpdated(): void
 }
 
 const EditDataslate = (props: NewDataslateProps) => {
-  const { dataslate } = props;
-  const [teamName, setTeamName] = useState(dataslate.teamName);
-  const [history, setHistory] = useState(dataslate.history ?? "");
-  const session = useContext(sessionContext);
+  const { dataslate } = props
+  const [teamName, setTeamName] = useState(dataslate.teamName)
+  const [history, setHistory] = useState(dataslate.history ?? '')
+  const session = useContext(sessionContext)
 
   const schema: ZodType<FormData> = z.object({
     history: z.string().min(10).max(150),
-    faction: z.string().nonempty("Must select a Faction!!!"),
-  });
+    faction: z.string().nonempty('Must select a Faction!!!'),
+  })
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-  });
+  })
 
   const onSubmit = async () => {
     const { error } = await updateDataslate({
       ...dataslate,
       history,
-    });
+    })
 
-    if (error) console.log(error);
+    if (error) console.log(error)
 
-    props.onUpdated();
-    window.location.reload();
-  };
+    props.onUpdated()
+    window.location.reload()
+  }
 
   const updateHistory = () => {
     if (history !== dataslate.history) {
-      onSubmit();
+      onSubmit()
     } else {
-      props.onUpdated();
+      props.onUpdated()
     }
-  };
+  }
 
   const genarateHisotry = (): string => {
-    const rollResult = Math.floor(Math.random() * 6);
-    return dataslate.faction?.historyTable?.[rollResult] ?? "";
-  };
+    const rollResult = Math.floor(Math.random() * 6)
+    return dataslate.faction?.historyTable?.[rollResult] ?? ''
+  }
 
   return (
     <>
@@ -105,7 +105,7 @@ const EditDataslate = (props: NewDataslateProps) => {
         </form>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default EditDataslate;
+export default EditDataslate
