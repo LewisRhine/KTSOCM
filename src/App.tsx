@@ -1,33 +1,33 @@
-import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Authentication from "./pages/Authentication";
-import { Session } from "@supabase/supabase-js";
-import supabaseClient from "./superbaseClient";
-import NewDataslate from "./pages/NewDataslate";
-import Dataslate from "./pages/Dataslate";
-import { sessionContext } from "./context/sessionContext";
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Dashboard from './pages/Dashboard'
+import Authentication from './pages/Authentication'
+import { Session } from '@supabase/supabase-js'
+import supabaseClient from './superbaseClient'
+import NewDataslate from './pages/NewDataslate'
+import Dataslate from './pages/Dataslate'
+import { sessionContext } from './context/sessionContext'
 
 function App() {
-  const [session, setSession] = useState<Session | null>(null);
+  const [session, setSession] = useState<Session | null>(null)
 
   useEffect(() => {
     supabaseClient.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
+      setSession(session)
+    })
 
     const {
       data: { subscription },
     } = supabaseClient.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+      setSession(session)
+    })
 
-    return () => subscription.unsubscribe();
-  }, []);
+    return () => subscription.unsubscribe()
+  }, [])
 
-  console.log("Session: " + session);
+  console.log('Session: ' + session)
   if (!session) {
-    return <Authentication />;
+    return <Authentication />
   } else {
     return (
       <sessionContext.Provider value={session}>
@@ -40,7 +40,7 @@ function App() {
 
           <div id="navbarMenu" className="navbar-menu">
             <div className="navbar-start">
-              <a className="navbar-item" href={"/"}>
+              <a className="navbar-item" href={'/'}>
                 Dashboard
               </a>
             </div>
@@ -66,8 +66,8 @@ function App() {
           </Routes>
         </BrowserRouter>
       </sessionContext.Provider>
-    );
+    )
   }
 }
 
-export default App;
+export default App

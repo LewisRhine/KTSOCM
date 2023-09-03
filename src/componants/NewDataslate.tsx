@@ -1,54 +1,49 @@
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form'
 //KNEEL BEFORE
-import { ZodType, z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useEffect, useState } from "react";
-import { sessionContext } from "../context/sessionContext";
-import { factions } from "../data/faction.ts";
-import { postDataslate } from "../data/dataslate.ts";
+import { ZodType, z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useContext, useEffect, useState } from 'react'
+import { sessionContext } from '../context/sessionContext'
+import { factions } from '../data/faction.ts'
+import { postDataslate } from '../data/dataslate.ts'
 
 type FormData = {
-  killTeamName: string;
-  faction: string;
-};
+  killTeamName: string
+  faction: string
+}
 
 interface NewDataslateProps {
-  cancelShowModal: () => void;
+  cancelShowModal: () => void
 }
 
 const NewDataslate = (props: NewDataslateProps) => {
-  const session = useContext(sessionContext);
+  const session = useContext(sessionContext)
 
   const schema: ZodType<FormData> = z.object({
     killTeamName: z.string().min(2).max(50),
-    faction: z.string().nonempty("Must select a Faction!!!"),
-  });
+    faction: z.string().nonempty('Must select a Faction!!!'),
+  })
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-  });
+  })
 
   const onSubmit = async (data: FormData) => {
-    const factionConverter = Number(data.faction);
+    const factionConverter = Number(data.faction)
 
-    const faction = factions.find((faction) => faction.id === factionConverter);
+    const faction = factions.find((faction) => faction.id === factionConverter)
 
     if (!faction) {
-      console.log("Opprs error");
-      return;
+      console.log('Opprs error')
+      return
     }
 
-    await postDataslate(
-      session?.user.id ?? "",
-      data?.killTeamName,
-      faction,
-      ""
-    );
-    window.location.href = "/";
-  };
+    await postDataslate(session?.user.id ?? '', data?.killTeamName, faction, '')
+    window.location.href = '/'
+  }
 
   return (
     <div className="modal is-active">
@@ -64,10 +59,10 @@ const NewDataslate = (props: NewDataslateProps) => {
                 <input
                   className="input is-small"
                   type="text"
-                  {...register("killTeamName")}
+                  {...register('killTeamName')}
                 />
                 {errors.killTeamName && (
-                  <span style={{ color: "red" }}>
+                  <span style={{ color: 'red' }}>
                     {errors.killTeamName.message}
                   </span>
                 )}
@@ -75,7 +70,7 @@ const NewDataslate = (props: NewDataslateProps) => {
                   <label className="lable"> Chose Faction </label>
                   <div className="control" />
                   <div className="select">
-                    <select {...register("faction")} defaultValue="">
+                    <select {...register('faction')} defaultValue="">
                       <option value=""> Select From Dropdown</option>
                       {factions?.map((faction) => {
                         return (
@@ -84,11 +79,11 @@ const NewDataslate = (props: NewDataslateProps) => {
                               {faction.name}
                             </option>
                           </>
-                        );
+                        )
                       })}
                     </select>
                   </div>
-                  <span style={{ color: "red" }}>
+                  <span style={{ color: 'red' }}>
                     {errors.faction?.message}
                   </span>
                 </div>
@@ -106,7 +101,7 @@ const NewDataslate = (props: NewDataslateProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NewDataslate;
+export default NewDataslate
