@@ -1,29 +1,14 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Dataslate, getDataslate } from "../data/dataslate.ts";
+import { useRef } from 'react'
+import useDataslateStore from '../stores/dataslateStore.ts'
 
 // const [isEditMode, setisEditMode] = useState(false);
 const TeamBackground = () => {
-  const { dataslateId } = useParams();
-  const [dataslate, setDataslate] = useState<Dataslate | null>(null);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    if (!dataslateId) return;
-    const fetchDataslate = async () => {
-      const { data, error } = await getDataslate(dataslateId);
-
-      if (error) {
-        setError(true);
-        return;
-      }
-
-      if (data) setDataslate(data);
-      setError(false);
-    };
-
-    fetchDataslate();
-  }, [dataslateId]);
+  const history = useDataslateStore((state) => state.selectedDataslate?.history)
+  const quirks = useDataslateStore((state) => state.selectedDataslate?.quirks)
+  const notes = useDataslateStore((state) => state.selectedDataslate?.notes)
+  const historyInputRef = useRef<HTMLTextAreaElement>(null)
+  const saveHistory = useDataslateStore((state) => state.saveHistory)
+  console.log(historyInputRef.current?.value)
 
   return (
     <>
@@ -37,25 +22,41 @@ const TeamBackground = () => {
 
       <section className="section is-medium">
         <h1 className="title">History</h1>
-        <h2 className="subtitle">
-          {dataslate?.history ? dataslate.history : "None"}
-        </h2>
+        <textarea
+          className="textarea"
+          ref={historyInputRef}
+          defaultValue={history}></textarea>
       </section>
+      <button
+        className="button"
+        onClick={() => saveHistory(historyInputRef.current?.value ?? '')}>
+        Save
+      </button>
       <section className="section is-medium">
         <h1 className="title">Quirks</h1>
-        <h2 className="subtitle">
-          {dataslate?.quirks ? dataslate.quirks : "None"}
-        </h2>
+        <h2 className="subtitle">{quirks ?? 'None'}</h2>
       </section>
 
       <section className="section is-medium">
         <h1 className="title">Notes</h1>
-        <h2 className="subtitle">
-          {dataslate?.notes ? dataslate.notes : "None"}
-        </h2>
+        <h2 className="subtitle">{notes ?? 'None'}</h2>
       </section>
-    </>
-  );
-};
 
-export default TeamBackground;
+      {/* <section className="section is-medium">
+        <h1 className="title">History</h1>
+        <h2 className="subtitle">{history ?? 'None'}</h2>
+      </section>
+      <section className="section is-medium">
+        <h1 className="title">Quirks</h1>
+        <h2 className="subtitle">{quirks ?? 'None'}</h2>
+      </section>
+
+      <section className="section is-medium">
+        <h1 className="title">Notes</h1>
+        <h2 className="subtitle">{notes ?? 'None'}</h2>
+      </section> */}
+    </>
+  )
+}
+
+export default TeamBackground
