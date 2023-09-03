@@ -20,7 +20,8 @@
     "react-hook-form": "^7.45.2",
     "react-router-dom": "^6.14.1",
     "yup": "^1.2.0",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
@@ -32,6 +33,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
     "typescript": "^5.0.2",
-    "vite": "^4.4.0"
+    "vite": "^4.4.0",
+    "prettier": "^3.0.3"
   }
 }
