@@ -14,6 +14,8 @@ interface DataslateState {
   getDataslates: () => Promise<void>
   getDataslate: (dataslateId: string) => Promise<void>
   saveHistory: (newHistory: string) => Promise<void>
+  saveQuirks: (newQuirks: string) => Promise<void>
+  saveNotes: (newNotes: string) => Promise<void>
 }
 
 const useDataslateStore = create<DataslateState>((set, get) => ({
@@ -41,8 +43,40 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
     const newDataslate: Dataslate = { ...selectedDataslate }
+
     set({ loading: true, error: undefined })
     newDataslate.history = newHistory
+
+    const { data, error } = await updateDataslate(newDataslate)
+
+    if (error) {
+      set({ loading: false, error })
+      return
+    }
+
+    if (data) set({ loading: false, selectedDataslate: data })
+  },
+  saveQuirks: async (newQuirks) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+    const newDataslate: Dataslate = { ...selectedDataslate }
+    set({ loading: true, error: undefined })
+    newDataslate.quirks = newQuirks
+    const { data, error } = await updateDataslate(newDataslate)
+
+    if (error) {
+      set({ loading: false, error })
+      return
+    }
+
+    if (data) set({ loading: false, selectedDataslate: data })
+  },
+  saveNotes: async (newNotes) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+    const newDataslate: Dataslate = { ...selectedDataslate }
+    set({ loading: true, error: undefined })
+    newDataslate.notes = newNotes
     const { data, error } = await updateDataslate(newDataslate)
 
     if (error) {
