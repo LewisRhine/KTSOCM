@@ -1,8 +1,7 @@
-import { Component, useRef, useState } from 'react'
+import { useRef } from 'react'
 import useDataslateStore from '../stores/dataslateStore.ts'
 import BackgroundSection from './BackgroundSection.tsx'
 
-// const [isEditMode, setisEditMode] = useState(false);
 const TeamBackground = () => {
   const history = useDataslateStore((state) => state.selectedDataslate?.history)
   const quirks = useDataslateStore((state) => state.selectedDataslate?.quirks)

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { ZodType, z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 // import { Session } from "@supabase/supabase-js";
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { sessionContext } from '../context/sessionContext'
 import { factions } from '../data/faction.ts'
 import { postDataslate } from '../data/dataslate.ts'
@@ -12,10 +12,6 @@ type FormData = {
   killTeamName: string
   faction: string
 }
-
-// interface NewDataslateProps {
-//   session: Session;
-// }
 
 const NewDataslate = (/*props: NewDataslateProps*/) => {
   const session = useContext(sessionContext)
@@ -34,7 +30,6 @@ const NewDataslate = (/*props: NewDataslateProps*/) => {
 
   const onSubmit = async (data: FormData) => {
     const factionConverter = Number(data.faction)
-    // alert("Success!");
 
     const faction = factions.find((faction) => faction.id === factionConverter)
 
