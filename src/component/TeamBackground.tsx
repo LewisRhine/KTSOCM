@@ -10,7 +10,6 @@ const TeamBackground = () => {
   const saveHistory = useDataslateStore((state) => state.saveHistory)
   const saveQuirks = useDataslateStore((state) => state.saveQuirks)
   const saveNotes = useDataslateStore((state) => state.saveNotes)
-  console.log(historyInputRef.current?.value)
 
   return (
     <>
