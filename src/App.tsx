@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Dashboard from './pages/Dashboard'
-import Authentication from './pages/Authentication'
 import { Session } from '@supabase/supabase-js'
-import supabaseClient from './superbaseClient'
-import NewDataslate from './pages/NewDataslate'
-import Dataslate from './pages/Dataslate'
+import { useEffect, useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { sessionContext } from './context/sessionContext'
+import Authentication from './pages/Authentication'
+import Dashboard from './pages/Dashboard'
+import Dataslate from './pages/Dataslate'
+import NewDataslate from './pages/NewDataslate'
+import supabaseClient from './superbaseClient'
 
 function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -49,8 +49,7 @@ function App() {
               <div className="navbar-item">
                 <button
                   className="button"
-                  onClick={() => supabaseClient.auth.signOut()}
-                >
+                  onClick={() => supabaseClient.auth.signOut()}>
                   Log out
                 </button>
               </div>

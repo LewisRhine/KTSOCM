@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import useDataslateStore from '../stores/dataslateStore.ts'
+import TeamBackground from '../component/TeamBackground.tsx'
 
 const Dataslate = () => {
   const { dataslateId } = useParams()
@@ -58,7 +59,7 @@ const Dataslate = () => {
         <section className={'section'}>
           {hash === '#operatives' && <>Operatives</>}
           {hash === '#base' && <>Base of Operations</>}
-          {hash === '#background' && <>Background</>}
+          {hash === '#background' && <TeamBackground />}
         </section>
       </div>
     </>

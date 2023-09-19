@@ -2,10 +2,11 @@ import { useForm } from 'react-hook-form'
 //KNEEL BEFORE
 import { ZodType, z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext, useEffect, useState } from 'react'
-import { sessionContext } from '../context/sessionContext'
+import { useContext } from 'react'
+import { sessionContext } from '../context/sessionContext.ts'
 import { factions } from '../data/faction.ts'
 import { postDataslate } from '../data/dataslate.ts'
+
 
 type FormData = {
   killTeamName: string
@@ -56,15 +57,9 @@ const NewDataslate = (props: NewDataslateProps) => {
               </header>
               <div className="modal-card-body">
                 Enter Kill Team Name...
-                <input
-                  className="input is-small"
-                  type="text"
-                  {...register('killTeamName')}
-                />
+                <input className="input is-small" type="text" {...register('killTeamName')} />
                 {errors.killTeamName && (
-                  <span style={{ color: 'red' }}>
-                    {errors.killTeamName.message}
-                  </span>
+                  <span style={{ color: 'red' }}>{errors.killTeamName.message}</span>
                 )}
                 <div className="field">
                   <label className="lable"> Chose Faction </label>
@@ -75,17 +70,13 @@ const NewDataslate = (props: NewDataslateProps) => {
                       {factions?.map((faction) => {
                         return (
                           <>
-                            <option value={faction.id.toString()}>
-                              {faction.name}
-                            </option>
+                            <option value={faction.id.toString()}>{faction.name}</option>
                           </>
                         )
                       })}
                     </select>
                   </div>
-                  <span style={{ color: 'red' }}>
-                    {errors.faction?.message}
-                  </span>
+                  <span style={{ color: 'red' }}>{errors.faction?.message}</span>
                 </div>
               </div>
               <footer className="modal-card-foot">

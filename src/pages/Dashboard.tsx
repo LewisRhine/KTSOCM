@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import DataslateCard from '../componants/DataslateCard'
-import NewDataslate from '../componants/NewDataslate.tsx'
+import DataslateCard from '../component/DataslateCard.tsx'
+import NewDataslate from '../component/NewDataslate.tsx'
 import useDataslateStore from '../stores/dataslateStore.ts'
 
 const Dashboard = () => {
