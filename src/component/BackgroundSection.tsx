@@ -17,13 +17,14 @@ const BackgroundSection = (props: Props) => {
   if (editMode)
     return (
       <>
-        <section className="section is-medium">
+        <div className={'content'}>
           <h1 className="title">{title}</h1>
           <textarea
             className="textarea"
             ref={textAreaRef}
-            defaultValue={value}></textarea>
-        </section>
+            defaultValue={value}
+          />
+        </div>
         <div className="buttons">
           <button className="button is-primary" onClick={callOnSave}>
             Save
@@ -34,12 +35,11 @@ const BackgroundSection = (props: Props) => {
         </div>
       </>
     )
+
   return (
     <a onClick={() => setEditMode(true)}>
-      <section className="section is-medium">
-        <h1 className="title">{title}</h1>
-        <h2 className="subtitle">{value ?? 'None'}</h2>
-      </section>
+      <h1 className="title">{title}</h1>
+      <h2 className="subtitle">{value ?? 'None'}</h2>
     </a>
   )
 }
