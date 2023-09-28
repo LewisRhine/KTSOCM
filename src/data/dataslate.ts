@@ -32,7 +32,10 @@ export const postDataslate = async (
     name: baseOfOperationsName,
     assetCapacity: 2,
     id: 0,
-    stash: [],
+    stash: {
+      availableEP: 0,
+      availableEquipment: [],
+    },
     strategicAssets: [],
   }
 

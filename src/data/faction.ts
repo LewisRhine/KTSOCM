@@ -1,4 +1,5 @@
 import { Equipment } from './equipment.ts'
+import { hearthkynSalvager } from '../factions/hearthkynSalvager.ts'
 
 export interface Faction {
   id: number
@@ -7,6 +8,7 @@ export interface Faction {
   historyTable: string[]
   quirkTable: string[]
   equipment: Equipment[]
+  rareEquipment: Equipment[]
   coverImage?: string
 }
 
@@ -32,16 +34,7 @@ export const farstalkerKinband: Faction = {
   ],
   coverImage: 'https://wh40k.lexicanum.com/mediawiki/images/b/b6/KrootArt1.jpg',
   equipment: [],
-}
-
-export const hearthkynSalvager: Faction = {
-  id: 2,
-  name: 'Hearthkyn Salvager',
-  keyword: 'HEARTHKYN SALVAGER',
-  coverImage: 'https://wh40k.lexicanum.com/mediawiki/images/8/82/LOVCover.jpg',
-  historyTable: [],
-  quirkTable: [],
-  equipment: [],
+  rareEquipment: [],
 }
 
 export const factions: Array<Faction> = [farstalkerKinband, hearthkynSalvager]
