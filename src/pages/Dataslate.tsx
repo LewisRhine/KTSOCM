@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import useDataslateStore from '../stores/dataslateStore.ts'
 import TeamBackground from '../component/TeamBackground.tsx'
+import BaseOfOperations from '../component/BaseOfOperations.tsx'
 
 const Dataslate = () => {
   const { dataslateId } = useParams()
@@ -9,9 +10,10 @@ const Dataslate = () => {
   const nav = useNavigate()
 
   const dataslate = useDataslateStore((state) => state.selectedDataslate)
-  const error = useDataslateStore((state) => state.error)
   const loading = useDataslateStore((state) => state.loading)
   const getDataslate = useDataslateStore((state) => state.getDataslate)
+  const increasePoints = useDataslateStore((state) => state.increasePoints)
+  const decreasePoints = useDataslateStore((state) => state.decreasePoints)
 
   useEffect(() => {
     getDataslate(dataslateId ?? '')
@@ -21,7 +23,6 @@ const Dataslate = () => {
     if (!hash) nav('#operatives')
   }, [])
 
-  if (error) return <h1> There was an error loading Dataslate! </h1>
   if (!dataslate || loading) return <h1> Loading </h1>
 
   return (
@@ -41,6 +42,14 @@ const Dataslate = () => {
                 <p className="title is-3">{dataslate.reqPoints}</p>
               </div>
             </div>
+            <div className={'buttons  has-addons is-centered'}>
+              <button className="button" onClick={increasePoints}>
+                +
+              </button>
+              <button className="button" onClick={decreasePoints}>
+                -
+              </button>
+            </div>
           </div>
         </section>
         <div className="tabs is-medium is-centered">
@@ -58,7 +67,7 @@ const Dataslate = () => {
         </div>
         <section className={'section'}>
           {hash === '#operatives' && <>Operatives</>}
-          {hash === '#base' && <>Base of Operations</>}
+          {hash === '#base' && <BaseOfOperations />}
           {hash === '#background' && <TeamBackground />}
         </section>
       </div>
