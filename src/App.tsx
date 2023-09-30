@@ -7,9 +7,12 @@ import Dashboard from './pages/Dashboard'
 import Dataslate from './pages/Dataslate'
 import NewDataslate from './pages/NewDataslate'
 import supabaseClient from './superbaseClient'
+import useSystemError from './stores/systemError.ts'
 
 function App() {
   const [session, setSession] = useState<Session | null>(null)
+  const error = useSystemError((state) => state.error)
+  const resetError = useSystemError((state) => state.resetError)
 
   useEffect(() => {
     supabaseClient.auth.getSession().then(({ data: { session } }) => {
@@ -56,6 +59,14 @@ function App() {
             </div>
           </div>
         </nav>
+        {error && (
+          <div style={{ padding: '10px' }}>
+            <div className="notification is-danger">
+              <button className="delete" onClick={resetError}></button>
+              {error}
+            </div>
+          </div>
+        )}
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Dashboard />} />
