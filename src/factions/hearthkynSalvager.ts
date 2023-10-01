@@ -1,6 +1,17 @@
 import { Faction } from '../data/faction.ts'
 import { Gear, Weapon } from '../data/equipment.ts'
 import { blast, indirect, lethal, limited, rng } from '../data/specialRules.ts'
+import {
+  stimmStash,
+  tacticalUplink,
+  commsNetwork,
+  warShrine,
+  medBay,
+  expandedArmoury,
+  surveillanceSystem,
+  intelligenceNetwork,
+  engineeringBay,
+} from '../data/strategicAssets.ts'
 
 // Equipment
 export const graviticConcussionGrenade: Weapon = {
@@ -163,5 +174,16 @@ export const hearthkynSalvager: Faction = {
     rightOfClaim,
     gravLiftDevice,
     ionExpediter,
+  ],
+  strategicAssets: [
+    stimmStash,
+    tacticalUplink,
+    commsNetwork,
+    warShrine,
+    medBay,
+    expandedArmoury,
+    surveillanceSystem,
+    intelligenceNetwork,
+    engineeringBay,
   ],
 }

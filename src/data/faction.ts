@@ -1,5 +1,6 @@
 import { Equipment } from './equipment.ts'
 import { hearthkynSalvager } from '../factions/hearthkynSalvager.ts'
+import { StrategicAssets } from './strategicAssets.ts'
 
 export interface Faction {
   id: number
@@ -10,6 +11,7 @@ export interface Faction {
   equipment: Equipment[]
   rareEquipment: Equipment[]
   coverImage?: string
+  strategicAssets?: StrategicAssets[]
 }
 
 export const farstalkerKinband: Faction = {
