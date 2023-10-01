@@ -1,17 +1,7 @@
 import { Faction } from '../data/faction.ts'
 import { Gear, Weapon } from '../data/equipment.ts'
 import { blast, indirect, lethal, limited, rng } from '../data/specialRules.ts'
-import {
-  stimmStash,
-  tacticalUplink,
-  commsNetwork,
-  warShrine,
-  medBay,
-  expandedArmoury,
-  surveillanceSystem,
-  intelligenceNetwork,
-  engineeringBay,
-} from '../data/strategicAssets.ts'
+import { StrategicAssets } from '../data/strategicAssets.ts'
 
 // Equipment
 export const graviticConcussionGrenade: Weapon = {
@@ -152,6 +142,15 @@ export const ionExpediter: Gear = {
   rare: true,
 }
 
+//Strategic Assets
+
+export const supplyHold: StrategicAssets = {
+  name: 'Supply Hold',
+  description:
+    'The Kin expect to recover a great deal of technology and resources on their missions, and so have established a sizeable supply hold to secure all of it.',
+  rule: 'While your base of operations has this strategic asset, double the quantities of HEARTHKYN SALVAGER equipment in your stash.',
+}
+
 export const hearthkynSalvager: Faction = {
   id: 2,
   name: 'Hearthkyn Salvager',
@@ -175,15 +174,5 @@ export const hearthkynSalvager: Faction = {
     gravLiftDevice,
     ionExpediter,
   ],
-  strategicAssets: [
-    stimmStash,
-    tacticalUplink,
-    commsNetwork,
-    warShrine,
-    medBay,
-    expandedArmoury,
-    surveillanceSystem,
-    intelligenceNetwork,
-    engineeringBay,
-  ],
+  strategicAssets: [supplyHold],
 }
