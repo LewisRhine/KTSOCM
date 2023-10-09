@@ -52,7 +52,7 @@ const BuyAssetModal = (props: Props) => {
             Save
           </button>
           <button className="button" onClick={onClose}>
-            Cancel
+            Done
           </button>
         </footer>
       </div>
