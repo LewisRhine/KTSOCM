@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import useDataslateStore from '../stores/dataslateStore.ts'
 import { isGear, isWeapon } from '../data/equipment.ts'
-import WeaponProfile from '../component/WeaponProfile.tsx'
 import GearProfile from '../component/GearProfile.tsx'
 import useEquipmentShopStore from '../stores/equipmentShopStore.ts'
 import { strategicAssets } from '../data/strategicAssets.ts'
+import StrategicAssetsProfile from '../component/AssetProfile.tsx'
 
 interface Props {
   showModal: boolean
@@ -44,7 +44,7 @@ const BuyAssetModal = (props: Props) => {
         </header>
         <section className="modal-card-body">
           {availableStrategicAssets?.map((asset, index) => {
-            return <div className="title"> {asset.name}</div>
+            return <StrategicAssetsProfile key={index} asset={asset}/>
           })}
         </section>
         <footer className="modal-card-foot">
