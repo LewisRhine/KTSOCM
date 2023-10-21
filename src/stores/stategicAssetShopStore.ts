@@ -5,13 +5,17 @@ import useDataslateStore from './dataslateStore.ts'
 
 
 interface AssetShopStoreState {
-    availableAsset: AvailableAsset[]
+    assetCapacity: number
+    availableStrategicAssets: AvailableStrategicAssets[]
   
   }
 
 
   const useAssetShopStore = create<AssetShopStoreState>((set, get) => ({
-    availableAsset:
-      useDataslateStore.getState().selectedDataslate?.baseOfOperations.assetCapacity,
+    assetCapacity:
+      useDataslateStore.getState().selectedDataslate?.baseOfOperations.assetCapacity ?? 0,
+    availableStrategicAssets:
+        useDataslateStore.getState().selectedDataslate?.baseOfOperations.strategicAssets ?? []
+
   
   
