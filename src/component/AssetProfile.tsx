@@ -5,6 +5,8 @@ interface Props {
   buyMode?: boolean
 }
 
+
+
 const StrategicAssetsProfile = (props: Props) => {
   const { asset, buyMode } = props
   const { name, description, rule } = asset

@@ -19,6 +19,9 @@ const BuyAssetModal = (props: Props) => {
   const assetCapacity = useDataslateStore(
     (state) => state.selectedDataslate?.baseOfOperations.assetCapacity,
   )
+  const selectedstrategicAssets = useDataslateStore((state) =>
+    state.selectedDataslate?.baseOfOperations.strategicAssets,
+  )
 
   const factionStrategicAssets =
     useDataslateStore(
@@ -39,12 +42,15 @@ const BuyAssetModal = (props: Props) => {
 
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title"> Strategic Assets {assetCapacity}</p>
+          <p className="modal-card-title">
+            {' '}
+            Strategic Assets Availabe: {assetCapacity}
+          </p>
           <button className="delete" onClick={onClose}></button>
         </header>
         <section className="modal-card-body">
           {availableStrategicAssets?.map((asset, index) => {
-            return <StrategicAssetsProfile key={index} asset={asset}/>
+            return <StrategicAssetsProfile key={index} asset={asset} />
           })}
         </section>
         <footer className="modal-card-foot">
