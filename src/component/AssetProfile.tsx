@@ -1,4 +1,6 @@
 import { StrategicAssets } from '../data/strategicAssets.ts'
+import useDataslateStore from '../stores/dataslateStore.ts'
+
 
 interface Props {
   asset: StrategicAssets
@@ -7,9 +9,14 @@ interface Props {
 
 
 
+
 const StrategicAssetsProfile = (props: Props) => {
   const { asset, buyMode } = props
   const { name, description, rule } = asset
+  const selectedstrategicAssets = useDataslateStore((state) =>
+  state.selectedDataslate?.baseOfOperations.strategicAssets
+)
+
 
   return (
     <div>
@@ -19,6 +26,7 @@ const StrategicAssetsProfile = (props: Props) => {
           <p>{description}</p>
           <p>{rule}</p>
         </div>
+        if (selectedstrategicAssets.)
       </div>
     </div>
   )

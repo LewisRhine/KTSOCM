@@ -9,10 +9,12 @@ import StrategicAssetsProfile from '../component/AssetProfile.tsx'
 interface Props {
   showModal: boolean
   onClose: () => void
+  selectedstrategicAssets: []
+  
 }
 
 const BuyAssetModal = (props: Props) => {
-  const { showModal, onClose } = props
+  const { showModal, onClose, selectedstrategicAssets } = props
 
   const isActive = showModal ? 'is-active' : ''
 
@@ -50,7 +52,7 @@ const BuyAssetModal = (props: Props) => {
         </header>
         <section className="modal-card-body">
           {availableStrategicAssets?.map((asset, index) => {
-            return <StrategicAssetsProfile key={index} asset={asset} />
+            return <StrategicAssetsProfile key={index} asset={asset} selectedstrategicAssets={selectedstrategicAssets}/>
           })}
         </section>
         <footer className="modal-card-foot">
