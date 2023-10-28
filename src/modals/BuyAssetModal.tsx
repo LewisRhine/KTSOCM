@@ -10,19 +10,18 @@ interface Props {
   showModal: boolean
   onClose: () => void
   selectedstrategicAssets: []
-  
 }
 
 const BuyAssetModal = (props: Props) => {
-  const { showModal, onClose, selectedstrategicAssets } = props
+  const { showModal, onClose } = props
 
   const isActive = showModal ? 'is-active' : ''
 
   const assetCapacity = useDataslateStore(
     (state) => state.selectedDataslate?.baseOfOperations.assetCapacity,
   )
-  const selectedstrategicAssets = useDataslateStore((state) =>
-    state.selectedDataslate?.baseOfOperations.strategicAssets,
+  const selectedstrategicAssets = useDataslateStore(
+    (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
   )
 
   const factionStrategicAssets =
@@ -52,7 +51,13 @@ const BuyAssetModal = (props: Props) => {
         </header>
         <section className="modal-card-body">
           {availableStrategicAssets?.map((asset, index) => {
-            return <StrategicAssetsProfile key={index} asset={asset} selectedstrategicAssets={selectedstrategicAssets}/>
+            return (
+              <StrategicAssetsProfile
+                key={index}
+                asset={asset}
+                selectedstrategicAssets={selectedstrategicAssets}
+              />
+            )
           })}
         </section>
         <footer className="modal-card-foot">

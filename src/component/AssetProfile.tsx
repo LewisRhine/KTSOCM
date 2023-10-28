@@ -1,22 +1,28 @@
 import { StrategicAssets } from '../data/strategicAssets.ts'
 import useDataslateStore from '../stores/dataslateStore.ts'
 
-
 interface Props {
   asset: StrategicAssets
   buyMode?: boolean
 }
 
-
-
-
 const StrategicAssetsProfile = (props: Props) => {
   const { asset, buyMode } = props
   const { name, description, rule } = asset
-  const selectedstrategicAssets = useDataslateStore((state) =>
-  state.selectedDataslate?.baseOfOperations.strategicAssets
-)
+  const selectedstrategicAssets = useDataslateStore(
+    (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
+  )
 
+  const isAssetSelected = () => {
+    if (
+      selectedstrategicAssets?.some(
+        (selectedstrategicAssets) =>
+          selectedstrategicAssets.name === asset.name,
+      )
+    )
+      return true
+    else return false
+  }
 
   return (
     <div>
@@ -26,7 +32,11 @@ const StrategicAssetsProfile = (props: Props) => {
           <p>{description}</p>
           <p>{rule}</p>
         </div>
-        if (selectedstrategicAssets.)
+        <div>
+          {isAssetSelected() && (
+            <button className="button-is-small">Add</button>
+          )}
+        </div>
       </div>
     </div>
   )
