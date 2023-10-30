@@ -13,6 +13,14 @@ const StrategicAssetsProfile = (props: Props) => {
     (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
   )
 
+  const addtoStrategicAssets = useDataslateStore(
+    (state) => state.addtoStrategicAssets,
+  )
+
+  const removeFromStrategicAssets = useDataslateStore(
+    (state) => state.removeFromStrategicAssets,
+  )
+
   const isAssetSelected = () => {
     if (
       selectedstrategicAssets?.some(
@@ -33,8 +41,19 @@ const StrategicAssetsProfile = (props: Props) => {
           <p>{rule}</p>
         </div>
         <div>
+          {!isAssetSelected() && (
+            <button
+              className="button is-small"
+              onClick={() => addtoStrategicAssets(asset)}>
+              Add
+            </button>
+          )}
           {isAssetSelected() && (
-            <button className="button-is-small">Add</button>
+            <button
+              className="button is-small"
+              onClick={() => removeFromStrategicAssets(asset)}>
+              Remove
+            </button>
           )}
         </div>
       </div>

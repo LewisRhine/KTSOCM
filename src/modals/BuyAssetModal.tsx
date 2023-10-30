@@ -55,15 +55,12 @@ const BuyAssetModal = (props: Props) => {
               <StrategicAssetsProfile
                 key={index}
                 asset={asset}
-                selectedstrategicAssets={selectedstrategicAssets}
+                // selectedstrategicAssets={selectedstrategicAssets}
               />
             )
           })}
         </section>
         <footer className="modal-card-foot">
-          <button className="button is-success" onClick={onSave}>
-            Save
-          </button>
           <button className="button" onClick={onClose}>
             Done
           </button>

@@ -24,6 +24,7 @@ interface DataslateState {
   equipmentDrop: () => Promise<void>
   saveStash: (stash: Stash) => Promise<void>
   addtoStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
+  removeFromStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
 }
 
 const setError = useSystemError.getState().setError
@@ -161,6 +162,21 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
 
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.strategicAssets.push(strategicAssets)
+
+    const { data, error } = await updateDataslate(newDataslate)
+    if (error) setError(error)
+    if (data) set({ selectedDataslate: data })
+  },
+  removeFromStrategicAssets: async (strategicAssets: StrategicAssets) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+
+    const strategicAssetIndex =
+      selectedDataslate.baseOfOperations.strategicAssets.indexOf(
+        strategicAssets,
+      )
+    const newDataslate = { ...selectedDataslate }
+    newDataslate.baseOfOperations.strategicAssets.splice(strategicAssetIndex, 1)
 
     const { data, error } = await updateDataslate(newDataslate)
     if (error) setError(error)
