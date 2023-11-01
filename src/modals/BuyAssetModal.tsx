@@ -51,13 +51,7 @@ const BuyAssetModal = (props: Props) => {
         </header>
         <section className="modal-card-body">
           {availableStrategicAssets?.map((asset, index) => {
-            return (
-              <StrategicAssetsProfile
-                key={index}
-                asset={asset}
-                // selectedstrategicAssets={selectedstrategicAssets}
-              />
-            )
+            return <StrategicAssetsProfile key={index} asset={asset} />
           })}
         </section>
         <footer className="modal-card-foot">
