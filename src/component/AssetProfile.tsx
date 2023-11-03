@@ -13,6 +13,12 @@ const StrategicAssetsProfile = (props: Props) => {
     (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
   )
 
+  const selectedstrategicAssetsLength =
+    useDataslateStore(
+      (state) =>
+        state.selectedDataslate?.baseOfOperations.strategicAssets.length,
+    ) ?? 0
+
   const addtoStrategicAssets = useDataslateStore(
     (state) => state.addtoStrategicAssets,
   )
@@ -26,14 +32,15 @@ const StrategicAssetsProfile = (props: Props) => {
   )
 
   const isAssetSelectable = () => {
-    if (
-      selectedstrategicAssets?.some(
-        (selectedstrategicAssets) =>
-          selectedstrategicAssets.name === asset.name,
-      )
+    const assetNames = selectedstrategicAssets?.some(
+      (selectedstrategicAssets) => selectedstrategicAssets.name === asset.name,
     )
+
+    if (assetCapacity > selectedstrategicAssetsLength && !assetNames) {
       return true
-    else return false
+    } else {
+      return false
+    }
   }
 
   return (
@@ -45,14 +52,14 @@ const StrategicAssetsProfile = (props: Props) => {
           <p>{rule}</p>
         </div>
         <div>
-          {!isAssetSelectable() && (
+          {isAssetSelectable() && (
             <button
               className="button is-small"
               onClick={() => addtoStrategicAssets(asset)}>
               Add
             </button>
           )}
-          {isAssetSelectable() && (
+          {!isAssetSelectable() && (
             <button
               className="button is-small"
               onClick={() => removeFromStrategicAssets(asset)}>

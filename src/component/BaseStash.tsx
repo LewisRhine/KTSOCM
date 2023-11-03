@@ -172,10 +172,10 @@ const BaseStash = () => {
           <button
             className={'button is-primary is-small'}
             onClick={() => setShowBuyAssetModal(true)}
-            disabled={
-              reqPoints <= 0 || strategicAssets?.length >= assetCapacity
-            }>
-            Acquire Asset
+            // disabled={
+            //   reqPoints <= 0 || strategicAssets?.length >= assetCapacity
+            // }>
+           > Acquire Asset
           </button>
           <p>asdasdasd </p>
           <p>asdasdasd </p>

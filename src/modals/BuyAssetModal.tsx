@@ -20,6 +20,11 @@ const BuyAssetModal = (props: Props) => {
   const assetCapacity = useDataslateStore(
     (state) => state.selectedDataslate?.baseOfOperations.assetCapacity,
   )
+
+  const selectedAssetLength = useDataslateStore(
+    (state) => state.selectedDataslate?.baseOfOperations.strategicAssets.length,
+  )
+
   const selectedstrategicAssets = useDataslateStore(
     (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
   )
@@ -46,6 +51,13 @@ const BuyAssetModal = (props: Props) => {
           <p className="modal-card-title">
             {' '}
             Strategic Assets Availabe: {assetCapacity}
+          </p>
+          <button className="delete" onClick={onClose}></button>
+        </header>
+        <header className="modal-card-head">
+          <p className="modal-card-title">
+            {' '}
+            Strategic Assets Selected: {selectedAssetLength}
           </p>
           <button className="delete" onClick={onClose}></button>
         </header>
