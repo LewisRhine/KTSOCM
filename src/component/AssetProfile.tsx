@@ -32,14 +32,12 @@ const StrategicAssetsProfile = (props: Props) => {
   )
 
   const isAssetSelectable = () => {
-    const assetNames = selectedstrategicAssets?.some(
+    const isNameInBase = selectedstrategicAssets?.some(
       (selectedstrategicAssets) => selectedstrategicAssets.name === asset.name,
     )
 
-    if (assetCapacity > selectedstrategicAssetsLength && !assetNames) {
+    if (assetCapacity > selectedstrategicAssetsLength && !isNameInBase) {
       return true
-    } else {
-      return false
     }
   }
 
@@ -51,21 +49,23 @@ const StrategicAssetsProfile = (props: Props) => {
           <p>{description}</p>
           <p>{rule}</p>
         </div>
-        <div>
-          {isAssetSelectable() && (
-            <button
-              className="button is-small"
-              onClick={() => addtoStrategicAssets(asset)}>
-              Add
-            </button>
-          )}
-          {!isAssetSelectable() && (
-            <button
-              className="button is-small"
-              onClick={() => removeFromStrategicAssets(asset)}>
-              Remove
-            </button>
-          )}
+        <div className={'column is-3'}>
+          {/* {isAssetSelectable() && ( */}
+          <button
+            className="button is-small"
+            onClick={() => addtoStrategicAssets(asset)}
+            disabled={!isAssetSelectable()}>
+            Add
+          </button>
+          {/* )} */}
+          {/* {!isAssetSelectable() && ( */}
+          <button
+            className="button is-small"
+            onClick={() => removeFromStrategicAssets(asset)}
+            disabled={isAssetSelectable()}>
+            Remove
+          </button>
+          {/* )} */}
         </div>
       </div>
     </div>

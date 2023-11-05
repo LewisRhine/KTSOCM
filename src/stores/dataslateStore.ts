@@ -167,14 +167,12 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     if (error) setError(error)
     if (data) set({ selectedDataslate: data })
   },
-  removeFromStrategicAssets: async (strategicAssets: StrategicAssets) => {
+  removeFromStrategicAssets: async (asset: StrategicAssets) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
     const strategicAssetIndex =
-      selectedDataslate.baseOfOperations.strategicAssets.indexOf(
-        strategicAssets,
-      )
+      selectedDataslate.baseOfOperations.strategicAssets.indexOf(asset)
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.strategicAssets.splice(strategicAssetIndex, 1)
 
