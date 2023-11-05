@@ -1,8 +1,4 @@
-import { useEffect } from 'react'
 import useDataslateStore from '../stores/dataslateStore.ts'
-import { isGear, isWeapon } from '../data/equipment.ts'
-import GearProfile from '../component/GearProfile.tsx'
-import useEquipmentShopStore from '../stores/equipmentShopStore.ts'
 import { strategicAssets } from '../data/strategicAssets.ts'
 import StrategicAssetsProfile from '../component/AssetProfile.tsx'
 
@@ -23,10 +19,6 @@ const BuyAssetModal = (props: Props) => {
 
   const selectedAssetLength = useDataslateStore(
     (state) => state.selectedDataslate?.baseOfOperations.strategicAssets.length,
-  )
-
-  const selectedstrategicAssets = useDataslateStore(
-    (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
   )
 
   const factionStrategicAssets =

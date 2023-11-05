@@ -162,8 +162,11 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
 
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.strategicAssets.push(strategicAssets)
+    newDataslate.reqPoints--
 
     const { data, error } = await updateDataslate(newDataslate)
+    console.log(selectedDataslate.baseOfOperations.strategicAssets)
+
     if (error) setError(error)
     if (data) set({ selectedDataslate: data })
   },
@@ -172,9 +175,13 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     if (!selectedDataslate) return
 
     const strategicAssetIndex =
-      selectedDataslate.baseOfOperations.strategicAssets.indexOf(asset)
+      selectedDataslate.baseOfOperations.strategicAssets.findIndex(
+        ({ name }) => name === asset.name,
+      )
+
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.strategicAssets.splice(strategicAssetIndex, 1)
+    newDataslate.reqPoints++
 
     const { data, error } = await updateDataslate(newDataslate)
     if (error) setError(error)

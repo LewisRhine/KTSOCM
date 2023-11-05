@@ -86,6 +86,7 @@ const BaseStash = () => {
       <BuyAssetModal
         showModal={showBuyAssetModal}
         onClose={() => setShowBuyAssetModal(false)}
+        selectedstrategicAssets={[]}
       />
       <BuyEquipmentModal
         showModal={showBuyEquipmentModal}
@@ -171,11 +172,8 @@ const BaseStash = () => {
           <p className="title">Strategic Assets</p>
           <button
             className={'button is-primary is-small'}
-            onClick={() => setShowBuyAssetModal(true)}
-            // disabled={
-            //   reqPoints <= 0 || strategicAssets?.length >= assetCapacity
-            // }>
-           > Acquire Asset
+            onClick={() => setShowBuyAssetModal(true)}>
+            Acquire Asset
           </button>
           <p>asdasdasd </p>
           <p>asdasdasd </p>
