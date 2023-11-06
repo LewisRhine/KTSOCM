@@ -77,6 +77,10 @@ const BaseStash = () => {
     saveStash({ ...stash, availableEquipment: updated })
   }
 
+  function removeFromStrategicAssets(strategicAssets: import("../data/strategicAssets.ts").StrategicAssets[]): void {
+    throw new Error('Function not implemented.')
+  }
+
   return (
     <>
       <EquipmentProfileModal
@@ -175,7 +179,18 @@ const BaseStash = () => {
             onClick={() => setShowBuyAssetModal(true)}>
             Acquire Asset
           </button>
-          <p>asdasdasd </p>
+          <div>{strategicAssets.map()}
+              <div  className={'has-addons'}>
+                <button
+                  className={'button is is-small'}
+                  onClick={() => removeFromStrategicAssets(strategicAssets)}>
+                  Unequip
+                </button> </div>
+                </div>
+
+
+
+
           <p>asdasdasd </p>
         </div>
       </div>
