@@ -31,8 +31,6 @@ const BuyAssetModal = (props: Props) => {
     ...factionStrategicAssets,
   ]
 
-  const onSave = () => {}
-
   return (
     <div className={`modal ${isActive}`}>
       <button className="delete" onClick={onClose} />
