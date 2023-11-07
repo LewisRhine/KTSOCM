@@ -49,6 +49,10 @@ const BaseStash = () => {
     ({ isEquipped }) => isEquipped,
   )
 
+  const removeFromStrategicAssets = useDataslateStore(
+    (state) => state.removeFromStrategicAssets,
+  )
+
   const equip = (equipment: AvailableEquipment) => {
     const updated = availableEquipment.map((availableEquipment) => {
       if (availableEquipment === equipment)
@@ -75,10 +79,6 @@ const BaseStash = () => {
     })
 
     saveStash({ ...stash, availableEquipment: updated })
-  }
-
-  function removeFromStrategicAssets(strategicAssets: import("../data/strategicAssets.ts").StrategicAssets[]): void {
-    throw new Error('Function not implemented.')
   }
 
   return (
@@ -179,19 +179,16 @@ const BaseStash = () => {
             onClick={() => setShowBuyAssetModal(true)}>
             Acquire Asset
           </button>
-          <div>{strategicAssets.map()}
-              <div  className={'has-addons'}>
-                <button
-                  className={'button is is-small'}
-                  onClick={() => removeFromStrategicAssets(strategicAssets)}>
-                  Unequip
-                </button> </div>
-                </div>
-
-
-
-
-          <p>asdasdasd </p>
+          {strategicAssets?.map((asset) => (
+            <div className={'has-addons'}>
+              {asset.name}
+              <button
+                className="button is-small"
+                onClick={() => removeFromStrategicAssets(asset)}>
+                Remove
+              </button>
+            </div>
+          ))}
         </div>
       </div>
     </>
