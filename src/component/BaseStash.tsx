@@ -85,78 +85,66 @@ const BaseStash = () => {
         }}
         onClose={() => setShowConfirmEquipmentDropModal(false)}
       />
-      <div className={'columns'}>
-        <div className={'column'}>
-          <div>
-            <div>
-              <span className={'title is-4'}>Stash</span>
-              <span className={'subtitle'}> {availableEP} EP Available</span>
-            </div>
-            <br />
-            <div className={'buttons'}>
-              <button
-                className={'button is-primary is-small'}
-                onClick={() => setShowBuyModal(true)}
-                disabled={availableEP <= 0}>
-                Add Equipment
-              </button>
-              <button
-                className={'button is-small'}
-                disabled={reqPoints <= 0}
-                onClick={() => setShowConfirmEquipmentDropModal(true)}>
-                Make Equipment Drop
-              </button>
-            </div>
-          </div>
-          <br />
-          <div>
-            {availableEquipment.length === 0 && (
-              <p className="title is-4">Empty!</p>
-            )}
-            {unEquippedEquipment.map((availableEquipment, index) => (
-              <div key={index} className={'has-addons'}>
-                <button
-                  className={'button is is-small'}
-                  onClick={() => equip(availableEquipment)}>
-                  Equip
-                </button>
-                <a
-                  onClick={() =>
-                    setEquipmentProfile(availableEquipment.equipment)
-                  }>
-                  <span className="title is-6">
-                    {' '}
-                    {availableEquipment.equipment.name}
-                  </span>
-                </a>
-              </div>
-            ))}
-            <br />
-            {equippedEquipment.map((availableEquipment, index) => (
-              <div key={index} className={'has-addons'}>
-                <button
-                  className={'button is is-small'}
-                  onClick={() => unequip(availableEquipment)}>
-                  Unequip
-                </button>
-                <a
-                  onClick={() =>
-                    setEquipmentProfile(availableEquipment.equipment)
-                  }>
-                  <span className="subtitle is-6">
-                    {' '}
-                    {availableEquipment.equipment.name}
-                  </span>
-                </a>
-              </div>
-            ))}
-          </div>
+
+      <div>
+        <div>
+          <span className={'title is-4'}>Stash</span>
+          <span className={'subtitle'}> {availableEP} EP Available</span>
         </div>
-        <div className={'column'}>
-          <p className="title">Strategic Assets</p>
-          <p>asdasdasd </p>
-          <p>asdasdasd </p>
+        <br />
+        <div className={'buttons'}>
+          <button
+            className={'button is-primary is-small'}
+            onClick={() => setShowBuyModal(true)}
+            disabled={availableEP <= 0}>
+            Add Equipment
+          </button>
+          <button
+            className={'button is-small'}
+            disabled={reqPoints <= 0}
+            onClick={() => setShowConfirmEquipmentDropModal(true)}>
+            Make Equipment Drop
+          </button>
         </div>
+      </div>
+      <br />
+      <div>
+        {availableEquipment.length === 0 && (
+          <p className="title is-4">Empty!</p>
+        )}
+        {unEquippedEquipment.map((availableEquipment, index) => (
+          <div key={index} className={'has-addons'}>
+            <button
+              className={'button is is-small'}
+              onClick={() => equip(availableEquipment)}>
+              Equip
+            </button>
+            <a
+              onClick={() => setEquipmentProfile(availableEquipment.equipment)}>
+              <span className="title is-6">
+                {' '}
+                {availableEquipment.equipment.name}
+              </span>
+            </a>
+          </div>
+        ))}
+        <br />
+        {equippedEquipment.map((availableEquipment, index) => (
+          <div key={index} className={'has-addons'}>
+            <button
+              className={'button is is-small'}
+              onClick={() => unequip(availableEquipment)}>
+              Unequip
+            </button>
+            <a
+              onClick={() => setEquipmentProfile(availableEquipment.equipment)}>
+              <span className="subtitle is-6">
+                {' '}
+                {availableEquipment.equipment.name}
+              </span>
+            </a>
+          </div>
+        ))}
       </div>
     </>
   )

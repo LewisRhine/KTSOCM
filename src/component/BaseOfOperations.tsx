@@ -7,8 +7,15 @@ const BaseOfOperations = () => {
       <div className={'content has-text-centered'}>
         <BaseInfo />
       </div>
-      <div className={'content'}>
-        <BaseStash />
+        <div className={'columns'}>
+          <div className={'column'}>
+            <BaseStash />
+          </div>
+          <div className={'column'}>
+            <p className="title">Strategic Assets</p>
+            <p>asdasdasd </p>
+            <p>asdasdasd </p>
+          </div>
       </div>
     </>
   )
