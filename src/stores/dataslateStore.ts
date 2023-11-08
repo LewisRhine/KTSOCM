@@ -1,3 +1,4 @@
+import { StrategicAssets, strategicAssets } from './../data/strategicAssets'
 import { create } from 'zustand'
 import {
   Dataslate,
@@ -22,6 +23,8 @@ interface DataslateState {
   decreasePoints: () => Promise<void>
   equipmentDrop: () => Promise<void>
   saveStash: (stash: Stash) => Promise<void>
+  addtoStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
+  removeFromStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
 }
 
 const setError = useSystemError.getState().setError
@@ -150,6 +153,37 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
 
     const { data, error } = await updateDataslate(newDataslate)
 
+    if (error) setError(error)
+    if (data) set({ selectedDataslate: data })
+  },
+  addtoStrategicAssets: async (strategicAssets: StrategicAssets) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+
+    const newDataslate = { ...selectedDataslate }
+    newDataslate.baseOfOperations.strategicAssets.push(strategicAssets)
+    newDataslate.reqPoints--
+
+    const { data, error } = await updateDataslate(newDataslate)
+    console.log(selectedDataslate.baseOfOperations.strategicAssets)
+
+    if (error) setError(error)
+    if (data) set({ selectedDataslate: data })
+  },
+  removeFromStrategicAssets: async (asset: StrategicAssets) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+
+    const strategicAssetIndex =
+      selectedDataslate.baseOfOperations.strategicAssets.findIndex(
+        ({ name }) => name === asset.name,
+      )
+
+    const newDataslate = { ...selectedDataslate }
+    newDataslate.baseOfOperations.strategicAssets.splice(strategicAssetIndex, 1)
+    newDataslate.reqPoints++
+
+    const { data, error } = await updateDataslate(newDataslate)
     if (error) setError(error)
     if (data) set({ selectedDataslate: data })
   },

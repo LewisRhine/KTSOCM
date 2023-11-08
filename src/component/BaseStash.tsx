@@ -5,6 +5,7 @@ import ConfirmModal from '../modals/ConfirmModal.tsx'
 import { Equipment } from '../data/equipment.ts'
 import { AvailableEquipment } from '../data/baseOfOperations.ts'
 import EquipmentProfileModal from '../modals/EquipmentProfileModal.tsx'
+import BuyAssetModal from '../modals/BuyAssetModal.tsx'
 
 const BaseStash = () => {
   const availableEP = useDataslateStore(
@@ -16,6 +17,15 @@ const BaseStash = () => {
   const stash = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash,
   )
+  const strategicAssets =
+    useDataslateStore(
+      (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
+    ) ?? []
+
+  const assetCapacity =
+    useDataslateStore(
+      (state) => state.selectedDataslate?.baseOfOperations.assetCapacity,
+    ) ?? 0
 
   const availableEquipment = stash.availableEquipment.sort((a, b) => {
     if (a.equipment.name < b.equipment.name) return -1
@@ -26,7 +36,8 @@ const BaseStash = () => {
   const equipmentDrop = useDataslateStore((state) => state.equipmentDrop)
   const saveStash = useDataslateStore((state) => state.saveStash)
 
-  const [showBuyModal, setShowBuyModal] = useState(false)
+  const [showBuyEquipmentModal, setshowBuyEquipmentModal] = useState(false)
+  const [showBuyAssetModal, setShowBuyAssetModal] = useState(false)
   const [equipmentProfile, setEquipmentProfile] = useState<Equipment>()
   const [showConfirmEquipmentDropModal, setShowConfirmEquipmentDropModal] =
     useState(false)
@@ -72,9 +83,14 @@ const BaseStash = () => {
         equipment={equipmentProfile}
         onClose={() => setEquipmentProfile(undefined)}
       />
+      <BuyAssetModal
+        showModal={showBuyAssetModal}
+        onClose={() => setShowBuyAssetModal(false)}
+        selectedstrategicAssets={[]}
+      />
       <BuyEquipmentModal
-        showModal={showBuyModal}
-        onClose={() => setShowBuyModal(false)}
+        showModal={showBuyEquipmentModal}
+        onClose={() => setshowBuyEquipmentModal(false)}
       />
       <ConfirmModal
         showModal={showConfirmEquipmentDropModal}
@@ -95,7 +111,7 @@ const BaseStash = () => {
         <div className={'buttons'}>
           <button
             className={'button is-primary is-small'}
-            onClick={() => setShowBuyModal(true)}
+            onClick={() => setshowBuyEquipmentModal(true)}
             disabled={availableEP <= 0}>
             Add Equipment
           </button>
@@ -144,7 +160,17 @@ const BaseStash = () => {
               </span>
             </a>
           </div>
-        ))}
+        </div>
+        <div className={'column'}>
+          <p className="title">Strategic Assets</p>
+          <button
+            className={'button is-primary is-small'}
+            onClick={() => setShowBuyAssetModal(true)}>
+            Acquire Asset
+          </button>
+          <p>asdasdasd </p>
+          <p>asdasdasd </p>
+        </div>
       </div>
     </>
   )
