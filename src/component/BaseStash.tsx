@@ -6,6 +6,7 @@ import { Equipment } from '../data/equipment.ts'
 import { AvailableEquipment } from '../data/baseOfOperations.ts'
 import EquipmentProfileModal from '../modals/EquipmentProfileModal.tsx'
 import BuyAssetModal from '../modals/BuyAssetModal.tsx'
+import { StrategicAssets } from '../data/strategicAssets.ts'
 
 const BaseStash = () => {
   const availableEP = useDataslateStore(
@@ -39,6 +40,7 @@ const BaseStash = () => {
   const [showBuyEquipmentModal, setshowBuyEquipmentModal] = useState(false)
   const [showBuyAssetModal, setShowBuyAssetModal] = useState(false)
   const [equipmentProfile, setEquipmentProfile] = useState<Equipment>()
+  const [AssetProfile, setAssetProfile] = useState<StrategicAssets>()
   const [showConfirmEquipmentDropModal, setShowConfirmEquipmentDropModal] =
     useState(false)
 
@@ -187,6 +189,16 @@ const BaseStash = () => {
                 onClick={() => removeFromStrategicAssets(asset)}>
                 Remove
               </button>
+              <a
+                  onClick={() =>
+                    setAssetProfile(asset)
+                  }>
+                  <span className="title is-6">
+                    {' '}
+                    {asset.name}
+                  </span>
+                </a>
+
             </div>
           ))}
         </div>
