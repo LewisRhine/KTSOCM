@@ -17,15 +17,6 @@ const BaseStash = () => {
   const stash = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash,
   )
-  const strategicAssets =
-    useDataslateStore(
-      (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
-    ) ?? []
-
-  const assetCapacity =
-    useDataslateStore(
-      (state) => state.selectedDataslate?.baseOfOperations.assetCapacity,
-    ) ?? 0
 
   const availableEquipment = stash.availableEquipment.sort((a, b) => {
     if (a.equipment.name < b.equipment.name) return -1
@@ -112,9 +103,8 @@ const BaseStash = () => {
             <div className={'buttons'}>
               <button
                 className={'button is-primary is-small'}
-                onClick={() => setshowBuyEquipmentModal(true)}
-                disabled={availableEP <= 0}>
-                Add Equipment
+                onClick={() => setshowBuyEquipmentModal(true)}>
+                Equipment
               </button>
               <button
                 className={'button is-small'}

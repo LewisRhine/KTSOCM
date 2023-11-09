@@ -1,9 +1,7 @@
-import { useEffect } from 'react'
 import useDataslateStore from '../stores/dataslateStore.ts'
 import { isGear, isWeapon } from '../data/equipment.ts'
 import WeaponProfile from '../component/WeaponProfile.tsx'
 import GearProfile from '../component/GearProfile.tsx'
-import useEquipmentShopStore from '../stores/equipmentShopStore.ts'
 
 interface Props {
   showModal: boolean
@@ -18,20 +16,9 @@ const BuyEquipmentModal = (props: Props) => {
   const equipment = useDataslateStore(
     (state) => state.selectedDataslate?.faction.equipment,
   )
-  const availableEP = useEquipmentShopStore((state) => state.availableEP)
-  const resetStore = useEquipmentShopStore((state) => state.resetStore)
-  const save = useEquipmentShopStore((state) => state.save)
-
-  useEffect(() => {
-    resetStore()
-
-    return resetStore
-  }, [resetStore])
-
-  const onSave = () => {
-    save()
-    onClose()
-  }
+  const availableEP = useDataslateStore(
+    (state) => state.selectedDataslate?.baseOfOperations.stash.availableEP,
+  )
 
   return (
     <div className={`modal ${isActive}`}>
@@ -52,11 +39,8 @@ const BuyEquipmentModal = (props: Props) => {
           })}
         </section>
         <footer className="modal-card-foot">
-          <button className="button is-success" onClick={onSave}>
-            Save
-          </button>
           <button className="button" onClick={onClose}>
-            Cancel
+            Done
           </button>
         </footer>
       </div>
