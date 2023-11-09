@@ -1,4 +1,4 @@
-import { StrategicAssets, strategicAssets } from './../data/strategicAssets'
+import { StrategicAssets } from './../data/strategicAssets'
 import { create } from 'zustand'
 import {
   Dataslate,
@@ -8,6 +8,7 @@ import {
 } from '../data/dataslate.ts'
 import { Stash } from '../data/baseOfOperations.ts'
 import useSystemError from './systemError.ts'
+import { Requisition } from '../data/requisition.ts'
 
 interface DataslateState {
   dataslates?: Dataslate[]
@@ -25,6 +26,7 @@ interface DataslateState {
   saveStash: (stash: Stash) => Promise<void>
   addtoStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
   removeFromStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
+  takeRequisition: (requisition: Requisition) => Promise<void>
 }
 
 const setError = useSystemError.getState().setError
@@ -156,6 +158,7 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     if (error) setError(error)
     if (data) set({ selectedDataslate: data })
   },
+
   addtoStrategicAssets: async (strategicAssets: StrategicAssets) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
@@ -170,6 +173,7 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     if (error) setError(error)
     if (data) set({ selectedDataslate: data })
   },
+
   removeFromStrategicAssets: async (asset: StrategicAssets) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
@@ -182,6 +186,26 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.strategicAssets.splice(strategicAssetIndex, 1)
     newDataslate.reqPoints++
+
+    const { data, error } = await updateDataslate(newDataslate)
+    if (error) setError(error)
+    if (data) set({ selectedDataslate: data })
+  },
+
+  takeRequisition: async (requisition: Requisition) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+
+    const newDataslate = { ...selectedDataslate }
+
+    const { name } = requisition
+
+    if (name === 'Equipment Drop')
+      newDataslate.baseOfOperations.stash.availableEP += 5
+
+    if (name === 'Asset Acquired') newDataslate.baseOfOperations.assetCapacity++
+
+    newDataslate.reqPoints--
 
     const { data, error } = await updateDataslate(newDataslate)
     if (error) setError(error)
