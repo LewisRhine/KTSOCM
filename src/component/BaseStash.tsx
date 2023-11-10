@@ -1,7 +1,6 @@
 import useDataslateStore from '../stores/dataslateStore.ts'
 import { useState } from 'react'
 import BuyEquipmentModal from '../modals/BuyEquipmentModal.tsx'
-import ConfirmModal from '../modals/ConfirmModal.tsx'
 import { Equipment } from '../data/equipment.ts'
 import { AvailableEquipment } from '../data/baseOfOperations.ts'
 import EquipmentProfileModal from '../modals/EquipmentProfileModal.tsx'
@@ -10,9 +9,6 @@ import BuyAssetModal from '../modals/BuyAssetModal.tsx'
 const BaseStash = () => {
   const availableEP = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash.availableEP,
-  )
-  const reqPoints = useDataslateStore(
-    (state) => state.selectedDataslate!.reqPoints,
   )
   const stash = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash,
@@ -24,14 +20,11 @@ const BaseStash = () => {
     return 0
   })
 
-  const equipmentDrop = useDataslateStore((state) => state.equipmentDrop)
   const saveStash = useDataslateStore((state) => state.saveStash)
 
   const [showBuyEquipmentModal, setshowBuyEquipmentModal] = useState(false)
   const [showBuyAssetModal, setShowBuyAssetModal] = useState(false)
   const [equipmentProfile, setEquipmentProfile] = useState<Equipment>()
-  const [showConfirmEquipmentDropModal, setShowConfirmEquipmentDropModal] =
-    useState(false)
 
   const unEquippedEquipment = availableEquipment.filter(
     ({ isEquipped }) => !isEquipped,
@@ -83,15 +76,6 @@ const BaseStash = () => {
         showModal={showBuyEquipmentModal}
         onClose={() => setshowBuyEquipmentModal(false)}
       />
-      <ConfirmModal
-        showModal={showConfirmEquipmentDropModal}
-        message={'Make an equipment drop?'}
-        onConfirm={() => {
-          equipmentDrop()
-          setShowConfirmEquipmentDropModal(false)
-        }}
-        onClose={() => setShowConfirmEquipmentDropModal(false)}
-      />
       <div className={'columns'}>
         <div className={'column'}>
           <div>
@@ -105,12 +89,6 @@ const BaseStash = () => {
                 className={'button is-primary is-small'}
                 onClick={() => setshowBuyEquipmentModal(true)}>
                 Equipment
-              </button>
-              <button
-                className={'button is-small'}
-                disabled={reqPoints <= 0}
-                onClick={() => setShowConfirmEquipmentDropModal(true)}>
-                Make Equipment Drop
               </button>
             </div>
           </div>

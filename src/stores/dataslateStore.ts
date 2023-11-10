@@ -24,6 +24,7 @@ interface DataslateState {
   increasePoints: () => Promise<void>
   decreasePoints: () => Promise<void>
   equipmentDrop: () => Promise<void>
+  undoEquipmentDrop: () => Promise<void>
   addToStash: (equipment: Equipment) => Promise<void>
   removeFromStash: (equipment: Equipment) => Promise<void>
   saveStash: (stash: Stash) => Promise<void>
@@ -134,6 +135,20 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     const newDataslate = { ...selectedDataslate }
     newDataslate.reqPoints--
     newDataslate.baseOfOperations.stash.availableEP += 5
+
+    await saveDataslate(newDataslate, set)
+  },
+
+  undoEquipmentDrop: async () => {
+    const selectedDataslate = get().selectedDataslate
+    const availableEP =
+      selectedDataslate?.baseOfOperations.stash.availableEP ?? 0
+
+    if (!selectedDataslate || availableEP < 5) return
+
+    const newDataslate = { ...selectedDataslate }
+    newDataslate.reqPoints++
+    newDataslate.baseOfOperations.stash.availableEP -= 5
 
     await saveDataslate(newDataslate, set)
   },
