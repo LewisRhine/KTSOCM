@@ -7,6 +7,7 @@ import { AvailableEquipment } from '../data/baseOfOperations.ts'
 import EquipmentProfileModal from '../modals/EquipmentProfileModal.tsx'
 import BuyAssetModal from '../modals/BuyAssetModal.tsx'
 import { StrategicAssets } from '../data/strategicAssets.ts'
+import AssetProfileModal from '../modals/AssetProfileModal.tsx'
 
 const BaseStash = () => {
   const availableEP = useDataslateStore(
@@ -88,6 +89,10 @@ const BaseStash = () => {
       <EquipmentProfileModal
         equipment={equipmentProfile}
         onClose={() => setEquipmentProfile(undefined)}
+      />
+      <AssetProfileModal
+        asset={AssetProfile}
+        onClose={() => setAssetProfile(undefined)}
       />
       <BuyAssetModal
         showModal={showBuyAssetModal}
@@ -183,22 +188,14 @@ const BaseStash = () => {
           </button>
           {strategicAssets?.map((asset) => (
             <div className={'has-addons'}>
-              {asset.name}
               <button
                 className="button is-small"
                 onClick={() => removeFromStrategicAssets(asset)}>
                 Remove
               </button>
-              <a
-                  onClick={() =>
-                    setAssetProfile(asset)
-                  }>
-                  <span className="title is-6">
-                    {' '}
-                    {asset.name}
-                  </span>
-                </a>
-
+              <a onClick={() => setAssetProfile(asset)}>
+                <span className="title is-6"> {asset.name}</span>
+              </a>
             </div>
           ))}
         </div>
