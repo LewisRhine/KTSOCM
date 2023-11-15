@@ -1,5 +1,7 @@
+import CasualtyCheckForstRoll from "../modals/CasualtyCheckFirstRoll"
+
 const Operatives = () => {
-  return <div> type here</div>
+  return <CasualtyCheckForstRoll />
 }
 
 export default Operatives
