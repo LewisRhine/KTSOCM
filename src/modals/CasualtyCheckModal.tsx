@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import CasualtyCheck from '../component/CasualtyCheck'
 import CasualtyCheckPass from '../component/CasualtyCheckPass'
+import RecoveryTestModal from './RecoveryTestModal'
 
 interface Props {
   showModal: boolean
+  recoveryTestModalswitch: () => void
   onClose: () => void
 }
 
@@ -49,6 +51,7 @@ const CasualtyCheckModal = (props: Props) => {
                 onClick={() => {
                   onClose()
                   setModalState('start')
+                  RecoveryTestModal
                 }}>
                 Take Recovery Test
               </button>
