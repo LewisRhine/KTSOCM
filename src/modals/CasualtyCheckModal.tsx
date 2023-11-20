@@ -1,18 +1,17 @@
 import { useState } from 'react'
 import CasualtyCheck from '../component/CasualtyCheck'
 import CasualtyCheckPass from '../component/CasualtyCheckPass'
-import RecoveryTestModal from './RecoveryTestModal'
 
 interface Props {
   showModal: boolean
-  recoveryTestModalswitch: () => void
+  showRecoveryTestModal: () => void
   onClose: () => void
 }
 
 type ModalState = 'start' | 'pass' | 'fail'
 
 const CasualtyCheckModal = (props: Props) => {
-  const { showModal, onClose } = props
+  const { showModal, onClose, showRecoveryTestModal } = props
 
   const isActive = showModal ? 'is-active' : ''
 
@@ -51,7 +50,7 @@ const CasualtyCheckModal = (props: Props) => {
                 onClick={() => {
                   onClose()
                   setModalState('start')
-                  RecoveryTestModal
+                  showRecoveryTestModal()
                 }}>
                 Take Recovery Test
               </button>
