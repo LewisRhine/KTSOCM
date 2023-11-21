@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CasualtyCheck from '../component/CasualtyCheck'
 import CasualtyCheckPass from '../component/CasualtyCheckPass'
+import CasualtyCheckFail from '../component/CasualtyCheckFail'
 
 interface Props {
   showModal: boolean
@@ -24,11 +25,12 @@ const CasualtyCheckModal = (props: Props) => {
 
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title"> First Roll</p>
+          <p className="modal-card-title"> Casualty Check</p>
         </header>
         <div className="modal-card-body">
           {modalState === 'start' && <CasualtyCheck />}
           {modalState === 'pass' && <CasualtyCheckPass />}
+          {modalState === 'fail' && <CasualtyCheckFail />}
         </div>
         <footer className="modal-card-foot">
           {modalState === 'start' ? (
