@@ -25,7 +25,7 @@ const CasualtyCheckFail = () => {
           operative does not have.
         </p>
       </div>
-      <table className="table">
+      <table className="table is-bordered">
         <thead>
           <tr>
             <th>
@@ -44,30 +44,48 @@ const CasualtyCheckFail = () => {
         </tfoot>
         <tbody>
           <tr>
-            Slain: This operative can no longer be used. Remove it from your
-            dataslate.
+            <td>1</td>
+            <td>
+              Slain: This operative can no longer be used. Remove it from your
+              dataslate.
+            </td>
           </tr>
           <tr>
-            Critical Impairment: This operative cannot perform Dash actions and
-            its APL characteristic cannot be increased.
+            <td>2</td>
+            <td>
+              Critical Impairment: This operative cannot perform Dash actions
+              and its APL characteristic cannot be increased.
+            </td>
           </tr>
           <tr>
-            Severe Concussion: This operative always suffers the penalty to the
-            Ballistic Skill characteristic of its ranged weapons as if it were
-            injured.
+            <td>3</td>
+            <td>
+              Severe Concussion: This operative always suffers the penalty to
+              the Ballistic Skill characteristic of its ranged weapons as if it
+              were injured.
+            </td>
           </tr>
           <tr>
-            Sapped Strength: This operative always suffers the penalty to the
-            Weapon Skill characteristic of its melee weapons as if it were
-            injured.
+            <td>4</td>
+            <td>
+              Sapped Strength: This operative always suffers the penalty to the
+              Weapon Skill characteristic of its melee weapons as if it were
+              injured.
+            </td>
           </tr>
           <tr>
-            Lingering Ailment: This operative always suffers the penalty to its
-            Movement characteristic as if it were injured.
+            <td>5</td>
+            <td>
+              Lingering Ailment: This operative always suffers the penalty to
+              its Movement characteristic as if it were injured.
+            </td>
           </tr>
           <tr>
-            Cerebral Affliction: This operative does not gain a Battle Scar but
-            does not gain any experience from this battle.
+            <td>6</td>
+            <td>
+              Cerebral Affliction: This operative does not gain a Battle Scar
+              but does not gain any experience from this battle.
+            </td>
           </tr>
         </tbody>
       </table>
