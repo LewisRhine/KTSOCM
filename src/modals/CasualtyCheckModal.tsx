@@ -41,6 +41,14 @@ const CasualtyCheckModal = (props: Props) => {
               <button className="button" onClick={() => setModalState('fail')}>
                 Failed
               </button>
+              <button
+                className="button"
+                onClick={() => {
+                  onClose()
+                  setModalState('start')
+                }}>
+                Exit
+              </button>
             </>
           ) : (
             <>
@@ -56,13 +64,16 @@ const CasualtyCheckModal = (props: Props) => {
                 }}>
                 Take Recovery Test
               </button>
+              <button
+                className="button"
+                onClick={() => {
+                  onClose()
+                  setModalState('start')
+                }}>
+                Done
+              </button>
             </>
           )}
-          {/* <button
-            className={'button is-primary is-small'}
-            onClick={() => setshowshowCasualtyCheckSecondRollModal(true)}>
-            Failed
-          </button> */}
         </footer>
       </div>
     </div>
