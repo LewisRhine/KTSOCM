@@ -6,6 +6,7 @@ import { Equipment } from '../data/equipment.ts'
 import { AvailableEquipment } from '../data/baseOfOperations.ts'
 import EquipmentProfileModal from '../modals/EquipmentProfileModal.tsx'
 import BuyAssetModal from '../modals/BuyAssetModal.tsx'
+import GetRareEquipmentModal from '../modals/GetRareEquipmentModal.tsx'
 
 const BaseStash = () => {
   const availableEP = useDataslateStore(
@@ -17,15 +18,6 @@ const BaseStash = () => {
   const stash = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash,
   )
-  const strategicAssets =
-    useDataslateStore(
-      (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
-    ) ?? []
-
-  const assetCapacity =
-    useDataslateStore(
-      (state) => state.selectedDataslate?.baseOfOperations.assetCapacity,
-    ) ?? 0
 
   const availableEquipment = stash.availableEquipment.sort((a, b) => {
     if (a.equipment.name < b.equipment.name) return -1
@@ -37,6 +29,7 @@ const BaseStash = () => {
   const saveStash = useDataslateStore((state) => state.saveStash)
 
   const [showBuyEquipmentModal, setshowBuyEquipmentModal] = useState(false)
+  const [showRareEquipmentModal, setshowRareEquipmentModal] = useState(false)
   const [showBuyAssetModal, setShowBuyAssetModal] = useState(false)
   const [equipmentProfile, setEquipmentProfile] = useState<Equipment>()
   const [showConfirmEquipmentDropModal, setShowConfirmEquipmentDropModal] =
@@ -92,6 +85,10 @@ const BaseStash = () => {
         showModal={showBuyEquipmentModal}
         onClose={() => setshowBuyEquipmentModal(false)}
       />
+      <GetRareEquipmentModal
+        showModal={showRareEquipmentModal}
+        onClose={() => setshowRareEquipmentModal(false)}
+      />
       <ConfirmModal
         showModal={showConfirmEquipmentDropModal}
         message={'Make an equipment drop?'}
@@ -115,6 +112,11 @@ const BaseStash = () => {
                 onClick={() => setshowBuyEquipmentModal(true)}
                 disabled={availableEP <= 0}>
                 Add Equipment
+              </button>
+              <button
+                className={'button is-dark is-small'}
+                onClick={() => setshowRareEquipmentModal(true)}>
+                Get Rare Equipment
               </button>
               <button
                 className={'button is-small'}
@@ -144,6 +146,7 @@ const BaseStash = () => {
                     {' '}
                     {availableEquipment.equipment.name}
                   </span>
+                  {availableEquipment.equipment.rare && <span className={'subtitle is-italic is-6'}> (Rare)</span>}
                 </a>
               </div>
             ))}
@@ -163,6 +166,7 @@ const BaseStash = () => {
                     {' '}
                     {availableEquipment.equipment.name}
                   </span>
+                  {availableEquipment.equipment.rare && <span className={'subtitle is-italic is-6'}> (Rare)</span>}
                 </a>
               </div>
             ))}
