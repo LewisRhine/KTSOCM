@@ -1,3 +1,5 @@
+import RecoveryTest from '../component/RecoveryTest'
+
 interface Props {
   showRecoveryTestModal: boolean
   onClose: () => void
@@ -17,9 +19,11 @@ const RecoveryTestModal = (props: Props) => {
           <p className="modal-card-title"> Recovery Test</p>
         </header>
         <div className="modal-card-body">
-          modal
+          <RecoveryTest />
           <div className={'box'}></div>
-          <button className="modal-close is-large" onClick={onClose} />
+          <button className="button" onClick={onClose}>
+            Done
+          </button>
         </div>
       </div>
     </div>
