@@ -20,7 +20,6 @@ const RecoveryTestModal = (props: Props) => {
         </header>
         <div className="modal-card-body">
           <RecoveryTest />
-          <div className={'box'}></div>
           <button className="button" onClick={onClose}>
             Done
           </button>
