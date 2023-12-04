@@ -31,8 +31,8 @@ const RequisitionsModal = (props: Props) => {
           <button className="delete" onClick={onClose}></button>
         </header>
         <section className="modal-card-body">
-          {availableRequisitions?.map((requisition) => (
-            <RequisitionProfile requisition={requisition} />
+          {availableRequisitions?.map((requisition, index) => (
+            <RequisitionProfile key={index} requisition={requisition} />
           ))}
         </section>
         <footer className="modal-card-foot">

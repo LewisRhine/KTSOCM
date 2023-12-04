@@ -18,17 +18,20 @@ interface DataslateState {
 
   getDataslates: () => Promise<void>
   getDataslate: (dataslateId: string) => Promise<void>
-  saveHistory: (newHistory: string) => Promise<void>
-  saveQuirks: (newQuirks: string) => Promise<void>
-  saveNotes: (newNotes: string) => Promise<void>
-  saveBaseInfo: (baseName: string, baseDescription: string) => Promise<void>
-  increasePoints: () => Promise<void>
-  decreasePoints: () => Promise<void>
-  equipmentDrop: () => Promise<void>
-  saveStash: (stash: Stash) => Promise<void>
-  addToStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
-  removeFromStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
-  takeRequisition: (requisition: Requisition) => Promise<void>
+  saveHistory: (newHistory: string) => void
+  saveQuirks: (newQuirks: string) => void
+  saveNotes: (newNotes: string) => void
+  saveBaseInfo: (baseName: string, baseDescription: string) => void
+  increasePoints: () => void
+  decreasePoints: () => void
+  equipmentDrop: () => void
+  undoEquipmentDrop: () => void
+  addToStash: (equipment: Equipment) => void
+  removeFromStash: (equipment: Equipment) => void
+  saveStash: (stash: Stash) => void
+  addToStrategicAssets: (strategicAssets: StrategicAssets) => void
+  removeFromStrategicAssets: (strategicAssets: StrategicAssets) => void
+  takeRequisition: (requisition: Requisition) => void
 }
 
 const setError = useSystemError.getState().setError
@@ -257,7 +260,7 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     saveDataslate(newDataslate, set)
   },
 
-  takeRequisition: async (requisition: Requisition) => {
+  takeRequisition: (requisition: Requisition) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
@@ -272,9 +275,7 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
 
     newDataslate.reqPoints--
 
-    const { data, error } = await updateDataslate(newDataslate)
-    if (error) setError(error)
-    if (data) set({ selectedDataslate: data })
+    saveDataslate(newDataslate, set)
   },
 }))
 
