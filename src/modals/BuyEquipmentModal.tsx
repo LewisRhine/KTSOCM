@@ -1,9 +1,7 @@
-import { useEffect } from 'react'
 import useDataslateStore from '../stores/dataslateStore.ts'
 import { isGear, isWeapon } from '../data/equipment.ts'
 import WeaponProfile from '../component/WeaponProfile.tsx'
 import GearProfile from '../component/GearProfile.tsx'
-import useEquipmentShopStore from '../stores/equipmentShopStore.ts'
 
 interface Props {
   showModal: boolean
@@ -18,45 +16,52 @@ const BuyEquipmentModal = (props: Props) => {
   const equipment = useDataslateStore(
     (state) => state.selectedDataslate?.faction.equipment,
   )
-  const availableEP = useEquipmentShopStore((state) => state.availableEP)
-  const resetStore = useEquipmentShopStore((state) => state.resetStore)
-  const save = useEquipmentShopStore((state) => state.save)
-
-  useEffect(() => {
-    resetStore()
-
-    return resetStore
-  }, [resetStore])
-
-  const onSave = () => {
-    save()
-    onClose()
-  }
+  const availableEP =
+    useDataslateStore(
+      (state) => state.selectedDataslate?.baseOfOperations.stash.availableEP,
+    ) ?? 0
+  const reqPoints = useDataslateStore(
+    (state) => state.selectedDataslate!.reqPoints,
+  )
+  const equipmentDrop = useDataslateStore((state) => state.equipmentDrop)
+  const undoEquipmentDrop = useDataslateStore(
+    (state) => state.undoEquipmentDrop,
+  )
 
   return (
     <div className={`modal ${isActive}`}>
       <button className="delete" onClick={onClose} />
       <div className="modal-background" />
-
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title">Available EP {availableEP}</p>
           <button className="delete" onClick={onClose}></button>
         </header>
         <section className="modal-card-body">
+          <div className={'buttons'}>
+            <button
+              className={'button is-small is-primary'}
+              disabled={reqPoints <= 0}
+              onClick={equipmentDrop}>
+              Make Equipment Drop
+            </button>
+            <button
+              className={'button is-small'}
+              disabled={availableEP < 5}
+              onClick={undoEquipmentDrop}>
+              Undo Equipment Drop
+            </button>
+          </div>
           {equipment?.map((equipment, index) => {
             if (isWeapon(equipment))
               return <WeaponProfile key={index} weapon={equipment} buyMode />
             if (isGear(equipment))
-              return <GearProfile gear={equipment} buyMode />
+              return <GearProfile key={index} gear={equipment} buyMode />
           })}
         </section>
         <footer className="modal-card-foot">
-          <button className="button is-success" onClick={onSave}>
-            Save
-          </button>
           <button className="button" onClick={onClose}>
-            Cancel
+            Done
           </button>
         </footer>
       </div>
