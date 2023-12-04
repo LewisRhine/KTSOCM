@@ -15,6 +15,12 @@ const BaseStash = () => {
   const stash = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash,
   )
+  const reqPoints = useDataslateStore(
+    (state) => state.selectedDataslate!.reqPoints,
+  )
+  const equipmentDrop = useDataslateStore(
+    (state) => state.equipmentDrop,
+  )
 
   const availableEquipment = stash.availableEquipment.sort((a, b) => {
     if (a.equipment.name < b.equipment.name) return -1
