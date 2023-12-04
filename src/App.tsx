@@ -28,7 +28,6 @@ function App() {
     return () => subscription.unsubscribe()
   }, [])
 
-  console.log('Session: ' + session)
   if (!session) {
     return <Authentication />
   } else {

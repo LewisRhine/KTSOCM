@@ -7,7 +7,7 @@ interface Props {
 }
 
 const StrategicAssetsProfile = (props: Props) => {
-  const { asset, buyMode } = props
+  const { asset } = props
   const { name, description, rule } = asset
   const selectedstrategicAssets = useDataslateStore(
     (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,

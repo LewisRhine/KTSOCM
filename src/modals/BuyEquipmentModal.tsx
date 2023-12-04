@@ -56,7 +56,7 @@ const BuyEquipmentModal = (props: Props) => {
             if (isWeapon(equipment))
               return <WeaponProfile key={index} weapon={equipment} buyMode />
             if (isGear(equipment))
-              return <GearProfile gear={equipment} buyMode />
+              return <GearProfile key={index} gear={equipment} buyMode />
           })}
         </section>
         <footer className="modal-card-foot">

@@ -42,8 +42,8 @@ const BaseOfOperations = () => {
             onClick={() => setShowBuyAssetModal(true)}>
             Acquire Asset
           </button>
-          {strategicAssets?.map((asset) => (
-            <div className={'has-addons'}>
+          {strategicAssets?.map((asset, index) => (
+            <div className={'has-addons'} key={index}>
               <button
                 className="button is-small"
                 onClick={() => removeFromStrategicAssets(asset)}>

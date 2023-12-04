@@ -1,12 +1,12 @@
 import useDataslateStore from '../stores/dataslateStore.ts'
 import { useState } from 'react'
 import BuyEquipmentModal from '../modals/BuyEquipmentModal.tsx'
+import ConfirmModal from '../modals/ConfirmModal.tsx'
 import { Equipment } from '../data/equipment.ts'
 import { AvailableEquipment } from '../data/baseOfOperations.ts'
 import EquipmentProfileModal from '../modals/EquipmentProfileModal.tsx'
 import BuyAssetModal from '../modals/BuyAssetModal.tsx'
-import { StrategicAssets } from '../data/strategicAssets.ts'
-import AssetProfileModal from '../modals/AssetProfileModal.tsx'
+import GetRareEquipmentModal from '../modals/GetRareEquipmentModal.tsx'
 
 const BaseStash = () => {
   const availableEP = useDataslateStore(
@@ -14,6 +14,12 @@ const BaseStash = () => {
   )
   const stash = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash,
+  )
+  const reqPoints = useDataslateStore(
+    (state) => state.selectedDataslate!.reqPoints,
+  )
+  const equipmentDrop = useDataslateStore(
+    (state) => state.equipmentDrop,
   )
 
   const availableEquipment = stash.availableEquipment.sort((a, b) => {
@@ -25,9 +31,11 @@ const BaseStash = () => {
   const saveStash = useDataslateStore((state) => state.saveStash)
 
   const [showBuyEquipmentModal, setshowBuyEquipmentModal] = useState(false)
+  const [showRareEquipmentModal, setshowRareEquipmentModal] = useState(false)
   const [showBuyAssetModal, setShowBuyAssetModal] = useState(false)
   const [equipmentProfile, setEquipmentProfile] = useState<Equipment>()
-  const [AssetProfile, setAssetProfile] = useState<StrategicAssets>()
+  const [showConfirmEquipmentDropModal, setShowConfirmEquipmentDropModal] =
+    useState(false)
 
   const unEquippedEquipment = availableEquipment.filter(
     ({ isEquipped }) => !isEquipped,
@@ -70,10 +78,6 @@ const BaseStash = () => {
         equipment={equipmentProfile}
         onClose={() => setEquipmentProfile(undefined)}
       />
-      <AssetProfileModal
-        asset={AssetProfile}
-        onClose={() => setAssetProfile(undefined)}
-      />
       <BuyAssetModal
         showModal={showBuyAssetModal}
         onClose={() => setShowBuyAssetModal(false)}
@@ -82,6 +86,19 @@ const BaseStash = () => {
       <BuyEquipmentModal
         showModal={showBuyEquipmentModal}
         onClose={() => setshowBuyEquipmentModal(false)}
+      />
+      <GetRareEquipmentModal
+        showModal={showRareEquipmentModal}
+        onClose={() => setshowRareEquipmentModal(false)}
+      />
+      <ConfirmModal
+        showModal={showConfirmEquipmentDropModal}
+        message={'Make an equipment drop?'}
+        onConfirm={() => {
+          equipmentDrop()
+          setShowConfirmEquipmentDropModal(false)
+        }}
+        onClose={() => setShowConfirmEquipmentDropModal(false)}
       />
       <div className={'columns'}>
         <div className={'column'}>
@@ -94,8 +111,20 @@ const BaseStash = () => {
             <div className={'buttons'}>
               <button
                 className={'button is-primary is-small'}
-                onClick={() => setshowBuyEquipmentModal(true)}>
-                Equipment
+                onClick={() => setshowBuyEquipmentModal(true)}
+                disabled={availableEP <= 0}>
+                Add Equipment
+              </button>
+              <button
+                className={'button is-dark is-small'}
+                onClick={() => setshowRareEquipmentModal(true)}>
+                Get Rare Equipment
+              </button>
+              <button
+                className={'button is-small'}
+                disabled={reqPoints <= 0}
+                onClick={() => setShowConfirmEquipmentDropModal(true)}>
+                Make Equipment Drop
               </button>
             </div>
           </div>
@@ -119,6 +148,7 @@ const BaseStash = () => {
                     {' '}
                     {availableEquipment.equipment.name}
                   </span>
+                  {availableEquipment.equipment.rare && <span className={'subtitle is-italic is-6'}> (Rare)</span>}
                 </a>
               </div>
             ))}
@@ -138,6 +168,7 @@ const BaseStash = () => {
                     {' '}
                     {availableEquipment.equipment.name}
                   </span>
+                  {availableEquipment.equipment.rare && <span className={'subtitle is-italic is-6'}> (Rare)</span>}
                 </a>
               </div>
             ))}

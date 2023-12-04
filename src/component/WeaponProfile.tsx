@@ -18,6 +18,7 @@ const WeaponProfile = (props: Props) => {
     criticalDamage,
     specialRules,
     criticalHitRules,
+    rare,
   } = weapon
 
   const availableEP =
@@ -51,7 +52,7 @@ const WeaponProfile = (props: Props) => {
           <div className={'column is-3'}>
             <button
               className="button is-small"
-              disabled={cantAfford}
+              disabled={rare ? !noneInStash : cantAfford}
               onClick={() => addToStash(weapon)}>
               +
             </button>

@@ -8,7 +8,7 @@ interface Props {
 
 const GearProfile = (props: Props) => {
   const { gear, buyMode } = props
-  const { name, cost, description, ability } = gear
+  const { name, cost, description, ability, rare } = gear
 
   const availableEP =
     useDataslateStore(
@@ -41,7 +41,7 @@ const GearProfile = (props: Props) => {
           <div className={'column is-3'}>
             <button
               className="button is-small"
-              disabled={cantAfford}
+              disabled={rare ? !noneInStash : cantAfford}
               onClick={() => addToStash(gear)}>
               +
             </button>
