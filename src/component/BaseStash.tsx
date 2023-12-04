@@ -1,7 +1,6 @@
 import useDataslateStore from '../stores/dataslateStore.ts'
 import { useState } from 'react'
 import BuyEquipmentModal from '../modals/BuyEquipmentModal.tsx'
-import ConfirmModal from '../modals/ConfirmModal.tsx'
 import { Equipment } from '../data/equipment.ts'
 import { AvailableEquipment } from '../data/baseOfOperations.ts'
 import EquipmentProfileModal from '../modals/EquipmentProfileModal.tsx'
@@ -13,21 +12,9 @@ const BaseStash = () => {
   const availableEP = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash.availableEP,
   )
-  const reqPoints = useDataslateStore(
-    (state) => state.selectedDataslate!.reqPoints,
-  )
   const stash = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash,
   )
-  const strategicAssets =
-    useDataslateStore(
-      (state) => state.selectedDataslate?.baseOfOperations.strategicAssets,
-    ) ?? []
-
-  const assetCapacity =
-    useDataslateStore(
-      (state) => state.selectedDataslate?.baseOfOperations.assetCapacity,
-    ) ?? 0
 
   const availableEquipment = stash.availableEquipment.sort((a, b) => {
     if (a.equipment.name < b.equipment.name) return -1
@@ -35,25 +22,18 @@ const BaseStash = () => {
     return 0
   })
 
-  const equipmentDrop = useDataslateStore((state) => state.equipmentDrop)
   const saveStash = useDataslateStore((state) => state.saveStash)
 
   const [showBuyEquipmentModal, setshowBuyEquipmentModal] = useState(false)
   const [showBuyAssetModal, setShowBuyAssetModal] = useState(false)
   const [equipmentProfile, setEquipmentProfile] = useState<Equipment>()
   const [AssetProfile, setAssetProfile] = useState<StrategicAssets>()
-  const [showConfirmEquipmentDropModal, setShowConfirmEquipmentDropModal] =
-    useState(false)
 
   const unEquippedEquipment = availableEquipment.filter(
     ({ isEquipped }) => !isEquipped,
   )
   const equippedEquipment = availableEquipment.filter(
     ({ isEquipped }) => isEquipped,
-  )
-
-  const removeFromStrategicAssets = useDataslateStore(
-    (state) => state.removeFromStrategicAssets,
   )
 
   const equip = (equipment: AvailableEquipment) => {
@@ -103,15 +83,6 @@ const BaseStash = () => {
         showModal={showBuyEquipmentModal}
         onClose={() => setshowBuyEquipmentModal(false)}
       />
-      <ConfirmModal
-        showModal={showConfirmEquipmentDropModal}
-        message={'Make an equipment drop?'}
-        onConfirm={() => {
-          equipmentDrop()
-          setShowConfirmEquipmentDropModal(false)
-        }}
-        onClose={() => setShowConfirmEquipmentDropModal(false)}
-      />
       <div className={'columns'}>
         <div className={'column'}>
           <div>
@@ -123,15 +94,8 @@ const BaseStash = () => {
             <div className={'buttons'}>
               <button
                 className={'button is-primary is-small'}
-                onClick={() => setshowBuyEquipmentModal(true)}
-                disabled={availableEP <= 0}>
-                Add Equipment
-              </button>
-              <button
-                className={'button is-small'}
-                disabled={reqPoints <= 0}
-                onClick={() => setShowConfirmEquipmentDropModal(true)}>
-                Make Equipment Drop
+                onClick={() => setshowBuyEquipmentModal(true)}>
+                Equipment
               </button>
             </div>
           </div>
@@ -178,26 +142,6 @@ const BaseStash = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className={'column'}>
-          <p className="title">Strategic Assets</p>
-          <button
-            className={'button is-primary is-small'}
-            onClick={() => setShowBuyAssetModal(true)}>
-            Acquire Asset
-          </button>
-          {strategicAssets?.map((asset) => (
-            <div className={'has-addons'}>
-              <button
-                className="button is-small"
-                onClick={() => removeFromStrategicAssets(asset)}>
-                Remove
-              </button>
-              <a onClick={() => setAssetProfile(asset)}>
-                <span className="title is-6"> {asset.name}</span>
-              </a>
-            </div>
-          ))}
         </div>
       </div>
     </>
