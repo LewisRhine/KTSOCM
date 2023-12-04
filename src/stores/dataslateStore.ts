@@ -28,7 +28,7 @@ interface DataslateState {
   addToStash: (equipment: Equipment) => void
   removeFromStash: (equipment: Equipment) => void
   saveStash: (stash: Stash) => void
-  addtoStrategicAssets: (strategicAssets: StrategicAssets) => void
+  addToStrategicAssets: (strategicAssets: StrategicAssets) => void
   removeFromStrategicAssets: (strategicAssets: StrategicAssets) => void
 }
 
@@ -231,7 +231,7 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     saveDataslate(newDataslate, set)
   },
 
-  addtoStrategicAssets: (strategicAssets: StrategicAssets) => {
+  addToStrategicAssets: (strategicAssets: StrategicAssets) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 

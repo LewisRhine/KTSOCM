@@ -12,9 +12,6 @@ const BaseStash = () => {
   const availableEP = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash.availableEP,
   )
-  const reqPoints = useDataslateStore(
-    (state) => state.selectedDataslate!.reqPoints,
-  )
   const stash = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash,
   )
@@ -25,7 +22,6 @@ const BaseStash = () => {
     return 0
   })
 
-  const equipmentDrop = useDataslateStore((state) => state.equipmentDrop)
   const saveStash = useDataslateStore((state) => state.saveStash)
 
   const [showBuyEquipmentModal, setshowBuyEquipmentModal] = useState(false)
@@ -171,16 +167,6 @@ const BaseStash = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className={'column'}>
-          <p className="title">Strategic Assets</p>
-          <button
-            className={'button is-primary is-small'}
-            onClick={() => setShowBuyAssetModal(true)}>
-            Acquire Asset
-          </button>
-          <p>asdasdasd </p>
-          <p>asdasdasd </p>
         </div>
       </div>
     </>
