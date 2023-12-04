@@ -20,7 +20,7 @@ const StrategicAssetsProfile = (props: Props) => {
     ) ?? 0
 
   const addtoStrategicAssets = useDataslateStore(
-    (state) => state.addtoStrategicAssets,
+    (state) => state.addToStrategicAssets,
   )
 
   const removeFromStrategicAssets = useDataslateStore(

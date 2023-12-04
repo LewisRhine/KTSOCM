@@ -17,30 +17,35 @@ interface DataslateState {
 
   getDataslates: () => Promise<void>
   getDataslate: (dataslateId: string) => Promise<void>
-  saveHistory: (newHistory: string) => Promise<void>
-  saveQuirks: (newQuirks: string) => Promise<void>
-  saveNotes: (newNotes: string) => Promise<void>
-  saveBaseInfo: (baseName: string, baseDescription: string) => Promise<void>
-  increasePoints: () => Promise<void>
-  decreasePoints: () => Promise<void>
-  equipmentDrop: () => Promise<void>
-  undoEquipmentDrop: () => Promise<void>
-  addToStash: (equipment: Equipment) => Promise<void>
-  removeFromStash: (equipment: Equipment) => Promise<void>
-  saveStash: (stash: Stash) => Promise<void>
-  addtoStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
-  removeFromStrategicAssets: (strategicAssets: StrategicAssets) => Promise<void>
+  saveHistory: (newHistory: string) => void
+  saveQuirks: (newQuirks: string) => void
+  saveNotes: (newNotes: string) => void
+  saveBaseInfo: (baseName: string, baseDescription: string) => void
+  increasePoints: () => void
+  decreasePoints: () => void
+  equipmentDrop: () => void
+  undoEquipmentDrop: () => void
+  addToStash: (equipment: Equipment) => void
+  removeFromStash: (equipment: Equipment) => void
+  saveStash: (stash: Stash) => void
+  addToStrategicAssets: (strategicAssets: StrategicAssets) => void
+  removeFromStrategicAssets: (strategicAssets: StrategicAssets) => void
 }
 
 const setError = useSystemError.getState().setError
 
-const saveDataslate = async (
+const saveDataslate = (
   newDataslate: Dataslate,
   set: (dataslateState: DataslateState | Partial<DataslateState>) => void,
 ) => {
-  const { data, error } = await updateDataslate(newDataslate)
-  if (error) setError(error)
-  if (data) set({ selectedDataslate: data })
+  async function call() {
+    const { data, error } = await updateDataslate(newDataslate)
+    if (error) setError(error)
+    if (data) set({ selectedDataslate: data })
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
+  call()
 }
 
 const useDataslateStore = create<DataslateState>((set, get) => ({
@@ -69,37 +74,37 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     if (data) set({ selectedDataslate: data })
   },
 
-  saveHistory: async (newHistory) => {
+  saveHistory: (newHistory) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
     const newDataslate: Dataslate = { ...selectedDataslate }
     newDataslate.history = newHistory
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  saveQuirks: async (newQuirks) => {
+  saveQuirks: (newQuirks) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
     const newDataslate: Dataslate = { ...selectedDataslate }
     newDataslate.quirks = newQuirks
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  saveNotes: async (newNotes) => {
+  saveNotes: (newNotes) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
     const newDataslate: Dataslate = { ...selectedDataslate }
     newDataslate.notes = newNotes
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  saveBaseInfo: async (baseName, baseDescription) => {
+  saveBaseInfo: (baseName, baseDescription) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
@@ -107,28 +112,28 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     newDataslate.baseOfOperations.name = baseName
     newDataslate.baseOfOperations.description = baseDescription
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  increasePoints: async () => {
+  increasePoints: () => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
     const newDataslate = { ...selectedDataslate }
     newDataslate.reqPoints++
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  decreasePoints: async () => {
+  decreasePoints: () => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
     const newDataslate = { ...selectedDataslate }
     newDataslate.reqPoints--
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  equipmentDrop: async () => {
+  equipmentDrop: () => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate || selectedDataslate.reqPoints <= 0) return
 
@@ -136,10 +141,10 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     newDataslate.reqPoints--
     newDataslate.baseOfOperations.stash.availableEP += 5
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  undoEquipmentDrop: async () => {
+  undoEquipmentDrop: () => {
     const selectedDataslate = get().selectedDataslate
     const availableEP =
       selectedDataslate?.baseOfOperations.stash.availableEP ?? 0
@@ -150,21 +155,29 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     newDataslate.reqPoints++
     newDataslate.baseOfOperations.stash.availableEP -= 5
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  addToStash: async (equipment: Equipment) => {
+  addToStash: (equipment: Equipment) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
     const { availableEP, availableEquipment } =
       selectedDataslate.baseOfOperations.stash
 
-    if (availableEP < equipment.cost) return
+    if (!equipment.rare && availableEP < equipment.cost) return
+
+    if (equipment.rare) {
+      const alreadyHave = !!availableEquipment.find(
+        (value) => value.equipment.name === equipment.name,
+      )
+
+      if (alreadyHave) return
+    }
 
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.stash = {
-      availableEP: availableEP - equipment.cost,
+      availableEP: equipment.rare ? availableEP : availableEP - equipment.cost,
       availableEquipment: [
         ...availableEquipment,
         {
@@ -174,10 +187,10 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
       ],
     }
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  removeFromStash: async (equipment: Equipment) => {
+  removeFromStash: (equipment: Equipment) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
@@ -201,24 +214,24 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
 
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.stash = {
-      availableEP: availableEP + equipment.cost,
+      availableEP: equipment.rare ? availableEP : availableEP + equipment.cost,
       availableEquipment,
     }
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  saveStash: async (stash: Stash) => {
+  saveStash: (stash: Stash) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.stash = stash
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  addtoStrategicAssets: async (strategicAssets: StrategicAssets) => {
+  addToStrategicAssets: (strategicAssets: StrategicAssets) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
@@ -226,10 +239,10 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     newDataslate.baseOfOperations.strategicAssets.push(strategicAssets)
     newDataslate.reqPoints--
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 
-  removeFromStrategicAssets: async (asset: StrategicAssets) => {
+  removeFromStrategicAssets: (asset: StrategicAssets) => {
     const selectedDataslate = get().selectedDataslate
     if (!selectedDataslate) return
 
@@ -242,7 +255,7 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     newDataslate.baseOfOperations.strategicAssets.splice(strategicAssetIndex, 1)
     newDataslate.reqPoints++
 
-    await saveDataslate(newDataslate, set)
+    saveDataslate(newDataslate, set)
   },
 }))
 

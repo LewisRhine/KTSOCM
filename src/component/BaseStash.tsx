@@ -36,10 +36,6 @@ const BaseStash = () => {
     ({ isEquipped }) => isEquipped,
   )
 
-  const removeFromStrategicAssets = useDataslateStore(
-    (state) => state.removeFromStrategicAssets,
-  )
-
   const equip = (equipment: AvailableEquipment) => {
     const updated = availableEquipment.map((availableEquipment) => {
       if (availableEquipment === equipment)
@@ -146,26 +142,6 @@ const BaseStash = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className={'column'}>
-          <p className="title">Strategic Assets</p>
-          <button
-            className={'button is-primary is-small'}
-            onClick={() => setShowBuyAssetModal(true)}>
-            Acquire Asset
-          </button>
-          {strategicAssets?.map((asset) => (
-            <div className={'has-addons'}>
-              <button
-                className="button is-small"
-                onClick={() => removeFromStrategicAssets(asset)}>
-                Remove
-              </button>
-              <a onClick={() => setAssetProfile(asset)}>
-                <span className="title is-6"> {asset.name}</span>
-              </a>
-            </div>
-          ))}
         </div>
       </div>
     </>
