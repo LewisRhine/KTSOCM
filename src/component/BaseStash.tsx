@@ -5,6 +5,8 @@ import { Equipment } from '../data/equipment.ts'
 import { AvailableEquipment } from '../data/baseOfOperations.ts'
 import EquipmentProfileModal from '../modals/EquipmentProfileModal.tsx'
 import BuyAssetModal from '../modals/BuyAssetModal.tsx'
+import { StrategicAssets } from '../data/strategicAssets.ts'
+import AssetProfileModal from '../modals/AssetProfileModal.tsx'
 
 const BaseStash = () => {
   const availableEP = useDataslateStore(
@@ -25,12 +27,17 @@ const BaseStash = () => {
   const [showBuyEquipmentModal, setshowBuyEquipmentModal] = useState(false)
   const [showBuyAssetModal, setShowBuyAssetModal] = useState(false)
   const [equipmentProfile, setEquipmentProfile] = useState<Equipment>()
+  const [AssetProfile, setAssetProfile] = useState<StrategicAssets>()
 
   const unEquippedEquipment = availableEquipment.filter(
     ({ isEquipped }) => !isEquipped,
   )
   const equippedEquipment = availableEquipment.filter(
     ({ isEquipped }) => isEquipped,
+  )
+
+  const removeFromStrategicAssets = useDataslateStore(
+    (state) => state.removeFromStrategicAssets,
   )
 
   const equip = (equipment: AvailableEquipment) => {
@@ -66,6 +73,10 @@ const BaseStash = () => {
       <EquipmentProfileModal
         equipment={equipmentProfile}
         onClose={() => setEquipmentProfile(undefined)}
+      />
+      <AssetProfileModal
+        asset={AssetProfile}
+        onClose={() => setAssetProfile(undefined)}
       />
       <BuyAssetModal
         showModal={showBuyAssetModal}
@@ -143,8 +154,18 @@ const BaseStash = () => {
             onClick={() => setShowBuyAssetModal(true)}>
             Acquire Asset
           </button>
-          <p>asdasdasd </p>
-          <p>asdasdasd </p>
+          {strategicAssets?.map((asset) => (
+            <div className={'has-addons'}>
+              <button
+                className="button is-small"
+                onClick={() => removeFromStrategicAssets(asset)}>
+                Remove
+              </button>
+              <a onClick={() => setAssetProfile(asset)}>
+                <span className="title is-6"> {asset.name}</span>
+              </a>
+            </div>
+          ))}
         </div>
       </div>
     </>
