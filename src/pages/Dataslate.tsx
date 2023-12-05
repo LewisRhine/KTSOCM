@@ -1,14 +1,17 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import useDataslateStore from '../stores/dataslateStore.ts'
 import TeamBackground from '../component/TeamBackground.tsx'
 import BaseOfOperations from '../component/BaseOfOperations.tsx'
 import Operatives from '../component/Operatives.tsx'
+import RequisitionsModal from '../modals/RequisitionsModal.tsx'
 
 const Dataslate = () => {
   const { dataslateId } = useParams()
   const { hash } = useLocation()
   const nav = useNavigate()
+
+  const [showRequisitionsModal, setShowRequisitionsModal] = useState(false)
 
   const dataslate = useDataslateStore((state) => state.selectedDataslate)
   const loading = useDataslateStore((state) => state.loading)
@@ -28,6 +31,10 @@ const Dataslate = () => {
 
   return (
     <>
+      <RequisitionsModal
+        showModal={showRequisitionsModal}
+        onClose={() => setShowRequisitionsModal(false)}
+      />
       <div className={'container'}>
         <section className={'section'}>
           <div className={'columns is-vcentered is-centered'}>
@@ -39,11 +46,13 @@ const Dataslate = () => {
             </div>
             <div className={'columns is-mobile is-vcentered is-centered'}>
               <div className={'column has-text-centered'}>
-                <p>Requisition Points</p>
-                <p className="title is-3">{dataslate.reqPoints}</p>
+                <a onClick={() => setShowRequisitionsModal(true)}>
+                  <p>Requisition Points</p>
+                  <p className="title is-3">{dataslate.reqPoints}</p>
+                </a>
               </div>
             </div>
-            <div className={'buttons  has-addons is-centered'}>
+            <div className={'buttons has-addons is-centered'}>
               <button className="button" onClick={increasePoints}>
                 +
               </button>

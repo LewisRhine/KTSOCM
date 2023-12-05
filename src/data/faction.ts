@@ -1,4 +1,5 @@
 import { Equipment } from './equipment.ts'
+import { Requisition } from './requisition.ts'
 import { hearthkynSalvager } from '../factions/hearthkynSalvager.ts'
 import { StrategicAssets } from './strategicAssets.ts'
 
@@ -10,6 +11,7 @@ export interface Faction {
   quirkTable: string[]
   equipment: Equipment[]
   rareEquipment: Equipment[]
+  requisitions: Requisition[]
   coverImage?: string
   strategicAssets?: StrategicAssets[]
 }
@@ -37,6 +39,7 @@ export const farstalkerKinband: Faction = {
   coverImage: 'https://wh40k.lexicanum.com/mediawiki/images/b/b6/KrootArt1.jpg',
   equipment: [],
   rareEquipment: [],
+  requisitions: [],
 }
 
 export const factions: Array<Faction> = [farstalkerKinband, hearthkynSalvager]
