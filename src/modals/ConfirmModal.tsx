@@ -11,7 +11,7 @@ const ConfirmModal = (props: Props) => {
   const isActive = showModal ? 'is-active' : ''
 
   return (
-    <div className={`modal ${isActive}`}>
+    <div className={`modal ${isActive}`} style={{ zIndex: 50 }}>
       <div className="modal-background"></div>
       <div className="modal-content">
         <div className={'box has-text-centered'}>

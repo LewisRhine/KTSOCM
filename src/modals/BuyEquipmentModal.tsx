@@ -30,7 +30,6 @@ const BuyEquipmentModal = (props: Props) => {
 
   return (
     <div className={`modal ${isActive}`}>
-      <button className="delete" onClick={onClose} />
       <div className="modal-background" />
       <div className="modal-card">
         <header className="modal-card-head">

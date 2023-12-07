@@ -175,4 +175,5 @@ export const hearthkynSalvager: Faction = {
     ionExpediter,
   ],
   strategicAssets: [supplyHold],
+  specOps: []
 }

@@ -9,8 +9,9 @@ import {
 import { Stash } from '../data/baseOfOperations.ts'
 import useSystemError from './systemError.ts'
 import { Equipment } from '../data/equipment.ts'
+import { SpecOps } from '../data/specOps.ts'
 
-interface DataslateState {
+export interface DataslateState {
   dataslates?: Dataslate[]
   selectedDataslate?: Dataslate
   loading: boolean
@@ -30,6 +31,12 @@ interface DataslateState {
   saveStash: (stash: Stash) => void
   addToStrategicAssets: (strategicAssets: StrategicAssets) => void
   removeFromStrategicAssets: (strategicAssets: StrategicAssets) => void
+  assignSpecOps: (specOps: SpecOps) => void
+  progressCurrentSpecOps: () => void
+  degreesCurrentSpecOps: () => void
+  abandonCurrentSpecOps: () => void
+  checkCommendationCurrentSpecOps: (index: number) => void
+  completeCurrentSpecOps: () => void
 }
 
 const setError = useSystemError.getState().setError
@@ -66,6 +73,15 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
 
   getDataslate: async (dataslateId) => {
     set({ loading: true })
+
+    const fromDataslate = get().dataslates?.find(
+      ({ id }) => id.toString() === dataslateId,
+    )
+
+    if (fromDataslate) {
+      set({ loading: false, selectedDataslate: fromDataslate })
+      return
+    }
 
     const { data, error } = await getDataslate(dataslateId)
 
@@ -254,6 +270,128 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.strategicAssets.splice(strategicAssetIndex, 1)
     newDataslate.reqPoints++
+
+    saveDataslate(newDataslate, set)
+  },
+
+  assignSpecOps: (specOps: SpecOps) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+
+    // check if user is on this specOps already
+    if (selectedDataslate.currentSpecOps?.name === specOps.name) {
+      setError(`You are already on a ${specOps.name} Spec Ops!`)
+      return
+    }
+
+    // check if the user has completed this spec op in the last 3 times
+    const lastTwoCompleted = selectedDataslate.completedSpecOps.slice(-2)
+    if (lastTwoCompleted?.find(({ name }) => specOps.name === name)) {
+      setError(
+        'A kill team cannot be assigned to a completed Spec Op again until it has completed two other Spec Ops',
+      )
+      return
+    }
+
+    const newDataslate = { ...selectedDataslate }
+    if (newDataslate.currentSpecOps) {
+      newDataslate.completedSpecOps.push(newDataslate.currentSpecOps)
+    }
+
+    newDataslate.currentSpecOps = specOps
+
+    saveDataslate(newDataslate, set)
+  },
+
+  progressCurrentSpecOps: () => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+    const newDataslate = { ...selectedDataslate }
+    if (!newDataslate?.currentSpecOps) return
+
+    const { operationOne, operationTwo } = newDataslate.currentSpecOps
+    const { gamesNeededToCompleted } = operationOne
+
+    if (!operationOne.complete) {
+      if (operationOne.gamesCompleted < gamesNeededToCompleted) {
+        operationOne.gamesCompleted++
+      }
+
+      if (operationOne.gamesCompleted >= gamesNeededToCompleted) {
+        operationOne.complete = true
+      }
+
+      saveDataslate(newDataslate, set)
+      return
+    }
+
+    if (!operationTwo.complete) {
+      operationTwo.complete = true
+      saveDataslate(newDataslate, set)
+    }
+  },
+
+  degreesCurrentSpecOps: () => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+    const newDataslate = { ...selectedDataslate }
+    if (!newDataslate?.currentSpecOps) return
+
+    const { operationOne, operationTwo } = newDataslate.currentSpecOps
+    const { gamesCompleted } = operationOne
+
+    if (operationTwo.complete) {
+      operationTwo.complete = false
+      saveDataslate(newDataslate, set)
+      return
+    }
+
+    if (operationOne.complete) {
+      operationOne.complete = false
+      operationOne.gamesCompleted--
+      saveDataslate(newDataslate, set)
+      return
+    }
+
+    if (!operationOne.complete && gamesCompleted > 0) {
+      operationOne.gamesCompleted--
+      saveDataslate(newDataslate, set)
+      return
+    }
+  },
+
+  abandonCurrentSpecOps: () => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+    const newDataslate = { ...selectedDataslate }
+    if (!newDataslate?.currentSpecOps) return
+
+    newDataslate.currentSpecOps = undefined
+    saveDataslate(newDataslate, set)
+  },
+
+  checkCommendationCurrentSpecOps: (index: number) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+    const newDataslate = { ...selectedDataslate }
+    if (!newDataslate?.currentSpecOps) return
+
+    if (index >= newDataslate.currentSpecOps.commendations.length) return
+
+    newDataslate.currentSpecOps.commendations[index].claimed =
+      !newDataslate.currentSpecOps.commendations[index].claimed
+
+    saveDataslate(newDataslate, set)
+  },
+
+  completeCurrentSpecOps: () => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+    const newDataslate = { ...selectedDataslate }
+    if (!newDataslate?.currentSpecOps) return
+
+    newDataslate.completedSpecOps.push(newDataslate.currentSpecOps)
+    newDataslate.currentSpecOps = undefined
 
     saveDataslate(newDataslate, set)
   },
