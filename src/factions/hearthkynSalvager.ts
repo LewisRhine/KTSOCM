@@ -2,6 +2,7 @@ import { Faction } from '../data/faction.ts'
 import { Gear, Weapon } from '../data/equipment.ts'
 import { blast, indirect, lethal, limited, rng } from '../data/specialRules.ts'
 import { StrategicAssets } from '../data/strategicAssets.ts'
+import { Requisition } from '../data/requisition.ts'
 
 // Equipment
 export const graviticConcussionGrenade: Weapon = {
@@ -151,6 +152,35 @@ export const supplyHold: StrategicAssets = {
   rule: 'While your base of operations has this strategic asset, double the quantities of HEARTHKYN SALVAGER equipment in your stash.',
 }
 
+// Requisitions
+
+const theirHearthBurns: Requisition = {
+  name: 'Their Hearth Burns',
+  cost: 1,
+  description:
+    'When a Kin has become especially impassioned or angry or becomes utterly relentless in the pursuit of their goals, it is said of them that Their Hearth Burns. Kin in this state of mind are particularly dogged and dangerous foes.',
+  rule:
+    'Purchase this Requisition after a game in which a friendly HEARTHKYN SALVAGER operative was incapacitated by an enemy operative. That friendly operative is harbouring a grudge against that enemy operative’s faction (make a note of this and the enemy’s Faction keyword in the ‘Notes’ section of its narrative datacard). Each time that friendly operative fights in combat or makes a shooting attack against an enemy operative with that Faction keyword, that enemy operative has one additional Grudge token for that combat or shooting attack.\n' +
+    '\n' +
+    'Once that friendly operative has incapacitated 3 enemy operatives with that Faction keyword (this does not have to be in the same battle), it’s no longer harbouring a grudge. You cannot use this Requisition if a friendly operative is already harbouring a grudge, unless you choose to renounce the grudge, in which case that friendly operative loses D6 experience points and is no longer harbouring a grudge.',
+}
+
+const returnToTheAncestor: Requisition = {
+  name: 'Return To The Ancestor',
+  cost: 1,
+  description:
+    'A key driving force for the Kin is to enrich their Votann with knowledge of the galaxy. The more experience and information a Kin accrues, the more they bring to their Ancestor Core.',
+  rule: 'Purchase this Requisition after a game in which a friendly HEARTHKYN SALVAGER operative was incapacitated and removed from your dataslate. You gain a number of Requisition Points equal to the number of ranks that operative had. For example, if that operative had the Ace rank, you would gain 3RP.',
+}
+
+const petitionTheGuild: Requisition = {
+  name: 'Petition The Guild',
+  cost: 2,
+  description:
+    'The kill team approaches one of the Kin’s many Guilds seeking unusual equipment that will aid them on their missions. The Guild is happy to oblige, provided that the squad offer something of comparable value to them in return.',
+  rule: 'Purchase this Requisition before a game, if your kill team is currently conducting a Spec Op. Randomly determine one Recon or Security Tac Op. Until that Spec Op ends, keep a tally of victory points you score from that Tac Op. When you add the fifth mark to the tally, you can add one item of rare equipment to your stash.',
+}
+
 export const hearthkynSalvager: Faction = {
   id: 2,
   name: 'Hearthkyn Salvager',
@@ -175,5 +205,6 @@ export const hearthkynSalvager: Faction = {
     ionExpediter,
   ],
   strategicAssets: [supplyHold],
+  requisitions: [theirHearthBurns, returnToTheAncestor, petitionTheGuild],
   specOps: []
 }

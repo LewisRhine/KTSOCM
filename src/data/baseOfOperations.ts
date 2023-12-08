@@ -1,16 +1,16 @@
 import { Equipment } from './equipment.ts'
 import { StrategicAssets } from './strategicAssets.ts'
 
-
-
 export interface AvailableStrategicAssets {
   isEquiped: boolean
   strategicAsset: StrategicAssets
 }
+
 export interface AvailableEquipment {
   isEquipped: boolean
   equipment: Equipment
 }
+
 export interface Stash {
   availableEP: number
   availableEquipment: AvailableEquipment[]

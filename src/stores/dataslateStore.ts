@@ -9,6 +9,7 @@ import {
 import { Stash } from '../data/baseOfOperations.ts'
 import useSystemError from './systemError.ts'
 import { Equipment } from '../data/equipment.ts'
+import { Requisition } from '../data/requisition.ts'
 import { isStanderSpecOps, SpecOps } from '../data/specOps.ts'
 
 export interface DataslateState {
@@ -31,6 +32,7 @@ export interface DataslateState {
   saveStash: (stash: Stash) => void
   addToStrategicAssets: (strategicAssets: StrategicAssets) => void
   removeFromStrategicAssets: (strategicAssets: StrategicAssets) => void
+  takeRequisition: (requisition: Requisition) => void
   assignSpecOps: (specOps: SpecOps) => void
   progressCurrentSpecOps: () => void
   degreesCurrentSpecOps: () => void
@@ -270,6 +272,24 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     const newDataslate = { ...selectedDataslate }
     newDataslate.baseOfOperations.strategicAssets.splice(strategicAssetIndex, 1)
     newDataslate.reqPoints++
+
+    saveDataslate(newDataslate, set)
+  },
+
+  takeRequisition: (requisition: Requisition) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+
+    const newDataslate = { ...selectedDataslate }
+
+    const { name } = requisition
+
+    if (name === 'Equipment Drop')
+      newDataslate.baseOfOperations.stash.availableEP += 5
+
+    if (name === 'Asset Acquired') newDataslate.baseOfOperations.assetCapacity++
+
+    newDataslate.reqPoints--
 
     saveDataslate(newDataslate, set)
   },

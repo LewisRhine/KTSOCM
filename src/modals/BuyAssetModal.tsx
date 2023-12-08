@@ -40,14 +40,7 @@ const BuyAssetModal = (props: Props) => {
         <header className="modal-card-head">
           <p className="modal-card-title">
             {' '}
-            Strategic Assets Availabe: {assetCapacity}
-          </p>
-          <button className="delete" onClick={onClose}></button>
-        </header>
-        <header className="modal-card-head">
-          <p className="modal-card-title">
-            {' '}
-            Strategic Assets Selected: {selectedAssetLength}
+            Strategic Assets {selectedAssetLength} of {assetCapacity}
           </p>
           <button className="delete" onClick={onClose}></button>
         </header>

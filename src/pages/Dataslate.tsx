@@ -6,12 +6,15 @@ import BaseOfOperations from '../component/BaseOfOperations.tsx'
 import SpecOpsModal from '../modals/SpecOpsModal.tsx'
 import CurrentSpecOpsCard from '../component/CurrentSpecOpsCard.tsx'
 import Operatives from '../component/Operatives.tsx'
+import RequisitionsModal from '../modals/RequisitionsModal.tsx'
 import PickASpecOpsModal from '../modals/PickASpecOpsModal.tsx'
 
 const Dataslate = () => {
   const { dataslateId } = useParams()
   const { hash } = useLocation()
   const nav = useNavigate()
+
+  const [showRequisitionsModal, setShowRequisitionsModal] = useState(false)
 
   const dataslate = useDataslateStore((state) => state.selectedDataslate)
   const loading = useDataslateStore((state) => state.loading)
@@ -34,6 +37,10 @@ const Dataslate = () => {
 
   return (
     <>
+      <RequisitionsModal
+        showModal={showRequisitionsModal}
+        onClose={() => setShowRequisitionsModal(false)}
+      />
       <SpecOpsModal
         showModal={showSpecOpsModal}
         onClose={() => setShowSpecOpsModal(false)}
@@ -61,8 +68,9 @@ const Dataslate = () => {
               <div className={'box'}>
                 <div className={'columns is-mobile is-vcentered is-centered'}>
                   <div className={'column has-text-centered'}>
-                    <p>Requisition Points</p>
-                    <p className="title is-3">{dataslate.reqPoints}</p>
+                    <a onClick={() => setShowRequisitionsModal(true)}>
+                  <p>Requisition Points</p>
+                    <p className="title is-3">{dataslate.reqPoints}</p></a>
                   </div>
                 </div>
                 <div className={'buttons  has-addons is-centered'}>
