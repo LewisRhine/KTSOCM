@@ -5,6 +5,8 @@ import TeamBackground from '../component/TeamBackground.tsx'
 import BaseOfOperations from '../component/BaseOfOperations.tsx'
 import Operatives from '../component/Operatives.tsx'
 import RequisitionsModal from '../modals/RequisitionsModal.tsx'
+import ConfirmModal from '../modals/ConfirmModal.tsx'
+import { deleteDataslate } from '../data/dataslate.ts'
 
 const Dataslate = () => {
   const { dataslateId } = useParams()
@@ -18,6 +20,8 @@ const Dataslate = () => {
   const getDataslate = useDataslateStore((state) => state.getDataslate)
   const increasePoints = useDataslateStore((state) => state.increasePoints)
   const decreasePoints = useDataslateStore((state) => state.decreasePoints)
+  const [showDeleteDataslateModal, setshowDeleteDataslateModal] =
+    useState(false)
 
   useEffect(() => {
     getDataslate(dataslateId ?? '')
@@ -31,6 +35,12 @@ const Dataslate = () => {
 
   return (
     <>
+      <button
+        className={'button is-small'}
+        onClick={() => setshowDeleteDataslateModal(true)}>
+        Delete Dataslate
+      </button>
+
       <RequisitionsModal
         showModal={showRequisitionsModal}
         onClose={() => setShowRequisitionsModal(false)}
@@ -76,11 +86,20 @@ const Dataslate = () => {
           </ul>
         </div>
         <section className={'section'}>
-          {hash === '#operatives' && <Operatives /> }
+          {hash === '#operatives' && <Operatives />}
           {hash === '#base' && <BaseOfOperations />}
           {hash === '#background' && <TeamBackground />}
         </section>
       </div>
+      <ConfirmModal
+        showModal={showDeleteDataslateModal}
+        message={'Are you sure you want to delete Dataslate'}
+        onConfirm={() => {
+          deleteDataslate(dataslate)
+          setshowDeleteDataslateModal(false)
+        }}
+        onClose={() => setshowDeleteDataslateModal(false)}
+      />
     </>
   )
 }

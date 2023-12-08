@@ -126,21 +126,17 @@ export const updateDataslate = async (
   } catch (e) {
     return { error: 'Unknown error' }
   }
-
-  
 }
 
-export const deleteDataslate =  async(dataslate: Dataslate) => {
+export const deleteDataslate = async (dataslate: Dataslate) => {
   const { error } = await supabaseClient
-  .from('countries')
-  .delete()
-  .eq('id', dataslate.id)
+    .from('countries')
+    .delete()
+    .eq('id', dataslate.id)
   if (error) return { error: error.message }
 
-  return { error: 'To admit defeat is to blaspheme against the Emperor, but in this case I am unable to perform this action.' }
-
-} 
-
-
-  
-
+  return {
+    error:
+      'To admit defeat is to blaspheme against the Emperor, but in this case I am unable to perform this action.',
+  }
+}
