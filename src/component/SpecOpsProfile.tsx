@@ -1,11 +1,11 @@
-import { SpecOps } from '../data/specOps.ts'
+import { StanderSpecOps } from '../data/specOps.ts'
 import OperationProfile from './OperationProfile.tsx'
 import ConfirmModal from '../modals/ConfirmModal.tsx'
 import { useState } from 'react'
 import useDataslateStore from '../stores/dataslateStore.ts'
 
 interface Props {
-  specOps: SpecOps
+  specOps: StanderSpecOps
   isAssigned?: boolean
   showCompletion?: boolean
 }
@@ -24,16 +24,21 @@ const SpecOpsProfile = (props: Props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false)
 
   const assignSpecOps = useDataslateStore((state) => state.assignSpecOps)
-  const completedSpecOps =
-    useDataslateStore((state) => state.selectedDataslate?.completedSpecOps) ??
-    []
+  // Off for beta testing
+  // const completedSpecOps =
+  //   useDataslateStore((state) => state.selectedDataslate?.completedSpecOps) ??
+  //   []
   const checkCommendationCurrentSpecOps = useDataslateStore(
     (state) => state.checkCommendationCurrentSpecOps,
   )
 
   const isComplete = operationOne.complete && operationTwo.complete
+  // Off for beta testing
   // todo this needs to be only if last 3
-  const isInLog = !!completedSpecOps.find((completed) => completed.name === name)
+  const isInLog = false
+  // const isInLog = !!completedSpecOps.find(
+  //   (completed) => completed.name === name,
+  // )
 
   const onConfirm = () => {
     setShowConfirmModal(false)

@@ -9,7 +9,7 @@ import {
 import { Stash } from '../data/baseOfOperations.ts'
 import useSystemError from './systemError.ts'
 import { Equipment } from '../data/equipment.ts'
-import { SpecOps } from '../data/specOps.ts'
+import { isStanderSpecOps, SpecOps } from '../data/specOps.ts'
 
 export interface DataslateState {
   dataslates?: Dataslate[]
@@ -284,14 +284,15 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
       return
     }
 
+    // Off for beta testing
     // check if the user has completed this spec op in the last 3 times
-    const lastTwoCompleted = selectedDataslate.completedSpecOps.slice(-2)
-    if (lastTwoCompleted?.find(({ name }) => specOps.name === name)) {
-      setError(
-        'A kill team cannot be assigned to a completed Spec Op again until it has completed two other Spec Ops',
-      )
-      return
-    }
+    // const lastTwoCompleted = selectedDataslate.completedSpecOps.slice(-2)
+    // if (lastTwoCompleted?.find(({ name }) => specOps.name === name)) {
+    //   setError(
+    //     'A kill team cannot be assigned to a completed Spec Op again until it has completed two other Spec Ops',
+    //   )
+    //   return
+    // }
 
     const newDataslate = { ...selectedDataslate }
     if (newDataslate.currentSpecOps) {
@@ -308,6 +309,8 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     if (!selectedDataslate) return
     const newDataslate = { ...selectedDataslate }
     if (!newDataslate?.currentSpecOps) return
+
+    if (!isStanderSpecOps(newDataslate.currentSpecOps)) return
 
     const { operationOne, operationTwo } = newDataslate.currentSpecOps
     const { gamesNeededToCompleted } = operationOne
@@ -336,6 +339,8 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     if (!selectedDataslate) return
     const newDataslate = { ...selectedDataslate }
     if (!newDataslate?.currentSpecOps) return
+
+    if (!isStanderSpecOps(newDataslate.currentSpecOps)) return
 
     const { operationOne, operationTwo } = newDataslate.currentSpecOps
     const { gamesCompleted } = operationOne
@@ -390,7 +395,7 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     const newDataslate = { ...selectedDataslate }
     if (!newDataslate?.currentSpecOps) return
 
-    newDataslate.completedSpecOps.push(newDataslate.currentSpecOps)
+    newDataslate.completedSpecOps.unshift(newDataslate.currentSpecOps)
     newDataslate.currentSpecOps = undefined
 
     saveDataslate(newDataslate, set)

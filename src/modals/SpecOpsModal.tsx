@@ -2,6 +2,7 @@ import { useState } from 'react'
 import useDataslateStore from '../stores/dataslateStore.ts'
 import ConfirmModal from './ConfirmModal.tsx'
 import SpecOpsProfile from '../component/SpecOpsProfile.tsx'
+import { isStanderSpecOps } from '../data/specOps.ts'
 
 interface Props {
   showModal: boolean
@@ -32,11 +33,7 @@ const SpecOpsModal = (props: Props) => {
     (state) => state.completeCurrentSpecOps,
   )
 
-  if (!currentSpecOps) {
-    onClose()
-
-    return null
-  }
+  if (!currentSpecOps || !isStanderSpecOps(currentSpecOps)) return null
 
   const { name, operationOne, operationTwo } = currentSpecOps
   const isComplete = operationOne.complete && operationTwo.complete

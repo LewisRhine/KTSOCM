@@ -1,5 +1,5 @@
 import useDataslateStore from '../stores/dataslateStore.ts'
-import { genericSpecOps } from '../data/specOps.ts'
+import { genericSpecOps, isStanderSpecOps } from '../data/specOps.ts'
 import SpecOpsProfile from '../component/SpecOpsProfile.tsx'
 
 interface Props {
@@ -15,11 +15,7 @@ const PickASpecOpsModal = (props: Props) => {
     (state) => state.selectedDataslate?.currentSpecOps,
   )
 
-  if (currentSpecOps) {
-    onClose()
-
-    return null
-  }
+  if (currentSpecOps) return null
 
   return (
     <>
@@ -31,9 +27,10 @@ const PickASpecOpsModal = (props: Props) => {
             <button className="delete" onClick={onClose}></button>
           </header>
           <section className="modal-card-body">
-            {genericSpecOps.map((specOps, index) => (
-              <SpecOpsProfile specOps={specOps} key={index} />
-            ))}
+            {genericSpecOps.map((specOps, index) => {
+              if (isStanderSpecOps(specOps))
+                return <SpecOpsProfile specOps={specOps} key={index} />
+            })}
           </section>
           <footer className="modal-card-foot">
             <button className="button is-primary" onClick={onClose}>

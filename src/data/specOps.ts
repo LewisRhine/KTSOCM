@@ -1,10 +1,19 @@
 export interface SpecOps {
   name: string
   description: string
+  commendations: Commendation[]
+}
+
+export interface StanderSpecOps extends SpecOps {
   operationOne: OperationOne
   operationTwo: OperationTwo
-  commendations: Commendation[]
   bonus?: string
+}
+
+export const isStanderSpecOps = (
+  specOps: SpecOps,
+): specOps is StanderSpecOps => {
+  return (specOps as StanderSpecOps).operationOne !== undefined
 }
 
 interface Commendation {
@@ -32,7 +41,7 @@ export const isOperationOne = (
 
 export type OperationTwo = Operation
 
-const elimination: SpecOps = {
+const elimination: StanderSpecOps = {
   name: 'Elimination',
   description:
     'Various rival factions have deployed kill teams in the area. If they gain a foothold, your faction’s war effort will be severely hampered. Your kill team must make a series of pre-emptive strikes and eventually eliminate the enemy’s command structure before their forces gain too much ground.',
@@ -70,7 +79,7 @@ const elimination: SpecOps = {
   ],
 }
 
-const recoverArcheotech: SpecOps = {
+const recoverArcheotech: StanderSpecOps = {
   name: 'Recover Archeotech',
   description:
     'Rumours are circulating of a hidden archeotech artefact, a rare and ancient item of technology that offers great power. Your kill team must search the area, and if the rumours prove to be true, retrieve the archeotech for high command.',
@@ -103,12 +112,38 @@ const recoverArcheotech: SpecOps = {
   ],
 }
 
-export const genericSpecOps: SpecOps[] = [
-  elimination,
-  recoverArcheotech,
-  recoverArcheotech,
-  recoverArcheotech,
-  recoverArcheotech,
-  recoverArcheotech,
-  recoverArcheotech,
-]
+const BetaTestSpecOps: StanderSpecOps = {
+  name: 'Let us test the machine sprite of these ancient systems',
+  description: 'Just a way to test out the app',
+  operationOne: {
+    name: 'See it to the end.',
+    description: 'Hey maybe we can get through this one if we play quick!',
+    rule: "Complete one game, that's it, just complete a game.",
+    complete: false,
+    gamesCompleted: 0,
+    gamesNeededToCompleted: 1,
+  },
+  operationTwo: {
+    name: 'Post game wrap up.',
+    description: 'Ok, now its time to see if the post game stuff works.',
+    rule: 'Complete all post game steps of of a narrative game.',
+    complete: false,
+  },
+  commendations: [
+    {
+      reward: 'You gain one Requisition point.',
+      claimed: false,
+    },
+    {
+      reward:
+        'The friendly operative that your opponent deems to be your VMP earns 5 XP. This is not affected by a passed Casualty test.',
+      claimed: false,
+    },
+    {
+      reward: 'You can add one item of rare equipment to your stash',
+      claimed: false,
+    },
+  ],
+}
+
+export const genericSpecOps: SpecOps[] = [BetaTestSpecOps]

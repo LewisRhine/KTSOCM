@@ -1,6 +1,6 @@
 import useDataslateStore from '../stores/dataslateStore.ts'
 import OperationName from './OperationName.tsx'
-import { SpecOps } from '../data/specOps.ts'
+import { isStanderSpecOps, SpecOps } from '../data/specOps.ts'
 
 interface Props {
   onClick: () => void
@@ -25,23 +25,27 @@ const CurrentSpecOpsCard = (props: Props) => {
       </a>
     )
 
-  const { name, operationOne, operationTwo } = currentSpecOps
+  if (isStanderSpecOps(currentSpecOps)) {
+    const { name, operationOne, operationTwo } = currentSpecOps
 
-  return (
-    <a className={'box'} onClick={onClick}>
-      <p className={'is-size-6 has-text-weight-bold'}>{name}</p>
-      {!operationOne.complete && (
-        <OperationName operation={operationOne} showCompletion={true} />
-      )}
-      {operationOne.complete && !operationTwo.complete && (
-        <OperationName operation={operationTwo} showCompletion={true} />
-      )}
-      {operationOne.complete && operationTwo.complete && (
-        <p className={'is-size-6 has-text-weight-bold'}>Complete!</p>
-      )}
-      <SpecOpsLog completedSpecOps={completedSpecOps} />
-    </a>
-  )
+    return (
+      <a className={'box'} onClick={onClick}>
+        <p className={'is-size-6 has-text-weight-bold'}>{name}</p>
+        {!operationOne.complete && (
+          <OperationName operation={operationOne} showCompletion={true} />
+        )}
+        {operationOne.complete && !operationTwo.complete && (
+          <OperationName operation={operationTwo} showCompletion={true} />
+        )}
+        {operationOne.complete && operationTwo.complete && (
+          <p className={'is-size-6 has-text-weight-bold'}>Complete!</p>
+        )}
+        <SpecOpsLog completedSpecOps={completedSpecOps} />
+      </a>
+    )
+  }
+
+  return
 }
 
 interface SpecOpsLogProps {
