@@ -1,6 +1,7 @@
 import { Faction } from './faction.ts'
 import { BaseOfOperations } from './baseOfOperations.ts'
 import supabaseClient from '../superbaseClient.ts'
+import { SpecOps } from './specOps.ts'
 
 export interface Dataslate {
   id: number
@@ -8,7 +9,8 @@ export interface Dataslate {
   teamName: string
   faction: Faction
   reqPoints: number
-  specOpsLog: number[]
+  currentSpecOps?: SpecOps
+  completedSpecOps: SpecOps[]
   baseOfOperations: BaseOfOperations
   history?: string
   notes?: string
@@ -46,7 +48,7 @@ export const postDataslate = async (
     baseOfOperations: newBaseOfOperations,
     id: 0,
     reqPoints: 4,
-    specOpsLog: [],
+    completedSpecOps: [],
   }
 
   try {
