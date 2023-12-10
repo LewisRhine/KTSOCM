@@ -130,7 +130,7 @@ export const updateDataslate = async (
 
 export const deleteDataslate = async (dataslate: Dataslate) => {
   const { error } = await supabaseClient
-    .from('countries')
+    .from('dataslate_json')
     .delete()
     .eq('id', dataslate.id)
   if (error) return { error: error.message }
