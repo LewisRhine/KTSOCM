@@ -97,7 +97,6 @@ const Dataslate = () => {
         onConfirm={() => {
           console.log(deleteDataslate(dataslate))
           setshowDeleteDataslateModal(false)
-          window.location.href = '/'
         }}
         onClose={() => setshowDeleteDataslateModal(false)}
       />

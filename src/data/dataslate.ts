@@ -129,14 +129,18 @@ export const updateDataslate = async (
 }
 
 export const deleteDataslate = async (dataslate: Dataslate) => {
-  const { error } = await supabaseClient
-    .from('dataslate_json')
-    .delete()
-    .eq('id', dataslate.id)
-  if (error) return { error: error.message }
+  try {
+    const { error } = await supabaseClient
+      .from('dataslate_json')
+      .delete()
+      .eq('id', dataslate.teamName)
+    window.location.href = '/'
 
-  return {
-    error:
-      'To admit defeat is to blaspheme against the Emperor, but in this case I am unable to perform this action.',
+    if (error) return { error: error.message }
+  } catch (e) {
+    return {
+      error:
+        'To admit defeat is to blaspheme against the Emperor, but in this case I am unable to perform this action.',
+    }
   }
 }
