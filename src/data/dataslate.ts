@@ -128,19 +128,27 @@ export const updateDataslate = async (
   }
 }
 
-export const deleteDataslate = async (dataslate: Dataslate) => {
-  try {
-    const { error } = await supabaseClient
-      .from('dataslate_json')
-      .delete()
-      .eq('id', dataslate.teamName)
-    window.location.href = '/'
+// found this here  https://github.com/supabase/supabase-js/issues/32 under Future DX
 
-    if (error) return { error: error.message }
-  } catch (e) {
-    return {
-      error:
-        'To admit defeat is to blaspheme against the Emperor, but in this case I am unable to perform this action.',
-    }
+export const deleteDataslate = async (dataslate: Dataslate) => {
+  const { error } = await supabaseClient
+    .from('dataslate_json')
+    .delete()
+    .eq('id', dataslate.teamName)
+
+  if (error) {
+    alert(error.message)
+    return // abort
   }
 }
+
+// window.location.href = '/'
+
+//     if (error) return { error: error.message }
+//   } catch (e) {
+//     return {
+//       error:
+//         'to admit defeat is to blaspheme against the Emperor, but in this case I am unavble to perform this action',
+//     }
+//   }
+// }

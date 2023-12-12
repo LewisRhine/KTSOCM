@@ -95,7 +95,7 @@ const Dataslate = () => {
         showModal={showDeleteDataslateModal}
         message={'Are you sure you want to delete Dataslate'}
         onConfirm={() => {
-          console.log(deleteDataslate(dataslate))
+          console.log('log: ' + deleteDataslate(dataslate))
           setshowDeleteDataslateModal(false)
         }}
         onClose={() => setshowDeleteDataslateModal(false)}
