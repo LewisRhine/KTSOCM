@@ -139,7 +139,7 @@ export const deleteDataslate = async (dataslate: Dataslate) => {
     .eq('id', dataslate.teamName)
   if (error?.code) {
     setError(
-      'to admit defeat is to blaspheme against the Emperor, but in this case I am unavble to perform this action',
+      'To admit defeat is to blaspheme against the Emperor, but in this case I am unable to perform this action',
     )
     // return {
     //   error:
