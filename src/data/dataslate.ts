@@ -2,6 +2,7 @@ import { Faction } from './faction.ts'
 import { BaseOfOperations } from './baseOfOperations.ts'
 import supabaseClient from '../superbaseClient.ts'
 import useSystemError from '../stores/systemError.ts'
+import { SpecOps } from './specOps.ts'
 export interface Dataslate {
   id: number
   userId: string
