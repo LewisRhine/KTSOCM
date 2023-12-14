@@ -206,4 +206,5 @@ export const hearthkynSalvager: Faction = {
   ],
   strategicAssets: [supplyHold],
   requisitions: [theirHearthBurns, returnToTheAncestor, petitionTheGuild],
+  specOps: []
 }
