@@ -7,7 +7,6 @@ import Operatives from '../component/Operatives.tsx'
 import RequisitionsModal from '../modals/RequisitionsModal.tsx'
 import ConfirmModal from '../modals/ConfirmModal.tsx'
 import { deleteDataslate } from '../data/dataslate.ts'
-import PickASpecOpsModal from '../modals/PickASpecOpsModal.tsx'
 
 const Dataslate = () => {
   const { dataslateId } = useParams()
