@@ -20,7 +20,7 @@ export interface DataslateState {
 
   getDataslates: () => Promise<void>
   getDataslate: (dataslateId: string) => Promise<void>
-  deleteDataslate: (dataslateId: number) => void
+  deleteDataslate: (dataslate: Dataslate) => void
   saveHistory: (newHistory: string) => void
   saveQuirks: (newQuirks: string) => void
   saveNotes: (newNotes: string) => void
@@ -94,8 +94,11 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     if (data) set({ selectedDataslate: data })
   },
 
-  deleteDataslate: async (dataslateId) => {
-    set({ loading: true })
+  deleteDataslate: async (dataslate) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+
+    deleteDataslate(dataslate)
   },
 
   saveHistory: (newHistory) => {
