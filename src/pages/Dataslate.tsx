@@ -8,7 +8,7 @@ import CurrentSpecOpsCard from '../component/CurrentSpecOpsCard.tsx'
 import Operatives from '../component/Operatives.tsx'
 import RequisitionsModal from '../modals/RequisitionsModal.tsx'
 import ConfirmModal from '../modals/ConfirmModal.tsx'
-import { deleteDataslate } from '../data/dataslate.ts'
+// import { deleteDataslate } from '../data/dataslate.ts'
 import PickASpecOpsModal from '../modals/PickASpecOpsModal.tsx'
 
 const Dataslate = () => {
@@ -21,6 +21,7 @@ const Dataslate = () => {
   const dataslate = useDataslateStore((state) => state.selectedDataslate)
   const loading = useDataslateStore((state) => state.loading)
   const getDataslate = useDataslateStore((state) => state.getDataslate)
+  const deleteDataslate = useDataslateStore((state) => state.deleteDataslate)
   const increasePoints = useDataslateStore((state) => state.increasePoints)
   const decreasePoints = useDataslateStore((state) => state.decreasePoints)
   const [showDeleteDataslateModal, setshowDeleteDataslateModal] =
@@ -79,8 +80,9 @@ const Dataslate = () => {
                 <div className={'columns is-mobile is-vcentered is-centered'}>
                   <div className={'column has-text-centered'}>
                     <a onClick={() => setShowRequisitionsModal(true)}>
-                  <p>Requisition Points</p>
-                    <p className="title is-3">{dataslate.reqPoints}</p></a>
+                      <p>Requisition Points</p>
+                      <p className="title is-3">{dataslate.reqPoints}</p>
+                    </a>
                   </div>
                 </div>
                 <div className={'buttons  has-addons is-centered'}>
@@ -118,7 +120,7 @@ const Dataslate = () => {
         showModal={showDeleteDataslateModal}
         message={'Are you sure you want to delete Dataslate'}
         onConfirm={() => {
-          console.log('log: ' + deleteDataslate(dataslate))
+          deleteDataslate(dataslate.id)
           setshowDeleteDataslateModal(false)
         }}
         onClose={() => setshowDeleteDataslateModal(false)}
