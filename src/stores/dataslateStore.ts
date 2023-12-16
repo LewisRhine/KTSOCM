@@ -1,3 +1,4 @@
+import { deleteDataslate } from './../data/dataslate'
 import { StrategicAssets } from './../data/strategicAssets'
 import { create } from 'zustand'
 import {
@@ -19,6 +20,7 @@ export interface DataslateState {
 
   getDataslates: () => Promise<void>
   getDataslate: (dataslateId: string) => Promise<void>
+  deleteDataslate: (dataslate: Dataslate) => void
   saveHistory: (newHistory: string) => void
   saveQuirks: (newQuirks: string) => void
   saveNotes: (newNotes: string) => void
@@ -90,6 +92,13 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     set({ loading: false })
     if (error) setError(error)
     if (data) set({ selectedDataslate: data })
+  },
+
+  deleteDataslate: async (dataslate) => {
+    const selectedDataslate = get().selectedDataslate
+    if (!selectedDataslate) return
+
+    deleteDataslate(dataslate)
   },
 
   saveHistory: (newHistory) => {

@@ -1,6 +1,7 @@
 import { Faction } from './faction.ts'
 import { BaseOfOperations } from './baseOfOperations.ts'
 import supabaseClient from '../superbaseClient.ts'
+import useSystemError from '../stores/systemError.ts'
 import { SpecOps } from './specOps.ts'
 
 export interface Dataslate {
@@ -22,6 +23,8 @@ interface ApiResponse<Data> {
   data?: Data
   error?: string | 'Unknown error'
 }
+
+const setError = useSystemError.getState().setError
 
 export const postDataslate = async (
   userId: string,
@@ -127,5 +130,19 @@ export const updateDataslate = async (
     return { data: data.json }
   } catch (e) {
     return { error: 'Unknown error' }
+  }
+}
+
+export const deleteDataslate = async (dataslate: Dataslate) => {
+  const { error } = await supabaseClient
+    .from('dataslate_json')
+    .delete()
+    .eq('id', dataslate.id)
+  if (error?.code) {
+    setError(
+      'To admit defeat is to blaspheme against the Emperor, but in this case I am unable to perform this action',
+    )
+  } else {
+    window.location.href = '/'
   }
 }
