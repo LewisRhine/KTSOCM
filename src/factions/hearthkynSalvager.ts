@@ -43,8 +43,8 @@ export const climbingEquipment: Gear = {
   description: 'The operative gains the following ability for the battle:',
   cost: 1,
   ability:
-    'Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3 it travels are counted as  for that climb.\n' +
-    'This operative does not need to be within  of a physical and climbable part of a terrain feature in order to climb it. Each time this operative drops, the intended location can be any vertical distance from the level it occupies.\n' +
+    'Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3 (2 inches) it travels are counted as 2 inches for that climb.\n' +
+    'This operative does not need to be within 1 inch of a physical and climbable part of a terrain feature in order to climb it. Each time this operative drops, the intended location can be any vertical distance from the level it occupies.\n' +
     'Each time this operative drops, it counts any vertical distance it travels as half for that drop.',
   rare: false,
 }
@@ -56,7 +56,7 @@ export const weavefieldCrest: Gear = {
     'THEYN operative only. The operative gains the following ability for the battle:',
   cost: 3,
   ability:
-    'While a friendly HEARTHKYN SALVAGER operative is within  of this operative, that operative has a 4+ invulnerable save.',
+    'While a friendly HEARTHKYN SALVAGER operative is within 3 inches of this operative, that operative has a 4+ invulnerable save.',
   rare: false,
 }
 
@@ -66,7 +66,7 @@ export const excavationTool: Gear = {
   description: 'The operative gains the following ability for the battle:',
   cost: 2,
   ability:
-    'At the end of the Set Up Barricades step, place one of your Clearance tokens within  of a part of a terrain feature with the Traversable trait and more than  from your opponent’s drop zone. Until the end of the battle, friendly operatives do not have to traverse that terrain feature; they can move through it as if it were not there, so long as they do so within  of that token. Note that they cannot finish the move on that terrain feature. You can select this item of equipment no more than three times for the battle.',
+    'At the end of the Set Up Barricades step, place one of your Clearance tokens within 1 inch of a part of a terrain feature with the Traversable trait and more than 6 inces from your opponent’s drop zone. Until the end of the battle, friendly operatives do not have to traverse that terrain feature; they can move through it as if it were not there, so long as they do so within 1 inch of that token. Note that they cannot finish the move on that terrain feature. You can select this item of equipment no more than three times for the battle.',
   rare: false,
 }
 
@@ -117,7 +117,7 @@ export const rightOfClaim: Gear = {
   description: 'The operative gains the following ability for the battle:',
   cost: 3,
   ability:
-    'While this operative is within  of an objective marker, add 1 to its Defence characteristic.',
+    'While this operative is within 2 inches of an objective marker, add 1 to its Defence characteristic.',
   rare: true,
 }
 
@@ -129,7 +129,7 @@ export const gravLiftDevice: Gear = {
   cost: 2,
   ap: 1,
   ability:
-    'Place a Grav-wave token within  of this operative. Until the end of the battle, each time a friendly HEARTHKYN SALVAGER operative moves within  of that token, it gains the FLY keyword until the end of its activation.',
+    'Place a Grav-wave token within 6 inches of this operative. Until the end of the battle, each time a friendly HEARTHKYN SALVAGER operative moves within 1 inch of that token, it gains the FLY keyword until the end of its activation.',
   rare: true,
 }
 
@@ -150,6 +150,20 @@ export const supplyHold: StrategicAssets = {
   description:
     'The Kin expect to recover a great deal of technology and resources on their missions, and so have established a sizeable supply hold to secure all of it.',
   rule: 'While your base of operations has this strategic asset, double the quantities of HEARTHKYN SALVAGER equipment in your stash.',
+}
+
+export const enhancedPanSpectralScanner: StrategicAssets = {
+  name: 'Enhanced Pan Spectral Scanner',
+  description:
+    'This larger version of the handheld pan spectral scanner can survey a more substantial expanse of ground, enabling the Kin to better assess the nature of the terrain around them and discover the optimal routes of travel through a space hulk.',
+  rule: 'In the Select Drop Zone step, after rolling off to determine who decides Attacker and Defender, you can re-roll your dice.',
+}
+
+export const excavationMachinery: StrategicAssets = {
+  name: 'Excavation Machinery',
+  description:
+    'Though the Hearthkyn Salvagers’ primary purpose is not to strip a space hulk or wreck of all its valuables, they have the operational remit and equipment to pave the way for those completing that task. Heavy excavation machinery can help them clear paths or move priority salvage, and can even serve as barricades if need be.',
+  rule: 'At the end of the Scouting step, if you are the Defender or selected the Fortify option, you can move one terrain feature within 3 inches of your drop zone that does not include any parts with the Heavy trait up to 3 inches.',
 }
 
 // Requisitions
@@ -206,5 +220,5 @@ export const hearthkynSalvager: Faction = {
   ],
   strategicAssets: [supplyHold],
   requisitions: [theirHearthBurns, returnToTheAncestor, petitionTheGuild],
-  specOps: []
+  specOps: [],
 }
