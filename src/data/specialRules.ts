@@ -1,4 +1,4 @@
-type Measurement = 'C' | 'T' | 'S' | 'O'
+type Measurement = 'C' | 'T' | 'S' | 'P'
 
 export interface SpecialRules {
   name: string
@@ -18,6 +18,11 @@ export const indirect: SpecialRules = {
 export const limited: SpecialRules = {
   name: 'Limited',
   rule: 'This weapon can only be selected for use once per battle. If the weapon has a special rule that would allow it to make more than one shooting attack for an action (e.g. Blast), make each of those attacks as normal.',
+}
+
+export const stun: SpecialRules = {
+  name: 'Stun',
+  rule: 'Each time a friendly operative makes a shooting attack with this weapon, in the Roll Attack Dice step of that shooting attack, if you retain any critical hits, subtract 1 from the target’s APL. Each time a friendly operative fights in combat with this weapon, in the Resolve Successful Hits step of that combat: The first time you strike with a critical hit, select one of your opponent’s normal hits from that combat to be discarded The second time you strike with a critical hit, subtract 1 from the target’s APL.',
 }
 
 export const rng = (x: Measurement): SpecialRules => ({
