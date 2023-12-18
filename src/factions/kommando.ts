@@ -1,3 +1,4 @@
+import { Requisition } from './../data/requisition'
 import { Faction } from '../data/faction.ts'
 import { Gear, Weapon } from '../data/equipment.ts'
 import {
@@ -278,4 +279,30 @@ export const explosivesStash: StrategicAssets = {
     )} of an enemy operative.` +
     '/n' +
     'Each time a friendly operative performs a Blow It Up!, Sabotage or Lay Explosives action, that terrain feature has been wrecked. While a terrain feature is wrecked, any parts of that terrain feature with the Heavy trait are treated as Light terrain instead.',
+}
+
+//REQUISITIONS
+
+export const orkyConstitution: Requisition = {
+  name: 'Orky Constitution',
+  cost: 1,
+  description:
+    'Orks are remarkably tough, capable of shrugging off most wounds.',
+  rule: 'Purchase this Requisition after taking a Casualty test, Recovery test, or determining a Battle Scar for a friendly KOMMANDO operative. You can re-roll that test, or roll again when determining that Battle Scar.',
+}
+
+export const grabDaLoot: Requisition = {
+  name: 'Grab Da Loot,',
+  cost: 0,
+  description:
+    'Many Orks pick battlefields clean of anything they perceive to be valuable, whether that be weapons, armour or anything shiny that catches their eye.',
+  rule: 'Purchase this Requisition after a game in which you scored maximum victory points from the mission objectives. Gain D3 RPs. You can only use this Requisition once after each battle.',
+}
+
+export const fearsomeReputation: Requisition = {
+  name: 'Fearsome Reputation',
+  cost: 1,
+  description:
+    'Orks are brutal creatures who thrive on violence. For them might makes right, and Orks who can kill a lot of enemies swiftly earn a reputation amongst their tribes.',
+  rule: 'Purchase this Requisition in the Update Dataslates step of the mission sequence, when updating experience for a friendly KOMMANDO operative. If that operative incapacitated three or more enemy operatives during the battle, or incapacitated two or more enemy operatives including an enemy LEADER in the battle, it gains 3 XP. This is not affected by a passed Casualty test. You can only use this Requisition once after each battle.',
 }
