@@ -1,5 +1,6 @@
 import { Weapon } from '../data/equipment.ts'
 import useDataslateStore from '../stores/dataslateStore.ts'
+import ShapeInjector from './ShapeInjector.tsx'
 
 interface Props {
   weapon: Weapon
@@ -90,16 +91,24 @@ const WeaponProfile = (props: Props) => {
             <td>{`${normalDamage}/${criticalDamage}`}</td>
             <td>
               {specialRules.map(({ name }, index) => (
-                <span className={'subtitle is-6'} key={index}>{`${name}${
-                  index !== specialRules.length - 1 ? ', ' : ''
-                }`}</span>
+                <span className={'subtitle is-6'} key={index}>
+                  <ShapeInjector
+                    text={`${name}${
+                      index !== specialRules.length - 1 ? ', ' : ''
+                    }`}
+                  />
+                </span>
               ))}
             </td>
             <td>
               {criticalHitRules.map(({ name }, index) => (
-                <span className={'subtitle is-6'} key={index}>{`${name}${
-                  index !== criticalHitRules.length - 1 ? ', ' : ''
-                }`}</span>
+                <span className={'subtitle is-6'} key={index}>
+                  <ShapeInjector
+                    text={`${name}${
+                      index !== criticalHitRules.length - 1 ? ', ' : ''
+                    }`}
+                  />
+                </span>
               ))}
             </td>
           </tr>

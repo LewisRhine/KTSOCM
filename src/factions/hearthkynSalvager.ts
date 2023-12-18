@@ -18,7 +18,7 @@ export const graviticConcussionGrenade: Weapon = {
   criticalDamage: 4,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('O'), blast('C'), indirect, limited],
+  specialRules: [rng('6"'), blast('2"'), indirect, limited],
 }
 
 export const plasmaKnife: Weapon = {
@@ -43,7 +43,7 @@ export const climbingEquipment: Gear = {
   description: 'The operative gains the following ability for the battle:',
   cost: 1,
   ability:
-    'Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3 it travels are counted as  for that climb.\n' +
+    'Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3" it travels are counted as  for that climb.\n' +
     'This operative does not need to be within  of a physical and climbable part of a terrain feature in order to climb it. Each time this operative drops, the intended location can be any vertical distance from the level it occupies.\n' +
     'Each time this operative drops, it counts any vertical distance it travels as half for that drop.',
   rare: false,
