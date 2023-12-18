@@ -160,12 +160,72 @@ export const climbingRope: Gear = {
 }
 
 // Rare Equipment
-export const aGrudgeDeclared: Gear = {
+export const shinySlugz: Gear = {
   id: 0,
-  name: '',
+  name: 'Shiny Slugz',
   description: '',
-  cost: 3,
-  ability: '',
+  cost: 2,
+  ability:
+    'Select a slugga, dakka shoota or scoped big shoota the operative is equipped with. That weapon gains the AP1 special rule for the battle. If you selected a slugga, this rare equipment costs 2EP; otherwise, it costs 3EP.',
+  rare: true,
+}
+
+export const worksEyeball: Gear = {
+  id: 0,
+  name: 'Work’S Eyeball',
+  description: '',
+  cost: 1,
+  ability: `Select a slugga, dakka shoota, scoped big shoota or rokkit launcha the operative is equipped with. Improve the Ballistic Skill characteristic of that weapon by 1 for the battle. If you selected a slugga, that weapon loses the Rng ${rng(
+    'P',
+  )} special rule for the battle and this rare equipment costs 1EP; otherwise, it costs 3EP.`,
+  rare: true,
+}
+export const devilsWhispa: Gear = {
+  id: 0,
+  name: 'Devil’S Whispa',
+  description: '',
+  cost: 2,
+  ability:
+    'A slugga the operative is equipped with gains the following improvements for the battle:' +
+    '/n' +
+    'Lethal 4+ special rule' +
+    '/n' +
+    'Silent special rule',
+  rare: true,
+}
+
+export const skragasChoppa: Gear = {
+  id: 0,
+  name: 'Skraga’S Choppa',
+  description: '',
+  cost: 2,
+  ability:
+    'A choppa, big choppa or twin choppas the operative is equipped with gains the Lethal 5+ special rule for the battle.',
+  rare: true,
+}
+
+export const fungalbrew: Gear = {
+  id: 0,
+  name: 'Fungal Brew',
+  description: '',
+  cost: 2,
+  ability:
+    'The operative gains the following abilities for the battle:' +
+    '/n' +
+    'Before the battle, remove one Battle Scar the operative has.' +
+    '/n' +
+    'During the battle, the operative cannot be injured.' +
+    '/n' +
+    'After the battle, the operative passes its Casualty test.',
+  rare: true,
+}
+
+export const kleverKap: Gear = {
+  id: 0,
+  name: 'Klever Kap',
+  description: '',
+  cost: 2,
+  ability: 'Gain 1CP for the battle.',
   rare: true,
 }
 
