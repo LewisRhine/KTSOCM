@@ -34,3 +34,29 @@ export const lethal = (x: number): SpecialRules => ({
   name: `Lethal ${x}+`,
   rule: `Each time a friendly operative fights in combat or makes a shooting attack with this weapon, in the Roll Attack Dice step of that combat or shooting attack, your attack dice results of equal to or greater than ${x}+ that are successful hits are critical hits.`,
 })
+
+export const ap = (x: number): SpecialRules => ({
+  name: `AP${x}+`,
+  rule: `Armour Penetration. Each time a friendly operative makes a shooting attack with this weapon, subtract ${x} from the Defence of the target for that shooting attack. If two different APx special rules would be in effect for a shooting attack, they are not cumulative - the attacker selects which one to use.`,
+})
+
+export const balanced: SpecialRules = {
+  name: 'Balanced',
+  rule: 'Each time a friendly operative fights in combat or makes a shooting attack with this weapon, in the Roll Attack Dice step of that combat or shooting attack, you can re-roll one of your attack dice.'
+}
+
+// Critical Hit Rules
+
+//todo this need to have bullet points
+export const stun: SpecialRules = {
+  name: 'Stun',
+  rule:
+    'Each time a friendly operative makes a shooting attack with this weapon, in the Roll Attack Dice step of that shooting attack, if you retain any critical hits, subtract 1 from the target’s APL. Each time a friendly operative fights in combat with this weapon, in the Resolve Successful Hits step of that combat:\n' +
+    'The first time you strike with a critical hit, select one of your opponent’s normal hits from that combat to be discarded\n' +
+    'The second time you strike with a critical hit, subtract 1 from the target’s APL.',
+}
+
+export const rending: SpecialRules = {
+  name: 'Rending',
+  rule: 'Each time a friendly operative fights in combat or makes a shooting attack with this weapon, in the Roll Attack Dice step of that combat or shooting attack, if you retain any critical hits you can retain one normal hit as a critical hit.'
+}
