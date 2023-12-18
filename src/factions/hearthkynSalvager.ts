@@ -18,7 +18,7 @@ export const graviticConcussionGrenade: Weapon = {
   criticalDamage: 4,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('O'), blast('C'), indirect, limited],
+  specialRules: [rng('P'), blast('C'), indirect, limited],
 }
 
 export const plasmaKnife: Weapon = {
@@ -43,8 +43,14 @@ export const climbingEquipment: Gear = {
   description: 'The operative gains the following ability for the battle:',
   cost: 1,
   ability:
-    'Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3 (2 inches) it travels are counted as 2 inches for that climb.\n' +
-    'This operative does not need to be within 1 inch of a physical and climbable part of a terrain feature in order to climb it. Each time this operative drops, the intended location can be any vertical distance from the level it occupies.\n' +
+    `Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3 ${rng(
+      'C',
+    )} it travels are counted as ${rng('C')} for that climb.` +
+    '\n' +
+    `This operative does not need to be within ${rng(
+      'T',
+    )} of a physical and climbable part of a terrain feature in order to climb it. Each time this operative drops, the intended location can be any vertical distance from the level it occupies.` +
+    '\n' +
     'Each time this operative drops, it counts any vertical distance it travels as half for that drop.',
   rare: false,
 }
@@ -55,8 +61,9 @@ export const weavefieldCrest: Gear = {
   description:
     'THEYN operative only. The operative gains the following ability for the battle:',
   cost: 3,
-  ability:
-    'While a friendly HEARTHKYN SALVAGER operative is within 3 inches of this operative, that operative has a 4+ invulnerable save.',
+  ability: `While a friendly HEARTHKYN SALVAGER operative is within ${rng(
+    'S',
+  )} of this operative, that operative has a 4+ invulnerable save.`,
   rare: false,
 }
 
@@ -65,8 +72,11 @@ export const excavationTool: Gear = {
   name: 'Excavation Tool',
   description: 'The operative gains the following ability for the battle:',
   cost: 2,
-  ability:
-    'At the end of the Set Up Barricades step, place one of your Clearance tokens within 1 inch of a part of a terrain feature with the Traversable trait and more than 6 inces from your opponent’s drop zone. Until the end of the battle, friendly operatives do not have to traverse that terrain feature; they can move through it as if it were not there, so long as they do so within 1 inch of that token. Note that they cannot finish the move on that terrain feature. You can select this item of equipment no more than three times for the battle.',
+  ability: `At the end of the Set Up Barricades step, place one of your Clearance tokens within ${rng(
+    'T',
+  )} of a part of a terrain feature with the Traversable trait and more than 6 inces from your opponent’s drop zone. Until the end of the battle, friendly operatives do not have to traverse that terrain feature; they can move through it as if it were not there, so long as they do so within ${rng(
+    'T',
+  )} of that token. Note that they cannot finish the move on that terrain feature. You can select this item of equipment no more than three times for the battle.`,
   rare: false,
 }
 
@@ -116,8 +126,9 @@ export const rightOfClaim: Gear = {
   name: 'Right of Claim',
   description: 'The operative gains the following ability for the battle:',
   cost: 3,
-  ability:
-    'While this operative is within 2 inches of an objective marker, add 1 to its Defence characteristic.',
+  ability: `While this operative is within ${rng(
+    'C',
+  )} of an objective marker, add 1 to its Defence characteristic.`,
   rare: true,
 }
 
@@ -128,8 +139,11 @@ export const gravLiftDevice: Gear = {
     'The operative can perform the following action once during the battle:',
   cost: 2,
   ap: 1,
-  ability:
-    'Place a Grav-wave token within 6 inches of this operative. Until the end of the battle, each time a friendly HEARTHKYN SALVAGER operative moves within 1 inch of that token, it gains the FLY keyword until the end of its activation.',
+  ability: `Place a Grav-wave token within ${rng(
+    'P',
+  )} of this operative. Until the end of the battle, each time a friendly HEARTHKYN SALVAGER operative moves within ${rng(
+    'T',
+  )} of that token, it gains the FLY keyword until the end of its activation.`,
   rare: true,
 }
 
@@ -163,7 +177,11 @@ export const excavationMachinery: StrategicAssets = {
   name: 'Excavation Machinery',
   description:
     'Though the Hearthkyn Salvagers’ primary purpose is not to strip a space hulk or wreck of all its valuables, they have the operational remit and equipment to pave the way for those completing that task. Heavy excavation machinery can help them clear paths or move priority salvage, and can even serve as barricades if need be.',
-  rule: 'At the end of the Scouting step, if you are the Defender or selected the Fortify option, you can move one terrain feature within 3 inches of your drop zone that does not include any parts with the Heavy trait up to 3 inches.',
+  rule: `At the end of the Scouting step, if you are the Defender or selected the Fortify option, you can move one terrain feature within ${rng(
+    'T',
+  )} of your drop zone that does not include any parts with the Heavy trait up to ${rng(
+    'T',
+  )}.`,
 }
 
 // Requisitions
@@ -174,7 +192,8 @@ const theirHearthBurns: Requisition = {
   description:
     'When a Kin has become especially impassioned or angry or becomes utterly relentless in the pursuit of their goals, it is said of them that Their Hearth Burns. Kin in this state of mind are particularly dogged and dangerous foes.',
   rule:
-    'Purchase this Requisition after a game in which a friendly HEARTHKYN SALVAGER operative was incapacitated by an enemy operative. That friendly operative is harbouring a grudge against that enemy operative’s faction (make a note of this and the enemy’s Faction keyword in the ‘Notes’ section of its narrative datacard). Each time that friendly operative fights in combat or makes a shooting attack against an enemy operative with that Faction keyword, that enemy operative has one additional Grudge token for that combat or shooting attack.\n' +
+    'Purchase this Requisition after a game in which a friendly HEARTHKYN SALVAGER operative was incapacitated by an enemy operative. That friendly operative is harbouring a grudge against that enemy operative’s faction (make a note of this and the enemy’s Faction keyword in the ‘Notes’ section of its narrative datacard). Each time that friendly operative fights in combat or makes a shooting attack against an enemy operative with that Faction keyword, that enemy operative has one additional Grudge token for that combat or shooting attack.' +
+    '\n' +
     '\n' +
     'Once that friendly operative has incapacitated 3 enemy operatives with that Faction keyword (this does not have to be in the same battle), it’s no longer harbouring a grudge. You cannot use this Requisition if a friendly operative is already harbouring a grudge, unless you choose to renounce the grudge, in which case that friendly operative loses D6 experience points and is no longer harbouring a grudge.',
 }
