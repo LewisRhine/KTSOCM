@@ -231,8 +231,51 @@ export const kleverKap: Gear = {
 
 //Strategic Assets
 
-export const supplyHold: StrategicAssets = {
-  name: '',
-  description: '',
-  rule: '',
+export const territorialGlyphs: StrategicAssets = {
+  name: 'Territorial Glyphs',
+  description:
+    'The Orks mark their territory and honour Gork and Mork with crude glyphs, splatters of paint and battlefield trophies.',
+  rule:
+    `At the start of the Set Up Operatives step of the mission sequence, you can place a Glyph Token within ${rng(
+      'P',
+    )} of your drop zone. If both players have this asset, the Attacker sets up their token first.` +
+    '/n' +
+    `Unless they are being set up wholly within their drop zone, enemy operatives cannot be set up within ${rng(
+      'P',
+    )} of that token.` +
+    '/n' +
+    `While a friendly KOMMANDO operative is within ${rng(
+      'P',
+    )} of that token, each time it fights in a combat in the Roll Attack Dice step of that combat, you can re-roll one of your attack dice.`,
+}
+
+export const lootHoard: StrategicAssets = {
+  name: 'Loot Hoard',
+  description: `The Orks of this kill team have piled their bases high with loot they've taken from all manner of battlefields. This gives them great advantage when going to war, as they can take the weapon best suited for the mission - which is very often the biggest they can grab.`,
+  rule:
+    'In the Select Equipment step of each mission sequence, select one of the following:' +
+    '/n' +
+    'During this battle, friendly KOMMANDO operatives can perform Stun Grenade and Smoke Grenade actions twice, rather than once.' +
+    '/n' +
+    'During this battle, stikkbombs and dynamite that friendly KOMMANDO operatives are equipped with can be selected for use twice as a result of the Limited special rule, instead of only once.' +
+    '/n' +
+    'For this game, you can equip friendly KOMMANDO operatives with sluggas and choppas for 1EP, rather than 2EP.',
+}
+
+export const explosivesStash: StrategicAssets = {
+  name: 'Explosives Stash',
+  description:
+    'To Orks, explosions are as enjoyable as they are effective. The kill team has a vast collection of explosives in its base of operations and goes on every mission laden with them.' +
+    '/n' +
+    'Friendly KOMMANDO operatives (excluding BOMB SQUIG operatives) can perform the following action:',
+  rule:
+    `LAY EXPLOSIVES 2AP` +
+    '/n' +
+    `An operative can perform this action while within ${rng(
+      'T',
+    )} of a terrain feature that includes any parts with the Heavy trait. An operative cannot perform this action if it is Visible to and within ${rng(
+      'C',
+    )} of an enemy operative.` +
+    '/n' +
+    'Each time a friendly operative performs a Blow It Up!, Sabotage or Lay Explosives action, that terrain feature has been wrecked. While a terrain feature is wrecked, any parts of that terrain feature with the Heavy trait are treated as Light terrain instead.',
 }
