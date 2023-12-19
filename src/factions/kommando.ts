@@ -1,4 +1,3 @@
-import { Requisition } from './../data/requisition'
 import { Faction } from '../data/faction.ts'
 import { Gear, Weapon } from '../data/equipment.ts'
 import {
@@ -288,4 +287,35 @@ export const fearsomeReputation: Requisition = {
   description:
     'Orks are brutal creatures who thrive on violence. For them might makes right, and Orks who can kill a lot of enemies swiftly earn a reputation amongst their tribes.',
   rule: 'Purchase this Requisition in the Update Dataslates step of the mission sequence, when updating experience for a friendly KOMMANDO operative. If that operative incapacitated three or more enemy operatives during the battle, or incapacitated two or more enemy operatives including an enemy LEADER in the battle, it gains 3 XP. This is not affected by a passed Casualty test. You can only use this Requisition once after each battle.',
+}
+
+export const kommando: Faction = {
+  id: 2,
+  name: 'Kommando',
+  keyword: 'KOMMANDO',
+  coverImage: '',
+  historyTable: [],
+  quirkTable: [],
+  equipment: [
+    choppa,
+    slugga,
+    harpoon,
+    sledgehammer,
+    stikkbomb,
+    dynamite,
+    smokeGrenade,
+    stunGrenade,
+    climbingRope,
+  ],
+  rareEquipment: [
+    shinySlugz,
+    worksEyeball,
+    devilsWhispa,
+    skragasChoppa,
+    fungalbrew,
+    kleverKap,
+  ],
+  strategicAssets: [territorialGlyphs, lootHoard, explosivesStash],
+  requisitions: [orkyConstitution, grabDaLoot, fearsomeReputation],
+  specOps: [],
 }
