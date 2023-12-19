@@ -123,11 +123,8 @@ export const smokeGrenade: Gear = {
   name: 'Smoke Grenade',
   description: 'The operative can perform the following action for the battle',
   cost: 3,
-  ability: `Place the centre of one Smoke token on a point within ${rng(
-    'P',
-  )} of this operative. That token creates an area of smoke with a ${rng(
-    'C',
-  )} radius and unlimited upward height (but not below) measured from the centre of that token. Until the end of the Turning Point, an operative is Obscured if every Cover line drawn to it crosses an area of smoke. This operative can only perform this action once, and cannot perform this action if it is within Engagement Range of an enemy operative.`,
+  ability:
+    'Place the centre of one Smoke token on a point within 6" of this operative. That token creates an area of smoke with a 2" radius and unlimited upward height (but not below) measured from the centre of that token. Until the end of the Turning Point, an operative is Obscured if every Cover line drawn to it crosses an area of smoke. This operative can only perform this action once, and cannot perform this action if it is within Engagement Range of an enemy operative.',
   rare: false,
 }
 
@@ -136,11 +133,8 @@ export const stunGrenade: Gear = {
   name: 'Stun Grenade',
   description: 'The operative can perform the following action for the battle',
   cost: 1,
-  ability: `Select one point on the battlefield within ${rng(
-    'P',
-  )} of this operative. Roll one D6 for each operative within ${rng(
-    'C',
-  )} of that point, subtracting 1 from the result if they are not Visible to this operative. On a 4+, subtract 1 from that operative’s APL. This operative can only perform this action once, and cannot perform this action if it is within Engagement Range of an enemy operative.`,
+  ability:
+    'Select one point on the battlefield within 6" of this operative. Roll one D6 for each operative within 2" of that point, subtracting 1 from the result if they are not Visible to this operative. On a 4+, subtract 1 from that operative’s APL. This operative can only perform this action once, and cannot perform this action if it is within Engagement Range of an enemy operative.',
   rare: false,
 }
 
@@ -149,14 +143,14 @@ export const climbingRope: Gear = {
   name: 'Climbing Rope',
   description: 'The operative gains the following ability for the battle:',
   cost: 1,
-  ability: `Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3 ${rng(
-    'C',
-  )} it travels are counted as ${rng('C')} for that climb.
-    This operative does not need to be within ${rng(
-      'T',
-    )} of a physical and climbable part of a terrain feature in order to climb it.
-    Each time this operative drops, the intended location can be any vertical distance from the level it occupies.
-    Each time this operative drops, it counts any vertical distance it travels as half for that drop.`,
+  ability:
+    'Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3, 2" it travels are counted as 2" for that climb.' +
+    '/n' +
+    'This operative does not need to be within 1" of a physical and climbable part of a terrain feature in order to climb it.' +
+    '/n' +
+    'Each time this operative drops, the intended location can be any vertical distance from the level it occupies.' +
+    '/n' +
+    'Each time this operative drops, it counts any vertical distance it travels as half for that drop.',
   rare: false,
 }
 
@@ -176,14 +170,13 @@ export const worksEyeball: Gear = {
   name: 'Work’S Eyeball',
   description: '',
   cost: 1,
-  ability: `Select a slugga, dakka shoota, scoped big shoota or rokkit launcha the operative is equipped with. Improve the Ballistic Skill characteristic of that weapon by 1 for the battle. If you selected a slugga, that weapon loses the Rng ${rng(
-    'P',
-  )} special rule for the battle and this rare equipment costs 1EP; otherwise, it costs 3EP.`,
+  ability:
+    'Select a slugga, dakka shoota, scoped big shoota or rokkit launcha the operative is equipped with. Improve the Ballistic Skill characteristic of that weapon by 1 for the battle. If you selected a slugga, that weapon loses the 6" special rule for the battle and this rare equipment costs 1EP; otherwise, it costs 3EP.',
   rare: true,
 }
 export const devilsWhispa: Gear = {
   id: 0,
-  name: 'Devil’S Whispa',
+  name: `Devil'S Whispa`,
   description: '',
   cost: 2,
   ability:
@@ -237,17 +230,11 @@ export const territorialGlyphs: StrategicAssets = {
   description:
     'The Orks mark their territory and honour Gork and Mork with crude glyphs, splatters of paint and battlefield trophies.',
   rule:
-    `At the start of the Set Up Operatives step of the mission sequence, you can place a Glyph Token within ${rng(
-      'P',
-    )} of your drop zone. If both players have this asset, the Attacker sets up their token first.` +
+    'At the start of the Set Up Operatives step of the mission sequence, you can place a Glyph Token within 6" of your drop zone. If both players have this asset, the Attacker sets up their token first.' +
     '/n' +
-    `Unless they are being set up wholly within their drop zone, enemy operatives cannot be set up within ${rng(
-      'P',
-    )} of that token.` +
+    'Unless they are being set up wholly within their drop zone, enemy operatives cannot be set up within 6" of that token.' +
     '/n' +
-    `While a friendly KOMMANDO operative is within ${rng(
-      'P',
-    )} of that token, each time it fights in a combat in the Roll Attack Dice step of that combat, you can re-roll one of your attack dice.`,
+    'While a friendly KOMMANDO operative is within 6" of that token, each time it fights in a combat in the Roll Attack Dice step of that combat, you can re-roll one of your attack dice.',
 }
 
 export const lootHoard: StrategicAssets = {
@@ -270,13 +257,9 @@ export const explosivesStash: StrategicAssets = {
     '/n' +
     'Friendly KOMMANDO operatives (excluding BOMB SQUIG operatives) can perform the following action:',
   rule:
-    `LAY EXPLOSIVES 2AP` +
+    'LAY EXPLOSIVES 2AP' +
     '/n' +
-    `An operative can perform this action while within ${rng(
-      'T',
-    )} of a terrain feature that includes any parts with the Heavy trait. An operative cannot perform this action if it is Visible to and within ${rng(
-      'C',
-    )} of an enemy operative.` +
+    'An operative can perform this action while within 1" of a terrain feature that includes any parts with the Heavy trait. An operative cannot perform this action if it is Visible to and within 2" of an enemy operative.' +
     '/n' +
     'Each time a friendly operative performs a Blow It Up!, Sabotage or Lay Explosives action, that terrain feature has been wrecked. While a terrain feature is wrecked, any parts of that terrain feature with the Heavy trait are treated as Light terrain instead.',
 }
