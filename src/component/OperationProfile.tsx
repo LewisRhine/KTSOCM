@@ -12,8 +12,8 @@ const OperationProfile = (props: Props) => {
   return (
     <div className={'pb-3'}>
       <OperationName {...props} />
-      <p className={'is-size-7 is-italic  pb-2'}>{description}</p>
-      <p className={'is-size-6'}>{rule}</p>
+      <p className={'is-italic is-family-secondary pb-2'}>{description}</p>
+      <p className={'is-family-secondary has-text-weight-semibold'}>{rule}</p>
     </div>
   )
 }

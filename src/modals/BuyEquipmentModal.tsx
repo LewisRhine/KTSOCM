@@ -37,20 +37,7 @@ const BuyEquipmentModal = (props: Props) => {
           <button className="delete" onClick={onClose}></button>
         </header>
         <section className="modal-card-body">
-          <div className={'buttons'}>
-            <button
-              className={'button is-small is-primary'}
-              disabled={reqPoints <= 0}
-              onClick={equipmentDrop}>
-              Make Equipment Drop
-            </button>
-            <button
-              className={'button is-small'}
-              disabled={availableEP < 5}
-              onClick={undoEquipmentDrop}>
-              Undo Equipment Drop
-            </button>
-          </div>
+          <div className={'buttons'}></div>
           {equipment?.map((equipment, index) => {
             if (isWeapon(equipment))
               return <WeaponProfile key={index} weapon={equipment} buyMode />
@@ -59,8 +46,20 @@ const BuyEquipmentModal = (props: Props) => {
           })}
         </section>
         <footer className="modal-card-foot">
-          <button className="button" onClick={onClose}>
+          <button className="button is-primary" onClick={onClose}>
             Done
+          </button>
+          <button
+            className={'button'}
+            disabled={reqPoints <= 0}
+            onClick={equipmentDrop}>
+            Make Equipment Drop
+          </button>
+          <button
+            className={'button'}
+            disabled={availableEP < 5}
+            onClick={undoEquipmentDrop}>
+            Undo Equipment Drop
           </button>
         </footer>
       </div>

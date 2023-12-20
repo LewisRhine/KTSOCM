@@ -19,7 +19,7 @@ const ConfirmModal = (props: Props) => {
             <p className={'title is-4'}>{message}</p>
           </div>
           <div className="buttons is-centered">
-            <button className="button is-success" onClick={onConfirm}>
+            <button className="button is-primary" onClick={onConfirm}>
               Confirm
             </button>
             <button className="button" onClick={onClose}>

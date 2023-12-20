@@ -26,6 +26,7 @@ const CasualtyCheckModal = (props: Props) => {
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title"> Casualty Check</p>
+          <button className="delete" onClick={onClose}></button>
         </header>
         <div className="modal-card-body">
           {modalState === 'start' && <CasualtyCheck />}
@@ -35,23 +36,35 @@ const CasualtyCheckModal = (props: Props) => {
         <footer className="modal-card-foot">
           {modalState === 'start' ? (
             <>
-              <button className="button" onClick={() => setModalState('pass')}>
-                Passed
-              </button>
-              <button className="button" onClick={() => setModalState('fail')}>
-                Failed
-              </button>
               <button
-                className="button"
+                className="button is-primary"
                 onClick={() => {
                   onClose()
                   setModalState('start')
                 }}>
-                Exit
+                Done
+              </button>
+              <button
+                className="button is-success"
+                onClick={() => setModalState('pass')}>
+                Passed
+              </button>
+              <button
+                className="button is-danger"
+                onClick={() => setModalState('fail')}>
+                Failed
               </button>
             </>
           ) : (
             <>
+              <button
+                className="button is-primary"
+                onClick={() => {
+                  onClose()
+                  setModalState('start')
+                }}>
+                Done
+              </button>
               <button className="button" onClick={() => setModalState('start')}>
                 Take Another Casualty Test
               </button>
@@ -63,14 +76,6 @@ const CasualtyCheckModal = (props: Props) => {
                   showRecoveryTestModal()
                 }}>
                 Take Recovery Test
-              </button>
-              <button
-                className="button"
-                onClick={() => {
-                  onClose()
-                  setModalState('start')
-                }}>
-                Done
               </button>
             </>
           )}
