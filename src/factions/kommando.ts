@@ -290,10 +290,12 @@ export const fearsomeReputation: Requisition = {
 }
 
 export const kommando: Faction = {
-  id: 2,
+  id: 3,
   name: 'Kommando',
   keyword: 'KOMMANDO',
-  coverImage: '',
+  coverImage:
+    'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb258159-c3ff-4d5b-b866-7373bf1b9a0a/d7lso9v-26decdc9-9eae-4173-96bc-b80d7b3c261b.jpg/v1/fill/w_997,h_802,q_70,strp/ork_kommando_s_by_musibat_khan_d7lso9v-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAzMCIsInBhdGgiOiJcL2ZcL2JiMjU4MTU5LWMzZmYtNGQ1Yi1iODY2LTczNzNiZjFiOWEwYVwvZDdsc285di0yNmRlY2RjOS05ZWFlLTQxNzMtOTZiYy1iODBkN2IzYzI2MWIuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.uHuvOOHIGUlX1SlUpx2vIB9zEfpfZA9psMpoqdj_fyQ',
+  // backup image  'https://wh40k.lexicanum.com/mediawiki/images/9/9f/RT_Kommando.jpg',
   historyTable: [],
   quirkTable: [],
   equipment: [
