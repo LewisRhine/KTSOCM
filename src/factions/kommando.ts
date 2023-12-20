@@ -161,6 +161,8 @@ export const shinySlugz: Gear = {
   ability:
     'Select a slugga, dakka shoota or scoped big shoota the operative is equipped with. That weapon gains the AP1 special rule for the battle. If you selected a slugga, this rare equipment costs 2EP; otherwise, it costs 3EP.',
   rare: true,
+
+  //need to account for SHINY SLUGZ [2/3EP]
 }
 
 export const worksEyeball: Gear = {
@@ -171,6 +173,8 @@ export const worksEyeball: Gear = {
   ability:
     'Select a slugga, dakka shoota, scoped big shoota or rokkit launcha the operative is equipped with. Improve the Ballistic Skill characteristic of that weapon by 1 for the battle. If you selected a slugga, that weapon loses the 6" special rule for the battle and this rare equipment costs 1EP; otherwise, it costs 3EP.',
   rare: true,
+
+  //need to account for WORK’S EYEBALL [1/3EP]
 }
 export const devilsWhispa: Gear = {
   id: 0,
