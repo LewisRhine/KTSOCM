@@ -3,7 +3,6 @@ import { Gear, Weapon } from '../data/equipment.ts'
 import {
   blast,
   indirect,
-  lethal,
   limited,
   rng,
   stun,
