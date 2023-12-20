@@ -1,6 +1,7 @@
 import { Equipment } from './equipment.ts'
 import { Requisition } from './requisition.ts'
 import { hearthkynSalvager } from '../factions/hearthkynSalvager.ts'
+import { legionary } from '../factions/legionary.ts'
 import { kommando } from '../factions/kommando.ts'
 import { StrategicAssets } from './strategicAssets.ts'
 import { SpecOps } from './specOps.ts'
@@ -50,4 +51,5 @@ export const factions: Array<Faction> = [
   farstalkerKinband,
   hearthkynSalvager,
   kommando,
+  legionary,
 ]

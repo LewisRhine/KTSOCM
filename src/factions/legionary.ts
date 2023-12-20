@@ -240,10 +240,10 @@ export const castAside: Requisition = {
   rule: 'Purchase this Requisition in the Update Dataslates step of a mission sequence, before rolling to determine a Battle Scar for a friendly LEGIONARY operative. Instead of suffering a Battle Scar, for the next D3 battles this operative is in your kill team, it loses the relevant ability related to its <MARK OF CHAOS> keyword (e.g. a NURGLE operative would lose the Disgusting Vigour ability).',
 }
 
-export const legionariesando: Faction = {
-  id: 3,
-  name: 'Kommando',
-  keyword: 'KOMMANDO',
+export const legionary: Faction = {
+  id: 4,
+  name: 'Legionary',
+  keyword: 'LEGIONARY',
   coverImage: 'https://ktdash.app/img/portraits/CHAOS/LEG/LEG/ANO.jpg',
   historyTable: [],
   quirkTable: [],
