@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="93.518692mm"
+   height="80.989563mm"
+   viewBox="0 0 93.518692 80.989563"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="OneInShape.svg"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="2.136048"
+     inkscape:cx="176.72824"
+     inkscape:cy="152.85237"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <defs
+     id="defs1">
+    <rect
+       x="273.04532"
+       y="517.19696"
+       width="189.25365"
+       height="226.81543"
+       id="rect1" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-51.858415,-48.064872)">
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:7.12741;stroke-dasharray:none;stroke-opacity:1"
+       id="path1"
+       d="M 115.15886,79.824057 9.4511827,79.824056 62.30502,-11.721474 Z"
+       transform="matrix(0.79217742,0,0,0.79217742,49.261131,62.996532)" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-0.76447872,-62.687259)"
+       id="text1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:Anton;-inkscape-font-specification:Anton;text-align:center;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:11.3386"><tspan
+         x="335.9375"
+         y="691.22257"
+         id="tspan1">1</tspan></text>
+  </g>
+</svg>

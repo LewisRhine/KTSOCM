@@ -1,5 +1,6 @@
 import { Gear } from '../data/equipment.ts'
 import useDataslateStore from '../stores/dataslateStore.ts'
+import ShapeInjector from './ShapeInjector.tsx'
 
 interface Props {
   gear: Gear
@@ -58,7 +59,7 @@ const GearProfile = (props: Props) => {
       <p className={'is-italic is-family-secondary'}>{description}</p>
       {description && <br />}
       <p className={'is-family-secondary has-text-weight-semibold'}>
-        {ability}
+        <ShapeInjector text={ability} />
       </p>
       <br />
     </>

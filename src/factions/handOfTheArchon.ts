@@ -134,7 +134,7 @@ export const plasmaGrenade: Weapon = {
   criticalDamage: 4,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('P'), blast('C'), indirect, limited],
+  specialRules: [rng('6"'), blast('2"'), indirect, limited],
 }
 
 export const chainSnare: Gear = {

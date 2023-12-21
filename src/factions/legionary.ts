@@ -81,7 +81,7 @@ export const fragGrenade: Weapon = {
   criticalDamage: 3,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('P'), blast('C'), indirect, limited],
+  specialRules: [rng('6"'), blast('2"'), indirect, limited],
 }
 
 export const krakGrenade: Weapon = {
@@ -97,7 +97,7 @@ export const krakGrenade: Weapon = {
   criticalDamage: 5,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('P'), indirect, limited, ap(1)],
+  specialRules: [rng('6"'), indirect, limited, ap(1)],
 }
 
 export const maleficBlade: Weapon = {
