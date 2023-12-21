@@ -11,6 +11,7 @@ import useSystemError from './stores/systemError.ts'
 
 function App() {
   const [session, setSession] = useState<Session | null>(null)
+  const [burgerIsExpanded, setBurgerIsExpanded] = useState(false)
   const error = useSystemError((state) => state.error)
   const resetError = useSystemError((state) => state.resetError)
 
@@ -34,13 +35,18 @@ function App() {
     return (
       <sessionContext.Provider value={session}>
         <nav className="navbar is-dark">
-          <a className="navbar-burger" data-target="navbarMenu">
+          <a
+            className={`navbar-burger ${burgerIsExpanded ? 'is-active' : ''}`}
+            onClick={() => setBurgerIsExpanded((prevState) => !prevState)}
+            data-target="navbarMenu">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
 
-          <div id="navbarMenu" className="navbar-menu">
+          <div
+            id="navbarMenu"
+            className={`navbar-menu ${burgerIsExpanded ? 'is-active' : ''}`}>
             <div className="navbar-start">
               <a className="navbar-item" href={'/'}>
                 Dashboard
