@@ -1,8 +1,8 @@
 import { Faction } from '../data/faction.ts'
+import { Requisition } from '../data/requisition.ts'
+import { StrategicAssets } from '../data/strategicAssets.ts'
 import { Gear, Weapon } from '../data/equipment.ts'
 import { blast, indirect, lethal, limited, rng } from '../data/specialRules.ts'
-import { StrategicAssets } from '../data/strategicAssets.ts'
-import { Requisition } from '../data/requisition.ts'
 
 // Equipment
 export const graviticConcussionGrenade: Weapon = {
@@ -43,8 +43,10 @@ export const climbingEquipment: Gear = {
   description: 'The operative gains the following ability for the battle:',
   cost: 1,
   ability:
-    'Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3" it travels are counted as  for that climb.\n' +
-    'This operative does not need to be within  of a physical and climbable part of a terrain feature in order to climb it. Each time this operative drops, the intended location can be any vertical distance from the level it occupies.\n' +
+    `Each time this operative ascends or descends a terrain feature while climbing, the first vertical distance of up to 3 2" it travels are counted as 2" for that climb.` +
+    '\n' +
+    `This operative does not need to be within 1" of a physical and climbable part of a terrain feature in order to climb it. Each time this operative drops, the intended location can be any vertical distance from the level it occupies.` +
+    '\n' +
     'Each time this operative drops, it counts any vertical distance it travels as half for that drop.',
   rare: false,
 }
@@ -55,8 +57,7 @@ export const weavefieldCrest: Gear = {
   description:
     'THEYN operative only. The operative gains the following ability for the battle:',
   cost: 3,
-  ability:
-    'While a friendly HEARTHKYN SALVAGER operative is within  of this operative, that operative has a 4+ invulnerable save.',
+  ability: `While a friendly HEARTHKYN SALVAGER operative is within 3" of this operative, that operative has a 4+ invulnerable save.`,
   rare: false,
 }
 
@@ -65,8 +66,7 @@ export const excavationTool: Gear = {
   name: 'Excavation Tool',
   description: 'The operative gains the following ability for the battle:',
   cost: 2,
-  ability:
-    'At the end of the Set Up Barricades step, place one of your Clearance tokens within  of a part of a terrain feature with the Traversable trait and more than  from your opponent’s drop zone. Until the end of the battle, friendly operatives do not have to traverse that terrain feature; they can move through it as if it were not there, so long as they do so within  of that token. Note that they cannot finish the move on that terrain feature. You can select this item of equipment no more than three times for the battle.',
+  ability: `At the end of the Set Up Barricades step, place one of your Clearance tokens within 1" of a part of a terrain feature with the Traversable trait and more than 6 inces from your opponent’s drop zone. Until the end of the battle, friendly operatives do not have to traverse that terrain feature; they can move through it as if it were not there, so long as they do so within 1" of that token. Note that they cannot finish the move on that terrain feature. You can select this item of equipment no more than three times for the battle.`,
   rare: false,
 }
 
@@ -116,8 +116,7 @@ export const rightOfClaim: Gear = {
   name: 'Right of Claim',
   description: 'The operative gains the following ability for the battle:',
   cost: 3,
-  ability:
-    'While this operative is within  of an objective marker, add 1 to its Defence characteristic.',
+  ability: `While this operative is within 2" of an objective marker, add 1 to its Defence characteristic.`,
   rare: true,
 }
 
@@ -128,8 +127,7 @@ export const gravLiftDevice: Gear = {
     'The operative can perform the following action once during the battle:',
   cost: 2,
   ap: 1,
-  ability:
-    'Place a Grav-wave token within  of this operative. Until the end of the battle, each time a friendly HEARTHKYN SALVAGER operative moves within  of that token, it gains the FLY keyword until the end of its activation.',
+  ability: `Place a Grav-wave token within 6" of this operative. Until the end of the battle, each time a friendly HEARTHKYN SALVAGER operative moves within 1" of that token, it gains the FLY keyword until the end of its activation.`,
   rare: true,
 }
 
@@ -144,7 +142,6 @@ export const ionExpediter: Gear = {
 }
 
 //Strategic Assets
-
 export const supplyHold: StrategicAssets = {
   name: 'Supply Hold',
   description:
@@ -152,15 +149,29 @@ export const supplyHold: StrategicAssets = {
   rule: 'While your base of operations has this strategic asset, double the quantities of HEARTHKYN SALVAGER equipment in your stash.',
 }
 
-// Requisitions
+export const enhancedPanSpectralScanner: StrategicAssets = {
+  name: 'Enhanced Pan Spectral Scanner',
+  description:
+    'This larger version of the handheld pan spectral scanner can survey a more substantial expanse of ground, enabling the Kin to better assess the nature of the terrain around them and discover the optimal routes of travel through a space hulk.',
+  rule: 'In the Select Drop Zone step, after rolling off to determine who decides Attacker and Defender, you can re-roll your dice.',
+}
 
+export const excavationMachinery: StrategicAssets = {
+  name: 'Excavation Machinery',
+  description:
+    'Though the Hearthkyn Salvagers’ primary purpose is not to strip a space hulk or wreck of all its valuables, they have the operational remit and equipment to pave the way for those completing that task. Heavy excavation machinery can help them clear paths or move priority salvage, and can even serve as barricades if need be.',
+  rule: `At the end of the Scouting step, if you are the Defender or selected the Fortify option, you can move one terrain feature within 1" of your drop zone that does not include any parts with the Heavy trait up to 1".`,
+}
+
+// Requisitions
 const theirHearthBurns: Requisition = {
   name: 'Their Hearth Burns',
   cost: 1,
   description:
     'When a Kin has become especially impassioned or angry or becomes utterly relentless in the pursuit of their goals, it is said of them that Their Hearth Burns. Kin in this state of mind are particularly dogged and dangerous foes.',
   rule:
-    'Purchase this Requisition after a game in which a friendly HEARTHKYN SALVAGER operative was incapacitated by an enemy operative. That friendly operative is harbouring a grudge against that enemy operative’s faction (make a note of this and the enemy’s Faction keyword in the ‘Notes’ section of its narrative datacard). Each time that friendly operative fights in combat or makes a shooting attack against an enemy operative with that Faction keyword, that enemy operative has one additional Grudge token for that combat or shooting attack.\n' +
+    'Purchase this Requisition after a game in which a friendly HEARTHKYN SALVAGER operative was incapacitated by an enemy operative. That friendly operative is harbouring a grudge against that enemy operative’s faction (make a note of this and the enemy’s Faction keyword in the ‘Notes’ section of its narrative datacard). Each time that friendly operative fights in combat or makes a shooting attack against an enemy operative with that Faction keyword, that enemy operative has one additional Grudge token for that combat or shooting attack.' +
+    '\n' +
     '\n' +
     'Once that friendly operative has incapacitated 3 enemy operatives with that Faction keyword (this does not have to be in the same battle), it’s no longer harbouring a grudge. You cannot use this Requisition if a friendly operative is already harbouring a grudge, unless you choose to renounce the grudge, in which case that friendly operative loses D6 experience points and is no longer harbouring a grudge.',
 }
@@ -172,7 +183,6 @@ const returnToTheAncestor: Requisition = {
     'A key driving force for the Kin is to enrich their Votann with knowledge of the galaxy. The more experience and information a Kin accrues, the more they bring to their Ancestor Core.',
   rule: 'Purchase this Requisition after a game in which a friendly HEARTHKYN SALVAGER operative was incapacitated and removed from your dataslate. You gain a number of Requisition Points equal to the number of ranks that operative had. For example, if that operative had the Ace rank, you would gain 3RP.',
 }
-
 const petitionTheGuild: Requisition = {
   name: 'Petition The Guild',
   cost: 2,
@@ -204,7 +214,11 @@ export const hearthkynSalvager: Faction = {
     gravLiftDevice,
     ionExpediter,
   ],
-  strategicAssets: [supplyHold],
+  strategicAssets: [
+    supplyHold,
+    excavationMachinery,
+    enhancedPanSpectralScanner,
+  ],
   requisitions: [theirHearthBurns, returnToTheAncestor, petitionTheGuild],
-  specOps: []
+  specOps: [],
 }

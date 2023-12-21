@@ -55,7 +55,7 @@ const SpecOpsProfile = (props: Props) => {
       />
       <div className={'pb-6'}>
         <div className={'is-flex is-justify-content-space-between'}>
-          <p className={'is-size-5 has-text-weight-bold'}>{name}</p>
+          <p className={'title is-5'}>{name}</p>
           {!isAssigned && (
             <button
               className={'button is-small'}
@@ -65,7 +65,7 @@ const SpecOpsProfile = (props: Props) => {
             </button>
           )}
         </div>
-        <p className={'is-size-7 is-italic pb-2'}>{description}</p>
+        <p className={'is-italic is-family-secondary pb-3'}>{description}</p>
         <OperationProfile
           operation={operationOne}
           showCompletion={showCompletion}
@@ -75,7 +75,7 @@ const SpecOpsProfile = (props: Props) => {
           showCompletion={showCompletion}
         />
         <p className={'is-size-6 has-text-weight-bold'}>Commendation</p>
-        <ul className={'is-size-6 pl-5'} style={{ listStyleType: 'disc' }}>
+        <ul className={'is-family-secondary is-size-6 pl-5'} style={{ listStyleType: 'disc' }}>
           {commendations.map(({ reward, claimed }, index) => (
             <li key={index}>
               {isAssigned && isComplete && (

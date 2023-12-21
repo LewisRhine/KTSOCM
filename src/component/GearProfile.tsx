@@ -56,10 +56,11 @@ const GearProfile = (props: Props) => {
           </div>
         )}
       </div>
-      <div className={'subtitle is-6'}>{description}</div>
-      <div className={'li'}>
+      <p className={'is-italic is-family-secondary'}>{description}</p>
+      {description && <br />}
+      <p className={'is-family-secondary has-text-weight-semibold'}>
         <ShapeInjector text={ability} />
-      </div>
+      </p>
       <br />
     </>
   )

@@ -1,7 +1,6 @@
 import useDataslateStore from '../stores/dataslateStore.ts'
 import { useState } from 'react'
 import BuyEquipmentModal from '../modals/BuyEquipmentModal.tsx'
-import ConfirmModal from '../modals/ConfirmModal.tsx'
 import { Equipment } from '../data/equipment.ts'
 import { AvailableEquipment } from '../data/baseOfOperations.ts'
 import EquipmentProfileModal from '../modals/EquipmentProfileModal.tsx'
@@ -14,12 +13,6 @@ const BaseStash = () => {
   )
   const stash = useDataslateStore(
     (state) => state.selectedDataslate!.baseOfOperations.stash,
-  )
-  const reqPoints = useDataslateStore(
-    (state) => state.selectedDataslate!.reqPoints,
-  )
-  const equipmentDrop = useDataslateStore(
-    (state) => state.equipmentDrop,
   )
 
   const availableEquipment = stash.availableEquipment.sort((a, b) => {
@@ -34,14 +27,16 @@ const BaseStash = () => {
   const [showRareEquipmentModal, setshowRareEquipmentModal] = useState(false)
   const [showBuyAssetModal, setShowBuyAssetModal] = useState(false)
   const [equipmentProfile, setEquipmentProfile] = useState<Equipment>()
-  const [showConfirmEquipmentDropModal, setShowConfirmEquipmentDropModal] =
-    useState(false)
 
   const unEquippedEquipment = availableEquipment.filter(
     ({ isEquipped }) => !isEquipped,
   )
   const equippedEquipment = availableEquipment.filter(
     ({ isEquipped }) => isEquipped,
+  )
+  const totalEquippedPoints = equippedEquipment.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.equipment.cost,
+    0,
   )
 
   const equip = (equipment: AvailableEquipment) => {
@@ -81,7 +76,7 @@ const BaseStash = () => {
       <BuyAssetModal
         showModal={showBuyAssetModal}
         onClose={() => setShowBuyAssetModal(false)}
-        selectedstrategicAssets={[]}
+        selectedStrategicAssets={[]}
       />
       <BuyEquipmentModal
         showModal={showBuyEquipmentModal}
@@ -91,89 +86,65 @@ const BaseStash = () => {
         showModal={showRareEquipmentModal}
         onClose={() => setshowRareEquipmentModal(false)}
       />
-      <ConfirmModal
-        showModal={showConfirmEquipmentDropModal}
-        message={'Make an equipment drop?'}
-        onConfirm={() => {
-          equipmentDrop()
-          setShowConfirmEquipmentDropModal(false)
-        }}
-        onClose={() => setShowConfirmEquipmentDropModal(false)}
-      />
-      <div className={'columns'}>
-        <div className={'column'}>
-          <div>
-            <div>
-              <span className={'title is-4'}>Stash</span>
-              <span className={'subtitle'}> {availableEP} EP Available</span>
-            </div>
-            <br />
-            <div className={'buttons'}>
-              <button
-                className={'button is-primary is-small'}
-                onClick={() => setshowBuyEquipmentModal(true)}
-                disabled={availableEP <= 0}>
-                Add Equipment
-              </button>
-              <button
-                className={'button is-dark is-small'}
-                onClick={() => setshowRareEquipmentModal(true)}>
-                Get Rare Equipment
-              </button>
-              <button
-                className={'button is-small'}
-                disabled={reqPoints <= 0}
-                onClick={() => setShowConfirmEquipmentDropModal(true)}>
-                Make Equipment Drop
-              </button>
-            </div>
-          </div>
-          <br />
-          <div>
-            {availableEquipment.length === 0 && (
-              <p className="title is-4">Empty!</p>
-            )}
-            {unEquippedEquipment.map((availableEquipment, index) => (
-              <div key={index} className={'has-addons'}>
-                <button
-                  className={'button is is-small'}
-                  onClick={() => equip(availableEquipment)}>
-                  Equip
-                </button>
-                <a
-                  onClick={() =>
-                    setEquipmentProfile(availableEquipment.equipment)
-                  }>
-                  <span className="title is-6">
-                    {' '}
-                    {availableEquipment.equipment.name}
-                  </span>
-                  {availableEquipment.equipment.rare && <span className={'subtitle is-italic is-6'}> (Rare)</span>}
-                </a>
-              </div>
-            ))}
-            <br />
-            {equippedEquipment.map((availableEquipment, index) => (
-              <div key={index} className={'has-addons'}>
-                <button
-                  className={'button is is-small'}
-                  onClick={() => unequip(availableEquipment)}>
-                  Unequip
-                </button>
-                <a
-                  onClick={() =>
-                    setEquipmentProfile(availableEquipment.equipment)
-                  }>
-                  <span className="subtitle is-6">
-                    {' '}
-                    {availableEquipment.equipment.name}
-                  </span>
-                  {availableEquipment.equipment.rare && <span className={'subtitle is-italic is-6'}> (Rare)</span>}
-                </a>
-              </div>
-            ))}
-          </div>
+      <div>
+        <div className={'buttons'}>
+          <button
+            className={'button is-primary is-small'}
+            onClick={() => setshowBuyEquipmentModal(true)}>
+            Equipment
+          </button>
+          <button
+            className={'button is-dark is-small'}
+            onClick={() => setshowRareEquipmentModal(true)}>
+            Rare Equipment
+          </button>
         </div>
+        <div>
+          <span className={'title'}>Stash</span>
+          <span className={'subtitle pl-2'}>{availableEP} EP Available</span>
+        </div>
+      </div>
+      <br />
+      <div>
+        {availableEquipment.length === 0 && (
+          <p className="title is-4">Empty!</p>
+        )}
+        {unEquippedEquipment.map((availableEquipment, index) => (
+          <div key={index} className={'pb-1'}>
+            <button
+              className={'button is is-small'}
+              onClick={() => equip(availableEquipment)}>
+              Equip
+            </button>
+            <a
+              onClick={() => setEquipmentProfile(availableEquipment.equipment)}>
+              <span className="pl-2">{availableEquipment.equipment.name}</span>
+              {availableEquipment.equipment.rare && (
+                <span className={'subtitle is-italic is-6'}> (Rare)</span>
+              )}
+            </a>
+          </div>
+        ))}
+        <br />
+        {equippedEquipment.length > 0 && (
+          <p className={'pb-2'}>Total equipped points {totalEquippedPoints}</p>
+        )}
+        {equippedEquipment.map((availableEquipment, index) => (
+          <div key={index} className={'pb-1'}>
+            <button
+              className={'button is is-small'}
+              onClick={() => unequip(availableEquipment)}>
+              Unequip
+            </button>
+            <a
+              onClick={() => setEquipmentProfile(availableEquipment.equipment)}>
+              <span className="pl-2">{availableEquipment.equipment.name}</span>
+              {availableEquipment.equipment.rare && (
+                <span className={'is-italic'}> (Rare)</span>
+              )}
+            </a>
+          </div>
+        ))}
       </div>
     </>
   )

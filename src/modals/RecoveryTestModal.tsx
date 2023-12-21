@@ -17,13 +17,16 @@ const RecoveryTestModal = (props: Props) => {
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title"> Recovery Test</p>
+          <button className="delete" onClick={onClose}></button>
         </header>
-        <div className="modal-card-body">
+        <section className="modal-card-body">
           <RecoveryTest />
-          <button className="button" onClick={onClose}>
+        </section>
+        <footer className="modal-card-foot">
+          <button className="button is-primary" onClick={onClose}>
             Done
           </button>
-        </div>
+        </footer>
       </div>
     </div>
   )

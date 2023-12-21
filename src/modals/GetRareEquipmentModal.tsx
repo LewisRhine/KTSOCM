@@ -27,30 +27,30 @@ const GetRareEquipmentModal = (props: Props) => {
 
   return (
     <div className={`modal ${isActive}`}>
-      <button className="delete" onClick={onClose} />
       <div className="modal-background" />
-
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title">Rare Equipment</p>
           <button className="delete" onClick={onClose}></button>
         </header>
         <section className="modal-card-body">
-          <p className="title is-5">{factionName} Rare Equipment</p>
+          <p className="notification is-primary title is-4">{factionName} Rare Equipment</p>
           {factionRareEquipment?.map((equipment, index) => {
             if (isWeapon(equipment))
               return <WeaponProfile key={index} weapon={equipment} buyMode />
             if (isGear(equipment))
               return <GearProfile key={index} gear={equipment} buyMode />
           })}
-          <p className="title is-5">General Ranger Rare Equipment</p>
+
+          <p className="notification is-primary title is-4">General Ranger Rare Equipment</p>
           {genericRangeRareEquipment?.map((equipment, index) => {
             if (isWeapon(equipment))
               return <WeaponProfile key={index} weapon={equipment} buyMode />
             if (isGear(equipment))
               return <GearProfile key={index} gear={equipment} buyMode />
           })}
-          <p className="title is-5">General Melee Rare Equipment</p>
+
+          <p className="notification is-primary title is-4">General Melee Rare Equipment</p>
           {genericMeleeRareEquipment?.map((equipment, index) => {
             if (isWeapon(equipment))
               return <WeaponProfile key={index} weapon={equipment} buyMode />
@@ -59,7 +59,7 @@ const GetRareEquipmentModal = (props: Props) => {
           })}
         </section>
         <footer className="modal-card-foot">
-          <button className="button" onClick={onClose}>
+          <button className="button is-primary" onClick={onClose}>
             Done
           </button>
         </footer>
