@@ -62,7 +62,7 @@ const WeaponProfile = (props: Props) => {
               onClick={() => removeFromStash(weapon)}>
               -
             </button>
-            <span className={'title is-6'}>{` X ${amountInStash}`}</span>
+            <span className={'is-size-5'}>{` X ${amountInStash}`}</span>
           </div>
         )}
       </div>
@@ -90,14 +90,14 @@ const WeaponProfile = (props: Props) => {
             <td>{`${normalDamage}/${criticalDamage}`}</td>
             <td>
               {specialRules.map(({ name }, index) => (
-                <span className={'subtitle is-6'} key={index}>{`${name}${
+                <span key={index}>{`${name}${
                   index !== specialRules.length - 1 ? ', ' : ''
                 }`}</span>
               ))}
             </td>
             <td>
               {criticalHitRules.map(({ name }, index) => (
-                <span className={'subtitle is-6'} key={index}>{`${name}${
+                <span key={index}>{`${name}${
                   index !== criticalHitRules.length - 1 ? ', ' : ''
                 }`}</span>
               ))}

@@ -13,7 +13,7 @@ const BaseInfo = () => {
   const [editInfo, setEditInfo] = useState(false)
 
   return (
-    <div className={'content'}>
+    <div>
       <BaseInfoModal showModal={editInfo} onClose={() => setEditInfo(false)} />
       {!name && !description && (
         <button className={'button'} onClick={() => setEditInfo(true)}>

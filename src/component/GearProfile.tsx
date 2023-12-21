@@ -55,8 +55,11 @@ const GearProfile = (props: Props) => {
           </div>
         )}
       </div>
-      <div className={'subtitle is-6'}>{description}</div>
-      <div>{ability}</div>
+      <p className={'is-italic is-family-secondary'}>{description}</p>
+      {description && <br />}
+      <p className={'is-family-secondary has-text-weight-semibold'}>
+        {ability}
+      </p>
       <br />
     </>
   )

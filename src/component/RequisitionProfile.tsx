@@ -31,8 +31,9 @@ const RequisitionProfile = (props: Props) => {
         </div>
       </div>
 
-      <div className={'subtitle is-6 is-italic'}>{description}</div>
-      <div>{rule}</div>
+      <p className={'is-italic is-family-secondary'}>{description}</p>
+      <br />
+      <p className={'is-family-secondary has-text-weight-semibold'}>{rule}</p>
       <br />
     </>
   )

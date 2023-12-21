@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Anton');
+
+$purple: #8A4D76;
+$kt-orange: rgb(202, 78, 25);
+
+
+// Update Bulma's global variables
+$family-sans-serif: "Anton", sans-serif;
+$family-secondary: "Arial", sans-serif;
+$primary: $kt-orange;
+$danger: red;
+$body-background-color: #d5d5d5;
+$navbar-background-color: $kt-orange;
+$navbar-item-hover-background-color: $kt-orange;
+$navbar-item-color: white;
+$navbar-item-hover-color: white;
+$link: hsl(0, 0%, 29%);
+
+@import "../node_modules/bulma/bulma.sass";

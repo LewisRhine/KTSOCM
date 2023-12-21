@@ -20,7 +20,7 @@ const BackgroundSection = (props: Props) => {
         <div className={'content'}>
           <h1 className="title">{title}</h1>
           <textarea
-            className="textarea"
+            className="textarea is-family-secondary"
             ref={textAreaRef}
             defaultValue={value}
           />
@@ -39,7 +39,7 @@ const BackgroundSection = (props: Props) => {
   return (
     <a onClick={() => setEditMode(true)}>
       <h1 className="title">{title}</h1>
-      <h2 className="subtitle">{value ?? 'None'}</h2>
+      <h2 className="is-family-secondary is-size-5">{value ?? 'None'}</h2>
     </a>
   )
 }

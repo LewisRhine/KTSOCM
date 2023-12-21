@@ -42,8 +42,10 @@ const StrategicAssetsProfile = (props: Props) => {
       <div className={'columns'}>
         <div className={'column'}>
           <p className={'title is-5'}>{name}</p>
-          <p>{description}</p>
-          <p>{rule}</p>
+          <p className={'is-italic is-family-secondary'}>{description}</p>
+          <br />
+          <p className={'is-family-secondary has-text-weight-semibold'}>{rule}</p>
+          <br />
         </div>
         <div className={'column is-3'}>
           {isAssetSelectable && (
