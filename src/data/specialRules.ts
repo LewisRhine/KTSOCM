@@ -20,6 +20,16 @@ export const limited: SpecialRules = {
   rule: 'This weapon can only be selected for use once per battle. If the weapon has a special rule that would allow it to make more than one shooting attack for an action (e.g. Blast), make each of those attacks as normal.',
 }
 
+export const stun: SpecialRules = {
+  name: 'Stun',
+  rule: 'Each time a friendly operative makes a shooting attack with this weapon, in the Roll Attack Dice step of that shooting attack, if you retain any critical hits, subtract 1 from the target’s APL. Each time a friendly operative fights in combat with this weapon, in the Resolve Successful Hits step of that combat: The first time you strike with a critical hit, select one of your opponent’s normal hits from that combat to be discarded The second time you strike with a critical hit, subtract 1 from the target’s APL.',
+}
+
+export const unwieldy: SpecialRules = {
+  name: 'Unwieldy',
+  rule: 'An operative can only make a shooting attack with this weapon if an extra AP is subtracted to perform a Shoot action. It cannot make a shooting attack with this weapon by performing an Overwatch action.',
+}
+
 export const rng = (x: Measurement): SpecialRules => ({
   name: `Ran ${x}`,
   rule: `Range. Each time a friendly operative makes a shooting attack with this weapon, only operatives within ${x} are a valid target, ${x} is the distance after the weapon’s Rng, e.g. Rng . All other rules for selecting a valid target still apply.`,
@@ -33,4 +43,9 @@ export const blast = (x: Measurement): SpecialRules => ({
 export const lethal = (x: number): SpecialRules => ({
   name: `Lethal ${x}+`,
   rule: `Each time a friendly operative fights in combat or makes a shooting attack with this weapon, in the Roll Attack Dice step of that combat or shooting attack, your attack dice results of equal to or greater than ${x}+ that are successful hits are critical hits.`,
+})
+
+export const armourPenetration = (x: number): SpecialRules => ({
+  name: `Armour Penetration ${x}+`,
+  rule: 'Each time a friendly operative makes a shooting attack with this weapon, subtract x from the Defence of the target for that shooting attack, x is the number after the weapon’s AP, e.g. AP1. If two different APx special rules would be in effect for a shooting attack, they are not cumulative - the attacker selects which one to use.',
 })
