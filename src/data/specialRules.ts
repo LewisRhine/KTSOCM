@@ -1,4 +1,4 @@
-type Measurement = 'C' | 'T' | 'S' | 'O'
+type Measurement = 'C' | 'T' | 'S' | 'P'
 
 export interface SpecialRules {
   name: string
