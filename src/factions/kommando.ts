@@ -42,7 +42,7 @@ export const slugga: Weapon = {
   criticalDamage: 4,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('P')],
+  specialRules: [rng('6"')],
 }
 
 export const harpoon: Weapon = {
@@ -58,7 +58,7 @@ export const harpoon: Weapon = {
   criticalDamage: 5,
   rare: false,
   criticalHitRules: [stun],
-  specialRules: [rng('C')],
+  specialRules: [rng('2"')],
 }
 
 export const sledgehammer: Weapon = {
@@ -90,7 +90,7 @@ export const stikkbomb: Weapon = {
   criticalDamage: 4,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('P'), blast('C'), indirect, limited],
+  specialRules: [rng('6"'), blast('2"'), indirect, limited],
 }
 
 export const dynamite: Weapon = {
@@ -106,7 +106,7 @@ export const dynamite: Weapon = {
   criticalDamage: 6,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('P'), blast('C'), ap(1), indirect, unwieldy, limited],
+  specialRules: [rng('6"'), blast('2"'), ap(1), indirect, unwieldy, limited],
 }
 
 export const smokeGrenade: Gear = {

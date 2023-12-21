@@ -28,7 +28,7 @@ export const quillGrenade: Weapon = {
   criticalDamage: 3,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('P'), blast('C'), indirect, limited],
+  specialRules: [rng('6"'), blast('2"'), indirect, limited],
 }
 
 export const piercingShot: Weapon = {
@@ -115,7 +115,7 @@ export const krootPistol: Weapon = {
   criticalDamage: 4,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('P')],
+  specialRules: [rng('6"')],
 }
 
 // Rare Equipment
