@@ -6,6 +6,7 @@ import { kommando } from '../factions/kommando.ts'
 import { farstalkerKinband } from '../factions/farstalkerKinband.ts'
 import { StrategicAssets } from './strategicAssets.ts'
 import { SpecOps } from './specOps.ts'
+import { handOfTheArchon } from '../factions/handOfTheArchon.ts'
 
 export interface Faction {
   id: number
@@ -24,6 +25,7 @@ export interface Faction {
 export const factions: Array<Faction> = [
   farstalkerKinband,
   hearthkynSalvager,
+  handOfTheArchon,
   kommando,
   legionary,
 ]
