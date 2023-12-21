@@ -1,12 +1,6 @@
 import { Faction } from '../data/faction.ts'
 import { Gear, Weapon } from '../data/equipment.ts'
-import {
-  blast,
-  indirect,
-  limited,
-  rng,
-  armourPenetration,
-} from '../data/specialRules.ts'
+import { blast, indirect, limited, rng, ap } from '../data/specialRules.ts'
 import { StrategicAssets } from '../data/strategicAssets.ts'
 import { Requisition } from '../data/requisition.ts'
 
@@ -103,7 +97,7 @@ export const krakGrenade: Weapon = {
   criticalDamage: 5,
   rare: false,
   criticalHitRules: [],
-  specialRules: [rng('P'), indirect, limited, armourPenetration(1)],
+  specialRules: [rng('P'), indirect, limited, ap(1)],
 }
 
 export const maleficBlade: Weapon = {
@@ -129,7 +123,7 @@ export const brandsOfTheDamned: Gear = {
   description: 'The operative gains the following ability for the battle:',
   cost: 3,
   ability:
-    'Brands of the Damned: Once per battle, if this operative is in the killzone, you can use a Tactical Ploy without spending any CPs; that Tactical Ploy must have the same <MARK OF CHAOS> selectable keyword as this operative. For example, if this operative has the SLAANESH keyword, you can use the Sickening Captivation Tactical Ploy. If this operative has the UNDIVIDED keyword, you can use the Veteran of the Long War or Command Re-roll Tactical Ploys instead.',
+    'Brands of the Damned: Once per battle, if this operative is in the killzone, you can use a Tactical Ploy without spending any CPs; that Tactical Ploy must have the same MARK OF CHAOS selectable keyword as this operative. For example, if this operative has the SLAANESH keyword, you can use the Sickening Captivation Tactical Ploy. If this operative has the UNDIVIDED keyword, you can use the Veteran of the Long War or Command Re-roll Tactical Ploys instead.',
   rare: true,
 }
 
@@ -237,7 +231,7 @@ export const castAside: Requisition = {
   name: 'Cast Aside',
   cost: 1,
   description: `It takes little to earn the gods' ire, or to drive them to boredom.`,
-  rule: 'Purchase this Requisition in the Update Dataslates step of a mission sequence, before rolling to determine a Battle Scar for a friendly LEGIONARY operative. Instead of suffering a Battle Scar, for the next D3 battles this operative is in your kill team, it loses the relevant ability related to its <MARK OF CHAOS> keyword (e.g. a NURGLE operative would lose the Disgusting Vigour ability).',
+  rule: 'Purchase this Requisition in the Update Dataslates step of a mission sequence, before rolling to determine a Battle Scar for a friendly LEGIONARY operative. Instead of suffering a Battle Scar, for the next D3 battles this operative is in your kill team, it loses the relevant ability related to its MARK OF CHAOS keyword (e.g. a NURGLE operative would lose the Disgusting Vigour ability).',
 }
 
 export const legionary: Faction = {

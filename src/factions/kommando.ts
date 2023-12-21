@@ -6,7 +6,7 @@ import {
   limited,
   rng,
   stun,
-  armourPenetration,
+  ap,
   unwieldy,
 } from '../data/specialRules.ts'
 import { StrategicAssets } from '../data/strategicAssets.ts'
@@ -106,14 +106,7 @@ export const dynamite: Weapon = {
   criticalDamage: 6,
   rare: false,
   criticalHitRules: [],
-  specialRules: [
-    rng('P'),
-    blast('C'),
-    armourPenetration(1),
-    indirect,
-    unwieldy,
-    limited,
-  ],
+  specialRules: [rng('P'), blast('C'), ap(1), indirect, unwieldy, limited],
 }
 
 export const smokeGrenade: Gear = {
