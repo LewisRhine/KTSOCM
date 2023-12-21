@@ -21,6 +21,7 @@ export interface Weapon extends Equipment {
   criticalDamage: number
   criticalHitRules: SpecialRules[]
   specialRules: SpecialRules[]
+  specialRule?: string
 }
 
 export const isWeapon = (equipment: Equipment): equipment is Weapon => {
