@@ -146,4 +146,4 @@ const BetaTestSpecOps: StanderSpecOps = {
   ],
 }
 
-export const genericSpecOps: SpecOps[] = [BetaTestSpecOps]
+export const genericSpecOps: SpecOps[] = [BetaTestSpecOps, elimination, recoverArcheotech]
