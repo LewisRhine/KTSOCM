@@ -40,7 +40,7 @@ function App() {
             </div>
           </div>
         )}
-        <BrowserRouter>
+        <BrowserRouter basename={'/KTSOCM/'}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/auth" element={<Authentication />} />
