@@ -1,4 +1,5 @@
 import { Dataslate } from '../data/dataslate.ts'
+import { useNavigate } from 'react-router-dom'
 
 interface DataslateCardProps {
   dataslate: Dataslate
@@ -7,8 +8,10 @@ interface DataslateCardProps {
 const DataslateCard = (props: DataslateCardProps) => {
   const { id, faction, teamName, currentSpecOps } = props.dataslate
 
+  const nav = useNavigate()
+
   return (
-    <a href={`/dataslate/${id}`}>
+    <a onClick={() => nav(`/dataslate/${id}`)}>
       <div className="card">
         <div className="card-image">
           <figure className="image is-4by3">
