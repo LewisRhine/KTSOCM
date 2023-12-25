@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import DataslateCard from '../component/DataslateCard.tsx'
-import NewDataslate from '../component/NewDataslate.tsx'
+import NewDataslateModal from '../modals/NewDataslateModal.tsx'
 import useDataslateStore from '../stores/dataslateStore.ts'
 import Navbar from '../component/Navbar.tsx'
 
@@ -29,9 +29,10 @@ const Dashboard = () => {
           Create New Dataslate
         </a>
       </Navbar>
-      {showNewDataslateModal && (
-        <NewDataslate cancelShowModal={cancelShowModal} />
-      )}
+      <NewDataslateModal
+        showModal={showNewDataslateModal}
+        onClose={cancelShowModal}
+      />
       <div className="container">
         <section className="section">
           <div className="columns is-multiline">
