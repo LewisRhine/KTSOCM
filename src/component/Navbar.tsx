@@ -16,7 +16,7 @@ const Navbar = (props: Props) => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/">
+        <a className="navbar-item" onClick={() => nav('/')}>
           <img src={logo} alt={''} />
         </a>
 
@@ -34,7 +34,7 @@ const Navbar = (props: Props) => {
         id="navbarMenu"
         className={`navbar-menu ${burgerIsExpanded ? 'is-active' : ''}`}>
         <div className="navbar-start">
-          <a className="navbar-item" onClick={() => nav('/KTSOCM')}>
+          <a className="navbar-item" onClick={() => nav('/')}>
             Dashboard
           </a>
         </div>
