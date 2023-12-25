@@ -75,27 +75,29 @@ const SpecOpsModal = (props: Props) => {
             />
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-primary" onClick={onClose}>
-              Done
-            </button>
-            <button className="button" onClick={progressCurrentSpecOps}>
-              +
-            </button>
-            <button className="button" onClick={degreesCurrentSpecOps}>
-              -
-            </button>
-            <button
-              className="button is-danger"
-              onClick={() => setShowAbandonConfirmModal(true)}>
-              Abandon
-            </button>
-            {isComplete && (
-              <button
-                className="button"
-                onClick={() => setShowCompleteConfirmModal(true)}>
-                Compete Spec Op
+            <div className={'buttons'}>
+              <button className="button is-primary" onClick={onClose}>
+                Done
               </button>
-            )}
+              <button className="button" onClick={progressCurrentSpecOps}>
+                +
+              </button>
+              <button className="button" onClick={degreesCurrentSpecOps}>
+                -
+              </button>
+              <button
+                className="button is-danger"
+                onClick={() => setShowAbandonConfirmModal(true)}>
+                Abandon
+              </button>
+              {isComplete && (
+                <button
+                  className="button"
+                  onClick={() => setShowCompleteConfirmModal(true)}>
+                  Compete Spec Op
+                </button>
+              )}
+            </div>
           </footer>
         </div>
       </div>

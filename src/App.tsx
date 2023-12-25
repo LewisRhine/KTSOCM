@@ -1,6 +1,6 @@
 import { Session } from '@supabase/supabase-js'
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import { sessionContext } from './context/sessionContext'
 import Authentication from './pages/Authentication'
 import Dashboard from './pages/Dashboard'
@@ -40,13 +40,13 @@ function App() {
             </div>
           </div>
         )}
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/auth" element={<Authentication />} />
             <Route path="/dataslate/:dataslateId" element={<Dataslate />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </sessionContext.Provider>
     )
   }

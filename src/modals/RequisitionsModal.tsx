@@ -50,15 +50,17 @@ const RequisitionsModal = (props: Props) => {
           ))}
         </section>
         <footer className="modal-card-foot">
-          <button className="button is-primary" onClick={onClose}>
-            Done
-          </button>
-          <button className="button" onClick={increasePoints}>
-            +
-          </button>
-          <button className="button" onClick={decreasePoints}>
-            -
-          </button>
+          <div className={'buttons'}>
+            <button className="button is-primary" onClick={onClose}>
+              Done
+            </button>
+            <button className="button" onClick={increasePoints}>
+              +
+            </button>
+            <button className="button" onClick={decreasePoints}>
+              -
+            </button>
+          </div>
         </footer>
       </div>
     </div>
