@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import supabaseClient from '../superbaseClient.ts'
 import logo from '../assets/logo.png'
 
@@ -10,6 +11,7 @@ const Navbar = (props: Props) => {
   const { children } = props
 
   const [burgerIsExpanded, setBurgerIsExpanded] = useState(false)
+  const nav = useNavigate()
 
   return (
     <nav className="navbar">
@@ -32,7 +34,7 @@ const Navbar = (props: Props) => {
         id="navbarMenu"
         className={`navbar-menu ${burgerIsExpanded ? 'is-active' : ''}`}>
         <div className="navbar-start">
-          <a className="navbar-item" href={'/'}>
+          <a className="navbar-item" onClick={() => nav('/')}>
             Dashboard
           </a>
         </div>
