@@ -1,4 +1,4 @@
-import { deleteDataslate } from './../data/dataslate'
+import { deleteDataslate, postDataslate } from './../data/dataslate'
 import { StrategicAssets } from './../data/strategicAssets'
 import { create } from 'zustand'
 import {
@@ -12,6 +12,7 @@ import useSystemError from './systemError.ts'
 import { Equipment } from '../data/equipment.ts'
 import { Requisition } from '../data/requisition.ts'
 import { isStanderSpecOps, SpecOps } from '../data/specOps.ts'
+import { Faction } from '../data/faction.ts'
 
 export interface DataslateState {
   dataslates?: Dataslate[]
@@ -20,6 +21,12 @@ export interface DataslateState {
 
   getDataslates: () => Promise<void>
   getDataslate: (dataslateId: string) => Promise<void>
+  createDataslate: (
+    userId: string,
+    teamName: string,
+    faction: Faction,
+    baseOfOperationsName: string,
+  ) => void
   deleteDataslate: (dataslate: Dataslate) => void
   saveHistory: (newHistory: string) => void
   saveQuirks: (newQuirks: string) => void
@@ -92,6 +99,23 @@ const useDataslateStore = create<DataslateState>((set, get) => ({
     set({ loading: false })
     if (error) setError(error)
     if (data) set({ selectedDataslate: data })
+  },
+
+  createDataslate: async (
+    userId: string,
+    teamName: string,
+    faction: Faction,
+    baseOfOperationsName: string,
+  ) => {
+    const { data, error } = await postDataslate(
+      userId,
+      teamName,
+      faction,
+      baseOfOperationsName,
+    )
+
+    if (error) setError(error)
+    if (data) set({ dataslates: [data, ...(get().dataslates ?? [])] })
   },
 
   deleteDataslate: async (dataslate) => {

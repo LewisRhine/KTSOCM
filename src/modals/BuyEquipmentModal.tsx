@@ -46,21 +46,23 @@ const BuyEquipmentModal = (props: Props) => {
           })}
         </section>
         <footer className="modal-card-foot">
-          <button className="button is-primary" onClick={onClose}>
-            Done
-          </button>
-          <button
-            className={'button'}
-            disabled={reqPoints <= 0}
-            onClick={equipmentDrop}>
-            Make Equipment Drop
-          </button>
-          <button
-            className={'button'}
-            disabled={availableEP < 5}
-            onClick={undoEquipmentDrop}>
-            Undo Equipment Drop
-          </button>
+          <div className={'buttons'}>
+            <button className="button is-primary" onClick={onClose}>
+              Done
+            </button>
+            <button
+              className={'button'}
+              disabled={reqPoints <= 0}
+              onClick={equipmentDrop}>
+              Make Equipment Drop
+            </button>
+            <button
+              className={'button'}
+              disabled={availableEP < 5}
+              onClick={undoEquipmentDrop}>
+              Undo Equipment Drop
+            </button>
+          </div>
         </footer>
       </div>
     </div>

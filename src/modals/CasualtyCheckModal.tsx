@@ -56,7 +56,7 @@ const CasualtyCheckModal = (props: Props) => {
               </button>
             </>
           ) : (
-            <>
+            <div className={'buttons'}>
               <button
                 className="button is-primary"
                 onClick={() => {
@@ -77,7 +77,7 @@ const CasualtyCheckModal = (props: Props) => {
                 }}>
                 Take Recovery Test
               </button>
-            </>
+            </div>
           )}
         </footer>
       </div>
