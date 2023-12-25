@@ -8,7 +8,6 @@ import CurrentSpecOpsCard from '../component/CurrentSpecOpsCard.tsx'
 import Operatives from '../component/Operatives.tsx'
 import RequisitionsModal from '../modals/RequisitionsModal.tsx'
 import ConfirmModal from '../modals/ConfirmModal.tsx'
-// import { deleteDataslate } from '../data/dataslate.ts'
 import PickASpecOpsModal from '../modals/PickASpecOpsModal.tsx'
 import Navbar from '../component/Navbar.tsx'
 
@@ -31,7 +30,7 @@ const Dataslate = () => {
   }, [dataslateId])
 
   useEffect(() => {
-    if (!hash) nav('#operatives')
+    if (!hash) nav('#base')
   }, [])
 
   const [showSpecOpsModal, setShowSpecOpsModal] = useState(false)
@@ -91,13 +90,13 @@ const Dataslate = () => {
         <div className="tabs is-medium is-centered">
           <ul>
             <li className={`${hash === '#operatives' ? 'is-active' : ''}`}>
-              <a href={'#operatives'}>Operatives</a>
+              <a onClick={() => nav('#operatives')}>Operatives</a>
             </li>
             <li className={`${hash === '#base' ? 'is-active' : ''}`}>
-              <a href={'#base'}>Base of Operations</a>
+              <a onClick={() => nav('#base')}>Base of Operations</a>
             </li>
             <li className={`${hash === '#background' ? 'is-active' : ''}`}>
-              <a href={'#background'}>Background</a>
+              <a onClick={() => nav('#background')}>Background</a>
             </li>
           </ul>
         </div>
