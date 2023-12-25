@@ -34,7 +34,7 @@ const Navbar = (props: Props) => {
         id="navbarMenu"
         className={`navbar-menu ${burgerIsExpanded ? 'is-active' : ''}`}>
         <div className="navbar-start">
-          <a className="navbar-item" onClick={() => nav('/KTSOCM/')}>
+          <a className="navbar-item" onClick={() => nav('/')}>
             Dashboard
           </a>
         </div>
