@@ -16,7 +16,7 @@ const Navbar = (props: Props) => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <a className="navbar-item" onClick={() => nav('/KTSOCM/')}>
+        <a className="navbar-item" href="/">
           <img src={logo} alt={''} />
         </a>
 
