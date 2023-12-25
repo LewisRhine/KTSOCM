@@ -38,16 +38,10 @@ const StrategicAssetsProfile = (props: Props) => {
     assetCapacity > selectedstrategicAssetsLength && !isNameInBase
 
   return (
-    <div>
-      <div className={'columns'}>
-        <div className={'column'}>
-          <p className={'title is-5'}>{name}</p>
-          <p className={'is-italic is-family-secondary'}>{description}</p>
-          <br />
-          <p className={'is-family-secondary has-text-weight-semibold'}>{rule}</p>
-          <br />
-        </div>
-        <div className={'column is-3'}>
+    <>
+      <div className={'is-flex is-justify-content-space-between'}>
+        <p className={'title is-5'}>{name}</p>
+        <div>
           {isAssetSelectable && (
             <button
               className="button is-small"
@@ -66,7 +60,13 @@ const StrategicAssetsProfile = (props: Props) => {
           )}
         </div>
       </div>
-    </div>
+      <div>
+        <p className={'is-italic is-family-secondary'}>{description}</p>
+        <br />
+        <p className={'is-family-secondary has-text-weight-semibold'}>{rule}</p>
+        <br />
+      </div>
+    </>
   )
 }
 
